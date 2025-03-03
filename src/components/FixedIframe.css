@@ -1,0 +1,12 @@
+.iframe-container {
+    width: 800px; /* Fixed width */
+    height: 450px; /* Fixed height */
+    margin: 0 ; /* Center the container */
+    overflow: hidden; /* Prevent overflow */
+  }
+  
+  .fixed-iframe {
+    width: 100%; /* Make the iframe take the full width of the container */
+    height: 100%; /* Make the iframe take the full height of the container */
+    border: none; /* Remove border */
+  }

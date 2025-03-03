@@ -1,0 +1,29 @@
+.game-card {
+  background-color: white; /* Card background */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 0px; /* Rounded corners */
+  overflow: hidden; /* Prevent overflow */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.2s; /* Smooth scaling effect */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.game-card:hover {
+  transform: scale(1.05); /* Scale up on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+.game-image {
+  width: 100%; /* Full width */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px;
+  margin-bottom: 5px;
+
+}
+
+.game-title {
+  padding: 10px; /* Padding around title */
+  font-size: 16px; /* Font size */
+  text-align: center; /* Center align text */
+}
