@@ -1,0 +1,31 @@
+/* Footer Styles */
+footer {
+    background-color: #333;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #333;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: auto; /* Push footer to the bottom */
+    margin-bottom: -1px; /* ✅ Negative margin to try and visually pull footer up slightly and remove bottom gap */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.footer-content a {
+    color: #555;
+    text-decoration: none;
+}
+
+.footer-content a:hover {
+    color: #333;
+    text-decoration: underline;
+}

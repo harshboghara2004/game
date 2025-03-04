@@ -1,0 +1,66 @@
+/* Game Grid - Perfect Layout */
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    width: 90%;
+    max-width: 1400px;
+}
+
+/* Game Cards - Fully Aligned */
+.game-card {
+    display: inline-block;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 10px 15px 25px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+/* Highlight a Few Games */
+.game-card.large {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+/* Game Title - Always Below Image */
+.game-title {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px;
+    color: #333;
+    background-color: #fff;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    line-height: 1.2;
+}
+
+/* Game Image */
+.game-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Hover Effect */
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.game-card h3 {
+    display: none; /* Hide the game name */
+}
+
+.game-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 10px;
+}
