@@ -6,9 +6,9 @@ import Header from "./components/UI/Header"; // Import Header
 import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
 import Footer from "./components/UI/Footer";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
-
     return (
         <Router>
             <div className="App">
@@ -16,6 +16,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/game/:slug" element={<GamePage />} />
+                    <Route path="/admin" element={<AdminPage />} />
                 </Routes>
                 <Footer />
             </div>

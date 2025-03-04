@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./HomePage.css";
 import GamesGrid from "../components/home-page/GamesGrid";
 import CategoryGrid from "../components/home-page/CategoryGrid";
+import { onValue, ref } from "firebase/database";
+import { database } from "../firebaseConfig";
 
 const categories = [
     { id: "action", name: "Action", image: "/images/action.jpg" },
@@ -26,17 +28,21 @@ const HomePage = () => {
     const [selectedCategory, setSelectedCategory] = useState(null);
 
     useEffect(() => {
-        fetch("/data/gameData.json")
-            .then((response) => response.json())
-            .then((data) => setGames(data.games))
-            .catch((error) =>
-                console.error("Error fetching game data:", error)
-            );
+        const dataRef = ref(database, "/games");
+
+        const unsubscribe = onValue(dataRef, (snapshot) => {
+            const gamesArray = Object.values(snapshot.val());
+            setGames(gamesArray);
+        });
+
+        return () => unsubscribe();
     }, []);
 
     const filteredGames = selectedCategory
         ? games.filter((game) => game.gameCategory === selectedCategory)
         : games;
+
+    console.log(games);
 
     return (
         <div className="home-page">
@@ -49,7 +55,6 @@ const HomePage = () => {
                 selectedCategory={selectedCategory}
                 setSelectedCategory={setSelectedCategory}
             />
-
         </div>
     );
 };

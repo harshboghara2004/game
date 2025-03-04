@@ -1,9 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./GamesGrid.css"
+import "./GamesGrid.css";
 
 const GamesGrid = ({ games, isHome = false }) => {
     const navigate = useNavigate();
+    console.log(games);
     return (
         <ul className="game-grid">
             {games.map((game, index) => (

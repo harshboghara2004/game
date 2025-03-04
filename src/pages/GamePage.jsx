@@ -5,6 +5,8 @@ import SideBar from "../components/game-page/SideBar";
 import GamesGrid from "../components/home-page/GamesGrid";
 import GameWindow from "../components/home-page/GameWindow";
 import GameDescription from "../components/game-page/GameDescription";
+import { database } from "../firebaseConfig";
+import { onValue, ref } from "firebase/database";
 
 const GamePage = () => {
     const { slug } = useParams();
@@ -12,12 +14,14 @@ const GamePage = () => {
     let currentGame = null;
 
     useEffect(() => {
-        fetch("/data/gameData.json")
-            .then((response) => response.json())
-            .then((data) => setGames(data.games))
-            .catch((error) => {
-                console.error("Error fetching game data:", error);
-            });
+        const dataRef = ref(database, "/games");
+
+        const unsubscribe = onValue(dataRef, (snapshot) => {
+            const gamesArray = Object.values(snapshot.val());
+            setGames(gamesArray);
+        });
+
+        return () => unsubscribe();
     }, []);
 
     if (games.length === 0) {
