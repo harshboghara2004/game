@@ -1,6 +1,6 @@
 // UploadCategories.jsx
 import React from "react";
-import { database } from "./firebase";
+import { database } from "../firebase";
 import { ref, push } from "firebase/database";
 
 const categories = [
