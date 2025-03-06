@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { auth, database, db } from "../firebase";
+import { auth, database, db } from "../../firebase";
 import { ref, onValue, set } from "firebase/database";
 import "./AdminPage.css";
-import AdminSideBar from "../components/admin-page/AdminSideBar";
-import GameSection from "../components/admin-page/games/GameSection";
-import CategorySection from "../components/admin-page/categories/CategorySection";
-import NotFoundPage from "./NotFoundPage";
-import Loader from "../components/UI/Loader";
-import { checkIsAdmin } from "../util/checkAdmin";
-import ErrorPage from "./ErrorPage";
+import AdminSideBar from "../../components/admin-page/AdminSideBar";
+import GameSection from "../../components/admin-page/games/GameSection";
+import CategorySection from "../../components/admin-page/categories/CategorySection";
+import NotFoundPage from "../Error/NotFoundPage";
+import Loader from "../../components/UI/Loader";
+import { checkIsAdmin } from "../../util/checkAdmin";
+import ErrorPage from "../Error/ErrorPage";
 import { onAuthStateChanged } from "firebase/auth";
 
 const AdminPage = () => {

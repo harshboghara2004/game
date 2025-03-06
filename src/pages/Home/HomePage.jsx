@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./HomePage.css";
-import GamesGrid from "../components/home-page/GamesGrid";
-import CategoryGrid from "../components/home-page/CategoryGrid";
+import GamesGrid from "../../components/home-page/GamesGrid";
+import CategoryGrid from "../../components/home-page/CategoryGrid";
 import { onValue, ref } from "firebase/database";
-import { database } from "../firebase";
-import Loader from "../components/UI/Loader";
-import HomeCard from "../components/UI/HomeCard";
+import { database } from "../../firebase";
+import Loader from "../../components/UI/Loader";
+import HomeCard from "../../components/UI/HomeCard";
 
 const categories = [
     { id: "action", name: "Action", image: "/images/action.jpg" },

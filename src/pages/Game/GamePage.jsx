@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./GamePage.css";
-import SideBar from "../components/game-page/SideBar";
-import GamesGrid from "../components/home-page/GamesGrid";
-import GameWindow from "../components/game-page/GameWindow";
-import GameDescription from "../components/game-page/GameDescription";
-import { database } from "../firebase";
+import SideBar from "../../components/game-page/SideBar";
+import GamesGrid from "../../components/home-page/GamesGrid";
+import GameWindow from "../../components/game-page/GameWindow";
+import GameDescription from "../../components/game-page/GameDescription";
+import { database } from "../../firebase";
 import { onValue, ref } from "firebase/database";
-import Loader from "../components/UI/Loader";
-import NotFoundPage from "./NotFoundPage";
+import Loader from "../../components/UI/Loader";
+import NotFoundPage from "../Error/NotFoundPage";
 
 const divideGames = (games) => {
     const leftSideGames = games.slice(0, 4);

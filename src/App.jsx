@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import "./pages/HomePage";
-import HomePage from "./pages/HomePage";
-import GamePage from "./pages/GamePage";
+import "./pages/Home/HomePage";
+import HomePage from "./pages/Home/HomePage";
+import GamePage from "./pages/Game/GamePage";
 import Footer from "./components/UI/Footer";
-import AdminPage from "./pages/AdminPage";
-import NotFoundPage from "./pages/NotFoundPage";
+import AdminPage from "./pages/Admin/AdminPage";
+import NotFoundPage from "./pages/Error/NotFoundPage";
 import LoginPage from "./pages/Auth/LoginPage";
 import SignupPage from "./pages/Auth/SignupPage";
 
