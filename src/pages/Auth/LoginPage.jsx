@@ -48,7 +48,7 @@ const LoginPage = () => {
     };
 
     const handleSignup = () => {
-        navigate("/signup");
+        navigate(`/signup?role=${role}`);
     };
 
     const handleAdminLogin = () => {

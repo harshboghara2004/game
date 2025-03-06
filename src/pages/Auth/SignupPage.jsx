@@ -26,7 +26,7 @@ const SignupPage = () => {
             );
             const user = userCredential.user;
             console.log("User sign-up success", user);
-            
+
             await addDoc(collection(db, role), {
                 uid: user.uid,
                 email: user.email,
@@ -42,7 +42,7 @@ const SignupPage = () => {
     };
 
     const handleLogin = () => {
-        navigate("/login");
+        navigate(`/login?role=${role}`);
     };
 
     const handleAdminSignup = () => {
