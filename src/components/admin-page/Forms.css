@@ -6,6 +6,15 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
+.ck-editor__editable ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+.ck-editor__editable ol {
+    list-style-type: decimal;
+    margin-left: 20px;
+}
+
 .left {
     align-self: flex-start;
 }

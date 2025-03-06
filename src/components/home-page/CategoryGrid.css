@@ -6,7 +6,7 @@
     width: 90%;
     max-width: 1400px;
     margin-top: 20px;
-    margin-bottom: 40px; /* ✅ Added margin at the bottom to create space between categories and footer */
+    margin-bottom: 40px; 
 }
 
 .category-card {

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { update, ref, set, push } from "firebase/database";
 import { database } from "../../../firebaseConfig";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../Forms.css";
 
 const AddNewGame = ({ setShowForm }) => {
-
     const [gameData, setGameData] = useState({
         description: "",
         gameCategory: "",
@@ -19,6 +20,11 @@ const AddNewGame = ({ setShowForm }) => {
 
     const handleGameChange = (e) => {
         setGameData({ ...gameData, [e.target.name]: e.target.value });
+    };
+
+    const handleDescriptionChange = (event, editor) => {
+        const data = editor.getData();
+        setGameData({ ...gameData, description: data });
     };
 
     const handleAddOrUpdateGame = () => {
@@ -68,8 +74,10 @@ const AddNewGame = ({ setShowForm }) => {
     };
 
     const handleCancel = () => {
-        setShowForm((prevState) => false);
+        setShowForm(false);
     };
+
+    const licenseKey = process.env.REACT_APP_LICENSE_KEY;
 
     return (
         <div className="form-container">
@@ -81,13 +89,32 @@ const AddNewGame = ({ setShowForm }) => {
                 onChange={handleGameChange}
                 placeholder="Game Title"
             />
-            <input
-                type="text"
-                name="description"
-                value={gameData.description}
-                onChange={handleGameChange}
-                placeholder="Description"
+
+            <CKEditor
+                editor={ClassicEditor}
+                data={gameData.description}
+                onChange={handleDescriptionChange}
+                config={{
+                    licenseKey: licenseKey,
+                    toolbar: [
+                        "undo",
+                        "redo",
+                        "|",
+                        "heading",
+                        "|",
+                        "bold",
+                        "italic",
+                        "underline",
+                        "strikethrough",
+                        "link",
+                        "bulletedList",
+                        "numberedList",
+                        "blockQuote",
+                    ],
+                    placeholder: "Description...",
+                }}
             />
+
             <input
                 type="text"
                 name="gameCategory"

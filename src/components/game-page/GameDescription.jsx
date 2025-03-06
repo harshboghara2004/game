@@ -1,7 +1,9 @@
 import React from "react";
 import "./GameDescription.css";
+import RenderHTML from "./RenderHTML";
 
 const GameDescription = ({ game }) => {
+    console.log(game);
     return (
         <div className="game-description-section">
             <div className="description-text-area">
@@ -9,18 +11,25 @@ const GameDescription = ({ game }) => {
                     {game.gameCategory}
                 </span>
                 <h2 className="description-title">{game.gameTitle}</h2>
-                <p className="description-text"> {game.description} </p>
-                <p className="description-howToPlay">
-                    <b> How to play: </b> {game.howToPlay}
+                <p className="description-text">
+                    {" "}
+                    <RenderHTML htmlString={game.description} />{" "}
                 </p>
-                <p className="description-whoCreated">
-                    <b> Who created: </b> {game.whoCreated}
+                <p className="howToPlay">
+                    <span className="bold"> How to play: </span>{" "}
+                    {game.howToPlay}
                 </p>
-                <p className="description-playForFree">
-                    <b> Play for Free: </b> {game.playForFree}
+                <p className="whoCreated">
+                    <span className="bold"> Who created: </span>{" "}
+                    {game.whoCreated}
                 </p>
-                <p className="description-mobileDesktop">
-                    <b> Platform to Play: </b> {game.mobileDesktop}
+                <p className="playForFree">
+                    <span className="bold"> Play for Free: </span>{" "}
+                    {game.playForFree}
+                </p>
+                <p className="mobileDesktop">
+                    <span className="bold"> Platform to Play: </span>{" "}
+                    {game.mobileDesktop}
                 </p>
             </div>
             <img

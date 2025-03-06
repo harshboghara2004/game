@@ -6,10 +6,10 @@ import "./Header.css";
 const Header = () => {
     return (
         <header className="header">
-            <Link to="/" className="home-icon">
+            <Link to="/" className="header-home-icon">
                 <FaHome size={18} />
             </Link>
-            <h1 className="header-title">Korgi Games</h1>
+            <h1 className="header-title sour-gummy-text">Korgi Games</h1>
         </header>
     );
 };

@@ -7,8 +7,9 @@ footer {
     font-size: 14px;
     width: 100%;
     box-sizing: border-box;
-    margin-top: auto; /* Push footer to the bottom */
-    margin-bottom: -1px; /* ✅ Negative margin to try and visually pull footer up slightly and remove bottom gap */
+    list-style: none;
+    margin-top: auto;
+    margin-bottom: -1px;
 }
 
 .footer-content {
@@ -20,12 +21,15 @@ footer {
     margin: 0 auto;
 }
 
-.footer-content a {
-    color: #555;
-    text-decoration: none;
+.footer-text {
+    font-family: "Sour Gummy", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
 }
 
-.footer-content a:hover {
-    color: #333;
-    text-decoration: underline;
+.footer-item:hover {
+    color: white;
+    background-color: black;
 }

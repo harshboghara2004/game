@@ -1,0 +1,53 @@
+.game-card {
+    display: inline-block;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.game-card.large {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.game-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.grid-game-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    color: white;
+    font-size: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    text-wrap: pretty;
+    z-index: 1000;
+    font-family: "Sour Gummy", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+.game-card:hover .game-image {
+    opacity: 0.5;
+}
+
+.game-card:hover .grid-game-title {
+    opacity: 1;
+}

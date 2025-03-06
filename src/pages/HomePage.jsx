@@ -4,6 +4,7 @@ import GamesGrid from "../components/home-page/GamesGrid";
 import CategoryGrid from "../components/home-page/CategoryGrid";
 import { onValue, ref } from "firebase/database";
 import { database } from "../firebaseConfig";
+import Loader from "../components/UI/Loader";
 
 const categories = [
     { id: "action", name: "Action", image: "/images/action.jpg" },
@@ -26,13 +27,16 @@ const categories = [
 const HomePage = () => {
     const [games, setGames] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        setIsLoading(true);
         const dataRef = ref(database, "/games");
 
         const unsubscribe = onValue(dataRef, (snapshot) => {
             const gamesArray = Object.values(snapshot.val());
             setGames(gamesArray);
+            setIsLoading(false);
         });
 
         return () => unsubscribe();
@@ -42,21 +46,26 @@ const HomePage = () => {
         ? games.filter((game) => game.gameCategory === selectedCategory)
         : games;
 
-    console.log(games);
+    let gameContent;
+    if (isLoading) {
+        gameContent = <Loader message="Loading Games..." />;
+    } else {
+        gameContent = (
+            <>
+                {/* Game Grid Section */}
+                <GamesGrid games={filteredGames} isHome />
 
-    return (
-        <div className="home-page">
-            {/* Game Grid Section */}
-            <GamesGrid games={filteredGames} isHome />
+                {/* Category Grid Section */}
+                <CategoryGrid
+                    categories={categories}
+                    selectedCategory={selectedCategory}
+                    setSelectedCategory={setSelectedCategory}
+                />
+            </>
+        );
+    }
 
-            {/* Category Grid Section */}
-            <CategoryGrid
-                categories={categories}
-                selectedCategory={selectedCategory}
-                setSelectedCategory={setSelectedCategory}
-            />
-        </div>
-    );
+    return <div className="home-page">{gameContent}</div>;
 };
 
 export default HomePage;

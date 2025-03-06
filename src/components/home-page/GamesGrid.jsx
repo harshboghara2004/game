@@ -1,29 +1,17 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import "./GamesGrid.css";
+import { motion } from "framer-motion";
+import HomeCard from "../UI/HomeCard";
+import GameCard from "./GameCard";
 
 const GamesGrid = ({ games, isHome = false }) => {
-    const navigate = useNavigate();
-    console.log(games);
     return (
-        <ul className="game-grid">
+        <motion.ul animate={{ y: [10, 0] }} className="game-grid">
+            {isHome && <HomeCard />}
             {games.map((game, index) => (
-                <li
-                    key={game.id}
-                    className={`game-card ${
-                        isHome && index % 6 === 0 ? "large" : ""
-                    }`}
-                    onClick={() => navigate(`/game/${game.slug}`)}
-                >
-                    <img
-                        src={game.gameImage}
-                        alt={game.gameTitle}
-                        className="game-image"
-                    />
-                    <h3 className="game-title">{game.gameTitle}</h3>
-                </li>
+                <GameCard game={game} index={index} isHome={isHome} />
             ))}
-        </ul>
+        </motion.ul>
     );
 };
 

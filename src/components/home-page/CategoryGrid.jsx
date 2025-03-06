@@ -9,7 +9,11 @@ const CategoryGrid = ({
 }) => {
     const navigate = useNavigate();
     const handleCategoryClick = (category) => {
-        setSelectedCategory(category);
+        if (selectedCategory === category) {
+            setSelectedCategory(null);
+        } else {
+            setSelectedCategory(category);
+        }
         navigate("/");
     };
     return (

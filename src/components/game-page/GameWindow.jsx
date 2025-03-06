@@ -1,8 +1,9 @@
 import React from "react";
 import "./GameWindow.css";
+import GameWindowBottomBar from "./GameWindowBottomBar";
 
 const GameWindow = ({ game }) => {
-    const { gameUrl, gameTitle } = game;
+    const { gameUrl, gameTitle, whoCreated, gameImage, view } = game;
     return (
         <div className="game-container">
             <iframe
@@ -12,7 +13,12 @@ const GameWindow = ({ game }) => {
                 frameBorder="0"
             />
             {/* Game Title */}
-            <h2 className="game-title">{gameTitle}</h2>
+            <GameWindowBottomBar
+                title={gameTitle}
+                whoCreated={whoCreated}
+                image={gameImage}
+                views={view}
+            />
         </div>
     );
 };

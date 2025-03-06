@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
 import Footer from "./components/UI/Footer";
 import AdminPage from "./pages/AdminPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/game/:slug" element={<GamePage />} />
                     <Route path="/admin" element={<AdminPage />} />
+                    <Route path="*" element={<NotFoundPage />} />
                 </Routes>
                 <Footer />
             </div>

@@ -27,7 +27,6 @@ const CategorySection = ({ categories }) => {
             "Are you sure you want to delete this category?"
         );
         if (!confirmDelete) return;
-        console.log(categoryId);
         const categoryRef = ref(database, `/categories/${categoryId}`);
         remove(categoryRef)
             .then(() => {
