@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ref, remove } from "firebase/database";
-import { database } from "../../../firebaseConfig";
+import { database } from "../../../firebase";
 import "../Section.css";
 import AddNewCategory from "./AddNewCategory";
 import EditCategoryForm from "./EditCategoryForm";

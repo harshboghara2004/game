@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { update, ref, set, push } from "firebase/database";
-import { database } from "../../../firebaseConfig";
+import { database } from "../../../firebase";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../Forms.css";

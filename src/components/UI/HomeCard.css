@@ -1,5 +1,7 @@
 .home-card {
-    width: 100%;
+    margin-top: 1rem;
+    width: 150px;
+    height: 150px;
     align-items: center;
     background: #fff;
     border-radius: 16px;
@@ -8,13 +10,18 @@
     flex-direction: column;
     background: white;
     color: #004e98;
+    z-index: 1000;
+    position: fixed;
+    top: 1%;
+    left: 9.25%;
 }
 
 /* Title styles */
 .korgi-title {
-    height: 70%;
+    width: 100%;
+    height: 50%;
     font-weight: bold;
-    padding: 12px 28px;
+    padding: 6px 15px;
     border-bottom: 1px solid black;
     font-family: "Sour Gummy", sans-serif;
     font-optical-sizing: auto;
@@ -27,16 +34,16 @@
 /* Icon container styles */
 .icon-container {
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
-    padding: 0;
 }
 
 /* Icon styles */
 .home-icon,
 .search-icon {
-    font-size: 40px;
-    padding: 20px 25px;
+    font-size: 35px;
+    padding: 15px 20px;
     color: #004e98;
     transition: color 0.3s;
 }

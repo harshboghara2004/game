@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { update, ref } from "firebase/database";
-import { database } from "../../../firebaseConfig";
+import { database } from "../../../firebase";
 import "../Forms.css";
 
 const EditGameForm = ({ game, setEditing }) => {

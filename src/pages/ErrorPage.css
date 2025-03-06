@@ -1,6 +1,6 @@
 /* NotFoundPage.css */
 
-.not-found-container {
+.error-container {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -12,14 +12,14 @@
     background-color: #caf0f8;
 }
 
-.not-found-title {
+.error-title {
     font-size: 6rem;
     font-weight: bold;
     color: #1f2937;
     margin: 0;
 }
 
-.not-found-message {
+.error-message {
     font-size: 1.5rem;
     color: #4b5563;
     margin: 16px 0;

@@ -2,8 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./SideBar.css";
 import { motion } from "framer-motion";
+import HomeCard from "../UI/HomeCard";
 
-const SideBar = ({ games, className }) => {
+const SideBar = ({ games, className, addHome = false }) => {
     const navigate = useNavigate();
 
     return (
@@ -11,6 +12,8 @@ const SideBar = ({ games, className }) => {
             className={`game-sidebar ${className}`}
             animate={{ y: [15, 0] }}
         >
+            {addHome && <HomeCard />}
+            {addHome && <div className="dummy"></div>}
             {games.map((game) => (
                 <motion.li
                     layout

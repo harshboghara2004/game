@@ -7,7 +7,7 @@ import GameCard from "./GameCard";
 const GamesGrid = ({ games, isHome = false }) => {
     return (
         <motion.ul animate={{ y: [10, 0] }} className="game-grid">
-            {isHome && <HomeCard />}
+            {isHome && <div className="dummy"></div>}
             {games.map((game, index) => (
                 <GameCard game={game} index={index} isHome={isHome} />
             ))}

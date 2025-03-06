@@ -8,7 +8,7 @@ const HomeCard = () => {
     const navigate = useNavigate();
 
     return (
-        <motion.li whileHover={{ scale: 1.05 }} className="home-card">
+        <motion.nav whileHover={{ scale: 1.05 }} className="home-card">
             <h1 className="korgi-title">Korgi</h1>
             <div className="icon-container">
                 <div className="home-icon">
@@ -18,7 +18,7 @@ const HomeCard = () => {
                     <FaSearch />
                 </div>
             </div>
-        </motion.li>
+        </motion.nav>
     );
 };
 

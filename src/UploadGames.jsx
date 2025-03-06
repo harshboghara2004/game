@@ -1,7 +1,7 @@
 // UploadGames.jsx
 import React from "react";
 import { ref, push } from "firebase/database";
-import { database } from "./firebaseConfig";
+import { database } from "./firebase";
 
 const games = [
     {

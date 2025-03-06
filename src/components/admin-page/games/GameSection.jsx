@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ref, remove } from "firebase/database";
-import { database } from "../../../firebaseConfig";
+import { database } from "../../../firebase";
 import "../Section.css";
 import AddNewGame from "./AddNewGame";
 import EditGameForm from "./EditGameForm";

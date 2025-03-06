@@ -5,6 +5,7 @@ body {
     background-color: black;
     background-image: url("https://a.poki-cdn.com/images/bg-diamante.svg");
     color: #333;
+    overscroll-behavior: none;
 }
 
 .container {

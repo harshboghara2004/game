@@ -5,15 +5,15 @@ import SideBar from "../components/game-page/SideBar";
 import GamesGrid from "../components/home-page/GamesGrid";
 import GameWindow from "../components/game-page/GameWindow";
 import GameDescription from "../components/game-page/GameDescription";
-import { database } from "../firebaseConfig";
+import { database } from "../firebase";
 import { onValue, ref } from "firebase/database";
 import Loader from "../components/UI/Loader";
 import NotFoundPage from "./NotFoundPage";
 
 const divideGames = (games) => {
-    const leftSideGames = games.slice(0, 5);
-    const rightSideGames = games.slice(5, 10);
-    const bottomGames = games.slice(10);
+    const leftSideGames = games.slice(0, 4);
+    const rightSideGames = games.slice(4, 9);
+    const bottomGames = games.slice(9);
     return { leftSideGames, rightSideGames, bottomGames };
 };
 
@@ -53,6 +53,7 @@ const GamePage = () => {
                         <SideBar
                             games={leftSideGames}
                             className="left-sidebar"
+                            addHome
                         />
 
                         {/* Game Window */}

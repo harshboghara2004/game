@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../Forms.css";
 import { ref, push, set } from "firebase/database";
-import { database } from "../../../firebaseConfig";
+import { database } from "../../../firebase";
 
 const AddNewCategory = ({ setShowForm }) => {
     const [categoryData, setCategoryData] = useState({

@@ -1,5 +1,5 @@
 import React from "react";
-import { auth } from "../../firebaseConfig";
+import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import "./AdminSideBar.css";
 

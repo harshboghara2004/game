@@ -5,7 +5,14 @@
     margin: 1rem;
     gap: 15px;
     list-style-type: none; /* Removes bullet points */
-    padding: 0; 
+    padding: 0;
+}
+
+.dummy {
+    width: 100px;
+    height: 150px;
+    border-radius: 10px;
+    margin-bottom: 0px;
 }
 
 .game-sidebar-card {

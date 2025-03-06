@@ -3,8 +3,9 @@ import "./HomePage.css";
 import GamesGrid from "../components/home-page/GamesGrid";
 import CategoryGrid from "../components/home-page/CategoryGrid";
 import { onValue, ref } from "firebase/database";
-import { database } from "../firebaseConfig";
+import { database } from "../firebase";
 import Loader from "../components/UI/Loader";
+import HomeCard from "../components/UI/HomeCard";
 
 const categories = [
     { id: "action", name: "Action", image: "/images/action.jpg" },
@@ -65,7 +66,12 @@ const HomePage = () => {
         );
     }
 
-    return <div className="home-page">{gameContent}</div>;
+    return (
+        <div className="home-page">
+            <HomeCard />
+            {gameContent}
+        </div>
+    );
 };
 
 export default HomePage;
