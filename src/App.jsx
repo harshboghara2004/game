@@ -7,7 +7,7 @@ import Footer from "./components/UI/Footer";
 import AdminPage from "./pages/Admin/AdminPage";
 import NotFoundPage from "./pages/Error/NotFoundPage";
 import LoginPage from "./pages/Auth/LoginPage";
-import SignupPage from "./pages/Auth/SignupPage";
+import SignUpPage from "./pages/Auth/SignUpPage";
 
 function App() {
     return (
@@ -18,7 +18,7 @@ function App() {
                     <Route path="/game/:slug" element={<GamePage />} />
                     <Route path="/admin-panel" element={<AdminPage />} />
                     <Route path="/login" element={<LoginPage />} />
-                    <Route path="/signup" element={<SignupPage />} />
+                    <Route path="/signup" element={<SignUpPage />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
                 <Footer />

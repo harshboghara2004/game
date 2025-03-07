@@ -1,7 +1,7 @@
 .game-sidebar {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     margin: 1rem;
     gap: 15px;
     list-style-type: none; /* Removes bullet points */

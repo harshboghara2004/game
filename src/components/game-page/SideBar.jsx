@@ -1,12 +1,10 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import classes from "./SideBar.module.css";
 import { motion } from "framer-motion";
 import HomeCard from "../UI/HomeCard";
+import GameCard from "../home-page/GameCard";
 
 const SideBar = ({ games, className, addHome = false }) => {
-    const navigate = useNavigate();
-
     return (
         <motion.ul
             className={`${classes["game-sidebar"]} ${className}`}
@@ -15,19 +13,7 @@ const SideBar = ({ games, className, addHome = false }) => {
             {addHome && <HomeCard />}
             {addHome && <div className={classes["dummy"]}></div>}
             {games.map((game) => (
-                <motion.li
-                    layout
-                    key={game.slug}
-                    className={classes["game-sidebar-card"]}
-                    whileHover={{ scale: 1.05 }}
-                    onClick={() => navigate(`/game/${game.slug}`)}
-                >
-                    <img
-                        src={game.gameImage}
-                        alt={game.gameTitle}
-                        className={classes["game-sidebar-image"]}
-                    />
-                </motion.li>
+                <GameCard game={game} />
             ))}
         </motion.ul>
     );
