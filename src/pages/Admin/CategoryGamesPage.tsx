@@ -66,7 +66,7 @@ function CategoryGamesPage({
 
                             {game.gameUrl && (
                                 <a
-                                    href={game.gameUrl}
+                                    href={`/game/${game.slug}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center text-blue-500 hover:text-blue-700"

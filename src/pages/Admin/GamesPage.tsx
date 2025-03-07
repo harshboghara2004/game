@@ -16,7 +16,14 @@ export interface Game {
     view: number;
 }
 
-function GameCard({ id, gameImage, gameUrl, gameTitle, gameCategory }: Game) {
+function GameCard({
+    id,
+    slug,
+    gameImage,
+    gameUrl,
+    gameTitle,
+    gameCategory,
+}: Game) {
     return (
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
             <img
@@ -31,7 +38,7 @@ function GameCard({ id, gameImage, gameUrl, gameTitle, gameCategory }: Game) {
                 </p>
                 {gameUrl && (
                     <a
-                        href={gameUrl}
+                        href={`/game/${slug}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center text-blue-500 hover:text-blue-700"

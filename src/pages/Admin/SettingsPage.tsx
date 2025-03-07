@@ -262,7 +262,7 @@ const SettingsPage = () => {
                                         <td className="px-6 py-4">
                                             {game.gameUrl && (
                                                 <a
-                                                    href={game.gameUrl}
+                                                    href={`/game/${game.slug}`}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="text-blue-500 hover:text-blue-700 flex items-center"
