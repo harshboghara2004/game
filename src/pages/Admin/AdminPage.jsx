@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { auth, database, db } from "../../firebase";
-import { ref, onValue, set } from "firebase/database";
-import "./AdminPage.css";
+import { auth, database } from "../../firebase";
+import { ref, onValue } from "firebase/database";
+import classes from "./AdminPage.module.css";
 import AdminSideBar from "../../components/admin-page/AdminSideBar";
 import GameSection from "../../components/admin-page/games/GameSection";
 import CategorySection from "../../components/admin-page/categories/CategorySection";
@@ -19,6 +19,7 @@ const AdminPage = () => {
     const [categories, setCategories] = useState([]);
     const [currentTab, setCurrentTab] = useState("games");
 
+    // check for admin
     useEffect(() => {
         setIsLoading(true);
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -45,6 +46,7 @@ const AdminPage = () => {
         return () => unsubscribe();
     }, []);
 
+    // get the data
     useEffect(() => {
         const gamesRef = ref(database, "games");
         const categoriesRef = ref(database, "categories");
@@ -96,7 +98,7 @@ const AdminPage = () => {
                     selectedTab={currentTab}
                     setCurrentTab={setCurrentTab}
                 />
-                <div className="content">
+                <div className={classes.content}>
                     {currentTab === "games" && <GameSection games={games} />}
                     {currentTab === "categories" && (
                         <CategorySection categories={categories} />
@@ -106,7 +108,7 @@ const AdminPage = () => {
         );
     }
 
-    return <div className="admin-container">{content}</div>;
+    return <div className={classes["admin-container"]}>{content}</div>;
 };
 
 export default AdminPage;

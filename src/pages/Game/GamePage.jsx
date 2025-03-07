@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import "./GamePage.css";
+import classes from "./GamePage.module.css";
 import SideBar from "../../components/game-page/SideBar";
 import GamesGrid from "../../components/home-page/GamesGrid";
 import GameWindow from "../../components/game-page/GameWindow";
@@ -48,7 +48,7 @@ const GamePage = () => {
             content = (
                 <>
                     {/* Game Layout */}
-                    <div className="game-layout">
+                    <div className={classes["game-layout"]}>
                         {/* Left Sidebar */}
                         <SideBar
                             games={leftSideGames}
@@ -76,7 +76,7 @@ const GamePage = () => {
         }
     }
 
-    return <div className="game-page">{content}</div>;
+    return <div className={classes["game-page"]}>{content}</div>;
 };
 
 export default GamePage;

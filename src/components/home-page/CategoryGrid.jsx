@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./CategoryGrid.css";
+import classes from "./CategoryGrid.module.css";
+import { motion } from "framer-motion";
 
 const CategoryGrid = ({
     categories,
@@ -8,6 +9,8 @@ const CategoryGrid = ({
     setSelectedCategory,
 }) => {
     const navigate = useNavigate();
+
+    // handle category select
     const handleCategoryClick = (category) => {
         if (selectedCategory === category) {
             setSelectedCategory(null);
@@ -16,21 +19,23 @@ const CategoryGrid = ({
         }
         navigate("/");
     };
+
     return (
-        <ul className="category-grid">
+        <motion.ul className={classes["category-grid"]}>
             {categories.map((category) => (
-                <li
+                <motion.li
                     key={category.id}
-                    className={`category-card ${
-                        selectedCategory === category.name ? "active" : ""
+                    className={`${classes["category-card"]} ${
+                        selectedCategory === category.name ? classes.active : ""
                     }`}
+                    whileHover={{ scale: 1.1 }}
                     onClick={() => handleCategoryClick(category.name)}
                 >
                     <img src={category.image} alt="" />
                     {category.name}
-                </li>
+                </motion.li>
             ))}
-        </ul>
+        </motion.ul>
     );
 };
 

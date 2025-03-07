@@ -1,5 +1,5 @@
 import React from "react";
-import "./Footer.css";
+import classes from "./Footer.module.css";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -13,16 +13,18 @@ const footerLinks = [
 
 const Footer = () => {
     return (
-        <footer>
-            <div className="footer-content">
+        <footer className={classes.footer}>
+            <div className={classes["footer-content"]}>
                 {footerLinks.map((element, index) => (
                     <motion.li
                         key={index}
                         whileHover={{ scale: 1.1 }}
-                        className="footer-item"
+                        className={classes["footer-item"]}
                     >
                         <Link to={element.link} key={index}>
-                            <p className="footer-text">{element.title}</p>
+                            <p className={classes["footer-text"]}>
+                                {element.title}
+                            </p>
                         </Link>
                     </motion.li>
                 ))}

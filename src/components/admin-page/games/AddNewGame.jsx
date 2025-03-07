@@ -3,7 +3,7 @@ import { update, ref, set, push } from "firebase/database";
 import { database } from "../../../firebase";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import "../Forms.css";
+import classes from "./GameForm.module.css";
 
 const AddNewGame = ({ setShowForm }) => {
     const [gameData, setGameData] = useState({
@@ -18,15 +18,18 @@ const AddNewGame = ({ setShowForm }) => {
     });
     const [editingGameId, setEditingGameId] = useState(null);
 
+    // change state to current entered value
     const handleGameChange = (e) => {
         setGameData({ ...gameData, [e.target.name]: e.target.value });
     };
 
+    // change description to current entered value
     const handleDescriptionChange = (event, editor) => {
         const data = editor.getData();
         setGameData({ ...gameData, description: data });
     };
 
+    // add or update game click
     const handleAddOrUpdateGame = () => {
         if (editingGameId) {
             handleUpdateGame();
@@ -51,6 +54,7 @@ const AddNewGame = ({ setShowForm }) => {
             .catch((error) => console.error("Add failed: ", error));
     };
 
+    // update game
     const handleUpdateGame = () => {
         if (!editingGameId) return;
 
@@ -73,6 +77,7 @@ const AddNewGame = ({ setShowForm }) => {
             .catch((error) => console.error("Update failed: ", error));
     };
 
+    // cancel to add new game
     const handleCancel = () => {
         setShowForm(false);
     };
@@ -80,7 +85,7 @@ const AddNewGame = ({ setShowForm }) => {
     const licenseKey = process.env.REACT_APP_LICENSE_KEY;
 
     return (
-        <div className="form-container">
+        <div className={classes["form-container"]}>
             <h3>{editingGameId ? "Update Game" : "Add New Game"}</h3>
             <input
                 type="text"
@@ -88,6 +93,7 @@ const AddNewGame = ({ setShowForm }) => {
                 value={gameData.gameTitle}
                 onChange={handleGameChange}
                 placeholder="Game Title"
+                className={classes["input-text"]}
             />
 
             <CKEditor
@@ -121,6 +127,7 @@ const AddNewGame = ({ setShowForm }) => {
                 value={gameData.gameCategory}
                 onChange={handleGameChange}
                 placeholder="Category"
+                className={classes["input-text"]}
             />
             <input
                 type="text"
@@ -128,6 +135,7 @@ const AddNewGame = ({ setShowForm }) => {
                 value={gameData.gameImage}
                 onChange={handleGameChange}
                 placeholder="Image URL"
+                className={classes["input-text"]}
             />
             <input
                 type="text"
@@ -135,6 +143,7 @@ const AddNewGame = ({ setShowForm }) => {
                 value={gameData.gameUrl}
                 onChange={handleGameChange}
                 placeholder="Game URL"
+                className={classes["input-text"]}
             />
             <input
                 type="text"
@@ -142,6 +151,7 @@ const AddNewGame = ({ setShowForm }) => {
                 value={gameData.slug}
                 onChange={handleGameChange}
                 placeholder="Slug"
+                className={classes["input-text"]}
             />
             <input
                 type="text"
@@ -149,6 +159,7 @@ const AddNewGame = ({ setShowForm }) => {
                 value={gameData.metaUrl}
                 onChange={handleGameChange}
                 placeholder="Meta URL"
+                className={classes["input-text"]}
             />
             <input
                 type="number"
@@ -156,12 +167,15 @@ const AddNewGame = ({ setShowForm }) => {
                 value={gameData.view}
                 onChange={handleGameChange}
                 placeholder="Views"
+                className={classes["input-number"]}
             />
 
-            <button onClick={handleAddOrUpdateGame}>
+            <button onClick={handleAddOrUpdateGame} className={classes.btn}>
                 {editingGameId ? "Save Changes" : "Add Game"}
             </button>
-            <button onClick={handleCancel}>Cancel</button>
+            <button onClick={handleCancel} className={classes.btn}>
+                Cancel
+            </button>
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../Forms.css";
+import classes from "./CategoryForm.module.css";
 import { ref, update } from "firebase/database";
 import { database } from "../../../firebase";
 
@@ -9,12 +9,14 @@ const EditCategoryForm = ({ category, setEditing }) => {
         description: category.description,
     });
 
-    const handleCancel = () => {
-        setEditing((prevState) => null);
-    };
-
+    // change state to current entered value
     const handleCategoryChange = (e) => {
         setCategoryData({ ...categoryData, [e.target.name]: e.target.value });
+    };
+
+    // cancel to edit category
+    const handleCancel = () => {
+        setEditing((prevState) => null);
     };
 
     // Update Category
@@ -31,13 +33,14 @@ const EditCategoryForm = ({ category, setEditing }) => {
     };
 
     return (
-        <div className="form-container">
+        <div className={classes["form-container"]}>
             <input
                 type="text"
                 name="name"
                 value={categoryData.name}
                 onChange={handleCategoryChange}
                 placeholder="Category Name"
+                className={classes["input-text"]}
             />
             <input
                 type="text"
@@ -45,9 +48,14 @@ const EditCategoryForm = ({ category, setEditing }) => {
                 value={categoryData.description}
                 onChange={handleCategoryChange}
                 placeholder="Category Description"
+                className={classes["input-text"]}
             />
-            <button onClick={handleUpdateCategory}>Update</button>
-            <button onClick={handleCancel}>Cancel</button>
+            <button onClick={handleUpdateCategory} className={classes.btn}>
+                Update
+            </button>
+            <button onClick={handleCancel} className={classes.btn}>
+                Cancel
+            </button>
         </div>
     );
 };

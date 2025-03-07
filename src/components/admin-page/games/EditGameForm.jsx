@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { update, ref } from "firebase/database";
 import { database } from "../../../firebase";
-import "../Forms.css";
+import classes from "./GameForm.module.css";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const EditGameForm = ({ game, setEditing }) => {
     const [gameData, setGameData] = useState({
@@ -15,10 +17,18 @@ const EditGameForm = ({ game, setEditing }) => {
         view: game.view,
     });
 
+     // change state to current entered value
     const handleGameChange = (e) => {
         setGameData({ ...gameData, [e.target.name]: e.target.value });
     };
 
+    // change description to current entered value
+    const handleDescriptionChange = (event, editor) => {
+        const data = editor.getData();
+        setGameData({ ...gameData, description: data });
+    };
+
+    // update game
     const handleUpdateGame = () => {
         if (!game.id) return;
 
@@ -31,9 +41,12 @@ const EditGameForm = ({ game, setEditing }) => {
             .catch((error) => console.error("Update failed: ", error));
     };
 
+    // cancel to edit game
     const handleCancel = () => {
         setEditing((prevState) => null);
     };
+
+    const licenseKey = process.env.REACT_APP_LICENSE_KEY;
 
     return (
         <div className="form-container">
@@ -44,13 +57,31 @@ const EditGameForm = ({ game, setEditing }) => {
                 value={gameData.gameTitle}
                 onChange={handleGameChange}
                 placeholder="Game Title"
+                className={classes["input-text"]}
             />
-            <input
-                type="text"
-                name="description"
-                value={gameData.description}
-                onChange={handleGameChange}
-                placeholder="Description"
+            <CKEditor
+                editor={ClassicEditor}
+                data={gameData.description}
+                onChange={handleDescriptionChange}
+                config={{
+                    licenseKey: licenseKey,
+                    toolbar: [
+                        "undo",
+                        "redo",
+                        "|",
+                        "heading",
+                        "|",
+                        "bold",
+                        "italic",
+                        "underline",
+                        "strikethrough",
+                        "link",
+                        "bulletedList",
+                        "numberedList",
+                        "blockQuote",
+                    ],
+                    placeholder: "Description...",
+                }}
             />
             <input
                 type="text"
@@ -58,6 +89,7 @@ const EditGameForm = ({ game, setEditing }) => {
                 value={gameData.gameCategory}
                 onChange={handleGameChange}
                 placeholder="Category"
+                className={classes["input-text"]}
             />
             <input
                 type="text"
@@ -65,6 +97,7 @@ const EditGameForm = ({ game, setEditing }) => {
                 value={gameData.gameImage}
                 onChange={handleGameChange}
                 placeholder="Image URL"
+                className={classes["input-text"]}
             />
             <input
                 type="text"
@@ -72,6 +105,7 @@ const EditGameForm = ({ game, setEditing }) => {
                 value={gameData.gameUrl}
                 onChange={handleGameChange}
                 placeholder="Game URL"
+                className={classes["input-text"]}
             />
             <input
                 type="text"
@@ -79,6 +113,7 @@ const EditGameForm = ({ game, setEditing }) => {
                 value={gameData.slug}
                 onChange={handleGameChange}
                 placeholder="Slug"
+                className={classes["input-text"]}
             />
             <input
                 type="text"
@@ -86,6 +121,7 @@ const EditGameForm = ({ game, setEditing }) => {
                 value={gameData.metaUrl}
                 onChange={handleGameChange}
                 placeholder="Meta URL"
+                className={classes["input-text"]}
             />
             <input
                 type="number"
@@ -93,10 +129,15 @@ const EditGameForm = ({ game, setEditing }) => {
                 value={gameData.view}
                 onChange={handleGameChange}
                 placeholder="Views"
+                className={classes["input-number"]}
             />
 
-            <button onClick={handleUpdateGame}>Update</button>
-            <button onClick={handleCancel}>Cancel</button>
+            <button onClick={handleUpdateGame} className={classes.btn}>
+                Update
+            </button>
+            <button onClick={handleCancel} className={classes.btn}>
+                Cancel
+            </button>
         </div>
     );
 };

@@ -1,7 +1,7 @@
 // NotFoundPage.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./NotFoundPage.css";
+import classes from "./NotFoundPage.module.css";
 import { motion } from "framer-motion";
 
 const NotFoundPage = ({ statusCode = 404, message = "Page Not Found" }) => {
@@ -11,13 +11,13 @@ const NotFoundPage = ({ statusCode = 404, message = "Page Not Found" }) => {
         navigate("/");
     };
     return (
-        <div className="not-found-container">
-            <h1 className="not-found-title">{statusCode}</h1>
-            <p className="not-found-message">{message}</p>
+        <div className={classes["not-found-container"]}>
+            <h1 className={classes["not-found-title"]}>{statusCode}</h1>
+            <p className={classes["not-found-message"]}>{message}</p>
             <motion.button
                 whileHover={{ scale: 1.1 }}
                 onClick={handleClick}
-                className="home-link"
+                className={classes["home-link"]}
             >
                 Go Back Home
             </motion.button>

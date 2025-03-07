@@ -12,3 +12,9 @@
     height: 100vh;
     background-color: #f4f4f4;
 }
+
+.content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}

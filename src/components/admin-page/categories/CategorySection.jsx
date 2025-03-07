@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ref, remove } from "firebase/database";
 import { database } from "../../../firebase";
-import "../Section.css";
+import classes from "./CategorySection.module.css";
 import AddNewCategory from "./AddNewCategory";
 import EditCategoryForm from "./EditCategoryForm";
 
@@ -13,6 +13,7 @@ const CategorySection = ({ categories }) => {
         setShowForm((prevState) => true);
     };
 
+    // Edit Category
     const handleEditClick = (category) => {
         setEditingCategory({
             id: category.id,
@@ -36,7 +37,7 @@ const CategorySection = ({ categories }) => {
     };
 
     return (
-        <div className="section">
+        <div className={classes.section}>
             {editingCategory !== null && (
                 <EditCategoryForm
                     category={editingCategory}
@@ -46,7 +47,8 @@ const CategorySection = ({ categories }) => {
             {editingCategory === null && showForm && (
                 <AddNewCategory setShowForm={setShowForm} />
             )}
-            {editingCategory !== null || (showForm && <hr />)}
+            {editingCategory !== null ||
+                (showForm && <hr className={classes.hr} />)}
             <h3>
                 Categories
                 {editingCategory === null && !showForm && (
@@ -55,7 +57,7 @@ const CategorySection = ({ categories }) => {
                     </button>
                 )}
             </h3>
-            <table>
+            <table className={classes.table}>
                 <thead>
                     <tr>
                         <th>Category Name</th>
@@ -64,23 +66,25 @@ const CategorySection = ({ categories }) => {
                 </thead>
                 <tbody>
                     {categories.map((category) => (
-                        <tr key={category.id}>
+                        <tr key={category.id} >
                             <td>{category.name}</td>
                             <td>
-                                <button
-                                    className="edit-btn"
-                                    onClick={() => handleEditClick(category)}
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    className="delete-btn"
-                                    onClick={() =>
-                                        handleDeleteCategory(category.id)
-                                    }
-                                >
-                                    Delete
-                                </button>
+                                <div className={classes["btn-container"]}>
+                                    <button
+                                        className={classes["edit-btn"]}
+                                        onClick={() => handleEditClick(category)}
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        className={classes["delete-btn"]}
+                                        onClick={() =>
+                                            handleDeleteCategory(category.id)
+                                        }
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     ))}

@@ -1,11 +1,5 @@
 /* Content */
-.content {
-    flex: 1;
-    padding: 30px;
-    overflow-y: auto;
-}
-
-hr {
+.hr {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
@@ -34,7 +28,7 @@ hr {
 }
 
 /* Table Styles */
-table {
+.table {
     width: 100%;
     border-collapse: collapse;
     background-color: white;
@@ -42,21 +36,25 @@ table {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-table th,
-table td {
+.table th,
+.table td {
     padding: 10px;
     border: 1px solid #ddd;
     text-align: left;
     vertical-align: middle;
 }
 
-table th {
+.table th {
     background-color: #ecf0f1;
     font-weight: bold;
 }
 
-table tr:hover {
+.table tr:hover {
     background-color: #f1f1f1;
+}
+
+.btn-container {
+    display: flex;
 }
 
 /* Action Buttons */

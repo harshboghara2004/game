@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../Forms.css";
+import classes from "./CategoryForm.module.css";
 import { ref, push, set } from "firebase/database";
 import { database } from "../../../firebase";
 
@@ -9,6 +9,7 @@ const AddNewCategory = ({ setShowForm }) => {
         description: "",
     });
 
+    // change state to current entered value
     const handleCategoryChange = (e) => {
         setCategoryData({ ...categoryData, [e.target.name]: e.target.value });
     };
@@ -27,18 +28,20 @@ const AddNewCategory = ({ setShowForm }) => {
             .catch((error) => console.error("Add category failed: ", error));
     };
 
+    // Cancel to add new category
     const handleCancel = () => {
         setShowForm(false);
     };
 
     return (
-        <div className="form-container">
+        <div className={classes["form-container"]}>
             <input
                 type="text"
                 name="name"
                 value={categoryData.name}
                 onChange={handleCategoryChange}
                 placeholder="Category Name"
+                className={classes["input-text"]}
             />
             <input
                 type="text"
@@ -46,9 +49,10 @@ const AddNewCategory = ({ setShowForm }) => {
                 value={categoryData.description}
                 onChange={handleCategoryChange}
                 placeholder="Category Description"
+                className={classes["input-text"]}
             />
-            <button onClick={handleAddCategory}>Add Category</button>
-            <button onClick={handleCancel}>Cancel</button>
+            <button onClick={handleAddCategory} className={classes.btn}>Add Category</button>
+            <button onClick={handleCancel} className={classes.btn}>Cancel</button>
         </div>
     );
 };

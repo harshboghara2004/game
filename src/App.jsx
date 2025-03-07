@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./App.css";
-import "./pages/Home/HomePage";
+import classes from "./App.module.css";
 import HomePage from "./pages/Home/HomePage";
 import GamePage from "./pages/Game/GamePage";
 import Footer from "./components/UI/Footer";
@@ -13,7 +12,7 @@ import SignupPage from "./pages/Auth/SignupPage";
 function App() {
     return (
         <Router>
-            <div className="App">
+            <div className={classes.app}>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/game/:slug" element={<GamePage />} />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./HomePage.css";
+import classes from "./HomePage.module.css";
 import GamesGrid from "../../components/home-page/GamesGrid";
 import CategoryGrid from "../../components/home-page/CategoryGrid";
 import { onValue, ref } from "firebase/database";
@@ -67,7 +67,7 @@ const HomePage = () => {
     }
 
     return (
-        <div className="home-page">
+        <div className={classes["home-page"]}>
             <HomeCard />
             {gameContent}
         </div>

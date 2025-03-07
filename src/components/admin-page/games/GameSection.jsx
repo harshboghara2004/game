@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ref, remove } from "firebase/database";
 import { database } from "../../../firebase";
-import "../Section.css";
+import classes from "./GameSection.module.css";
 import AddNewGame from "./AddNewGame";
 import EditGameForm from "./EditGameForm";
 
@@ -13,7 +13,22 @@ const GameSection = ({ games }) => {
         setShowForm((prevState) => true);
     };
 
-    // Delete Game
+    // Edit game click
+    const handleEditGame = (game) => {
+        setEditingGame({
+            id: game.id,
+            gameTitle: game.gameTitle,
+            description: game.description,
+            gameCategory: game.gameCategory,
+            gameImage: game.gameImage,
+            gameUrl: game.gameUrl,
+            slug: game.slug,
+            metaUrl: game.metaUrl,
+            view: game.view,
+        });
+    };
+
+    // Delete Game click
     const handleDeleteGame = (gameId) => {
         const confirmDelete = window.confirm(
             "Are you sure you want to delete this game?"
@@ -31,39 +46,28 @@ const GameSection = ({ games }) => {
             });
     };
 
-    // Set game data for updating
-    const handleEditGame = (game) => {
-        setEditingGame({
-            id: game.id,
-            gameTitle: game.gameTitle,
-            description: game.description,
-            gameCategory: game.gameCategory,
-            gameImage: game.gameImage,
-            gameUrl: game.gameUrl,
-            slug: game.slug,
-            metaUrl: game.metaUrl,
-            view: game.view,
-        });
-    };
-
     return (
-        <div className="section">
+        <div className={classes.section}>
             {editingGame !== null && (
                 <EditGameForm game={editingGame} setEditing={setEditingGame} />
             )}
             {editingGame === null && showForm && (
                 <AddNewGame setShowForm={setShowForm} />
             )}
-            {editingGame !== null || (showForm && <hr />)}
+            {editingGame !== null ||
+                (showForm && <hr className={classes.hr} />)}
             <h3>
                 Games
                 {editingGame === null && !showForm && (
-                    <button className="add-btn" onClick={handleNewGame}>
+                    <button
+                        className={classes["add-btn"]}
+                        onClick={handleNewGame}
+                    >
                         Add Game
                     </button>
                 )}
             </h3>
-            <table>
+            <table className={classes.table}>
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -87,7 +91,7 @@ const GameSection = ({ games }) => {
                                 <img
                                     src={game.gameImage}
                                     alt={game.gameTitle}
-                                    className="game-img"
+                                    className={classes["game-img"]}
                                 />
                             </td>
                             <td>
@@ -111,18 +115,22 @@ const GameSection = ({ games }) => {
                             </td>
                             <td>{game.view}</td>
                             <td>
-                                <button
-                                    className="edit-btn"
-                                    onClick={() => handleEditGame(game)}
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    className="delete-btn"
-                                    onClick={() => handleDeleteGame(game.id)}
-                                >
-                                    Delete
-                                </button>
+                                <div className={classes["btn-container"]}>
+                                    <button
+                                        className={classes["edit-btn"]}
+                                        onClick={() => handleEditGame(game)}
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        className={classes["delete-btn"]}
+                                        onClick={() =>
+                                            handleDeleteGame(game.id)
+                                        }
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     ))}

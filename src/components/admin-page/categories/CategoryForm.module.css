@@ -23,8 +23,8 @@
     align-self: flex-end;
 }
 
-input[type="text"],
-input[type="number"] {
+.input-text,
+.input-number {
     width: 100%;
     padding: 10px;
     margin: 8px 0;
@@ -32,7 +32,7 @@ input[type="number"] {
     border-radius: 5px;
 }
 
-button {
+.btn {
     padding: 10px 15px;
     margin: 10px 5px;
     border: none;
@@ -41,16 +41,16 @@ button {
     font-size: 16px;
 }
 
-button:hover {
+.btn:hover {
     opacity: 0.9;
 }
 
-button[style*="color: red"] {
+.btn[style*="color: red"] {
     background: #ff4d4d;
     color: white;
 }
 
-button[style*="color: blue"] {
+.btn[style*="color: blue"] {
     background: #4da6ff;
     color: white;
 }

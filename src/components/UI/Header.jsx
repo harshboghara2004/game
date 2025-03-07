@@ -1,15 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
-import "./Header.css";
+import classes from "./Header.module.css";
 
 const Header = () => {
     return (
-        <header className="header">
-            <Link to="/" className="header-home-icon">
+        <header className={classes.header}>
+            <Link to="/" className={classes["header-home-icon"]}>
                 <FaHome size={18} />
             </Link>
-            <h1 className="header-title sour-gummy-text">Korgi Games</h1>
+            <h1
+                className={`${classes["header-title"]} ${classes["sour-gummy-text"]}`}
+            >
+                Korgi Games
+            </h1>
         </header>
     );
 };

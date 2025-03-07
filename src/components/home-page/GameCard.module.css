@@ -3,6 +3,7 @@
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
+    max-width: fit-content;
 }
 
 .game-card.large {
@@ -14,6 +15,7 @@
     position: relative;
     width: 100%;
     height: 100%;
+    max-width: fit-content;
     overflow: hidden;
     border-radius: 8px;
 }
@@ -21,6 +23,8 @@
 .game-image {
     width: 100%;
     height: 100%;
+    max-width: 400px;
+    max-height: 400px;
     object-fit: cover;
 }
 
@@ -42,6 +46,10 @@
     font-weight: bold;
     font-style: normal;
     font-variation-settings: "wdth" 100;
+}
+
+.game-card:hover {
+    background-color: black;
 }
 
 .game-card:hover .game-image {

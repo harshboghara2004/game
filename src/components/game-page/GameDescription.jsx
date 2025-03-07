@@ -1,33 +1,35 @@
 import React from "react";
-import "./GameDescription.css";
-import RenderHTML from "./RenderHTML";
+import classes from "./GameDescription.module.css";
+import RenderHTML from "../../util/RenderHTML";
 
 const GameDescription = ({ game }) => {
-    console.log(game);
+    // console.log(game);
     return (
-        <div className="game-description-section">
-            <div className="description-text-area">
-                <span className="description-category">
+        <div className={classes["game-description-section"]}>
+            <div className={classes["description-text-area"]}>
+                <span className={classes["description-category"]}>
                     {game.gameCategory}
                 </span>
-                <h2 className="description-title">{game.gameTitle}</h2>
-                <p className="description-text">
+                <h2 className={classes["description-title"]}>
+                    {game.gameTitle}
+                </h2>
+                <p className={classes["description-text"]}>
                     {" "}
                     <RenderHTML htmlString={game.description} />{" "}
                 </p>
-                <p className="howToPlay">
+                <p className={classes["howToPlay"]}>
                     <span className="bold"> How to play: </span>{" "}
                     {game.howToPlay}
                 </p>
-                <p className="whoCreated">
+                <p className={classes["whoCreated"]}>
                     <span className="bold"> Who created: </span>{" "}
                     {game.whoCreated}
                 </p>
-                <p className="playForFree">
+                <p className={classes["playForFree"]}>
                     <span className="bold"> Play for Free: </span>{" "}
                     {game.playForFree}
                 </p>
-                <p className="mobileDesktop">
+                <p className={classes["mobileDesktop"]}>
                     <span className="bold"> Platform to Play: </span>{" "}
                     {game.mobileDesktop}
                 </p>
@@ -35,7 +37,7 @@ const GameDescription = ({ game }) => {
             <img
                 src={game.gameImage}
                 alt={game.gameTitle}
-                className="description-image"
+                className={classes["description-image"]}
             />
         </div>
     );

@@ -2,7 +2,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../../firebase";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import "./LoginPage.css";
+import classes from "./LoginPage.module.css";
 import { checkIsAdmin } from "../../util/checkAdmin";
 
 const LoginPage = () => {
@@ -60,16 +60,16 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="login-page">
-            <div className="login-container">
-                <h2 className="login-text">Login ({role})</h2>
-                {error && <p className="error">{error}</p>}
+        <div className={classes["login-page"]}>
+            <div className={classes["login-container"]}>
+                <h2 className={classes["login-text"]}>Login ({role})</h2>
+                {error && <p className={classes["error"]}>{error}</p>}
                 <form onSubmit={handleLogin}>
                     <input
                         type="email"
                         placeholder="Email"
                         value={email}
-                        className="email-input"
+                        className={classes["email-input"]}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
@@ -77,19 +77,22 @@ const LoginPage = () => {
                         type="password"
                         placeholder="Password"
                         value={password}
-                        className="password-input"
+                        className={classes["password-input"]}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    <button type="submit" className="btn">
+                    <button type="submit" className={classes.btn}>
                         Login
                     </button>
-                    <button className="btn" onClick={handleSignup}>
+                    <button className={classes.btn} onClick={handleSignup}>
                         Go to Sign Up
                     </button>
                 </form>
 
-                <button onClick={handleAdminLogin} className="redirect-btn">
+                <button
+                    onClick={handleAdminLogin}
+                    className={classes["redirect-btn"]}
+                >
                     {role === "admin" ? "Login as User" : "Login as Admin"}
                 </button>
             </div>

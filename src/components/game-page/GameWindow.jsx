@@ -1,15 +1,15 @@
 import React from "react";
-import "./GameWindow.css";
+import classes from "./GameWindow.module.css";
 import GameWindowBottomBar from "./GameWindowBottomBar";
 
 const GameWindow = ({ game }) => {
     const { gameUrl, gameTitle, whoCreated, gameImage, view } = game;
     return (
-        <div className="game-container">
+        <div className={classes["game-container"]}>
             <iframe
                 src={gameUrl}
                 title={gameTitle}
-                className="game-iframe"
+                className={classes["game-iframe"]}
                 frameBorder="0"
             />
             {/* Game Title */}

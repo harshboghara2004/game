@@ -1,10 +1,10 @@
 import React from "react";
 import { Atom } from "react-loading-indicators";
-import "./Loader.css";
+import classes from "./Loader.module.css";
 
 const Loader = ({ message = "Loading..." }) => {
     return (
-        <div className="loader">
+        <div className={classes.loader}>
             <Atom
                 color="#03045e"
                 size="large"

@@ -1,23 +1,27 @@
 import React from "react";
 import { Eye } from "lucide-react";
-import "./GameWindowBottomBar.css";
+import classes from "./GameWindowBottomBar.module.css";
 
 const GameWindowBottomBar = ({ title, whoCreated, image, views = 0 }) => {
     return (
-        <div className="bottom-bar">
+        <div className={classes["bottom-bar"]}>
             {/* Left Side: Image, Name, Who Created */}
-            <div className="left-section">
-                <img src={image} alt="Thumbnail" className="thumbnail" />
-                <div className="text-info">
-                    <span className="name">{title}</span>
-                    <span className="creator">by {whoCreated}</span>
+            <div className={classes["left-section"]}>
+                <img
+                    src={image}
+                    alt="Thumbnail"
+                    className={classes["thumbnail"]}
+                />
+                <div className={classes["text-info"]}>
+                    <span className={classes["name"]}>{title}</span>
+                    <span className={classes["creator"]}>by {whoCreated}</span>
                 </div>
             </div>
 
             {/* Right Side: Icon and Views Text */}
-            <div className="right-section">
-                <Eye className="icon" />
-                <span className="views">{views}</span>
+            <div className={classes["right-section"]}>
+                <Eye className={classes["icon"]} />
+                <span className={classes["views"]}>{views}</span>
             </div>
         </div>
     );
