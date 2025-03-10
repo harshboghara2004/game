@@ -6,6 +6,8 @@ import { onValue, ref } from "firebase/database";
 import { database } from "../../firebase";
 import Loader from "../../components/UI/Loader";
 import HomeCard from "../../components/UI/HomeCard";
+import SearchPage from "../Search/SearchPage";
+import Modal from "../../components/UI/Modal";
 
 const categories = [
     { id: "action", name: "Action", image: "/images/action.jpg" },
@@ -29,6 +31,7 @@ const HomePage = () => {
     const [games, setGames] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [isSearching, setIsSearching] = useState(false);
 
     useEffect(() => {
         setIsLoading(true);
@@ -54,7 +57,7 @@ const HomePage = () => {
         gameContent = (
             <>
                 <div className={classes["home-card"]}>
-                    <HomeCard />
+                    <HomeCard setIsSearching={setIsSearching} />
                 </div>
                 {/* Game Grid Section */}
                 <GamesGrid games={filteredGames} isHome />
@@ -71,7 +74,13 @@ const HomePage = () => {
 
     return (
         <div className={classes["home-page"]}>
+            {isSearching && <div className={classes.dimmedContent}></div>}
             <div className={classes["grid-container"]}>{gameContent}</div>
+            {isSearching && (
+                <Modal onClose={() => setIsSearching(false)}>
+                    <SearchPage games={games} categories={categories} />
+                </Modal>
+            )}
         </div>
     );
 };

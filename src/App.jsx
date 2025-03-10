@@ -9,6 +9,9 @@ import LoginPage from "./pages/Auth/LoginPage";
 import SignUpPage from "./pages/Auth/SignUpPage";
 import ForgotPasswordPage from "./pages/Admin/ForgetPasswordPage";
 import Footer from "./components/UI/Footer";
+import SearchPage from "./pages/Search/SearchPage";
+import { games } from "../public/data/gameData";
+import { categories } from "../public/data/categoryData";
 
 const App = () => {
     return (
@@ -22,6 +25,12 @@ const App = () => {
                 <Route
                     path="/forget-password"
                     element={<ForgotPasswordPage />}
+                />
+                <Route
+                    path="/search"
+                    element={
+                        <SearchPage games={games} categories={categories} />
+                    }
                 />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>

@@ -58,7 +58,7 @@ const Footer = () => {
                 </div>
                 <div className={classes["footer-right"]}>
                     <img
-                        src="/images/action.jpg"
+                        src="/images/usa-eng-logo.webp"
                         alt="Language"
                         className={classes["footer-flag"]}
                     />

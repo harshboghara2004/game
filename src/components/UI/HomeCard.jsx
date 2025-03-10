@@ -1,11 +1,26 @@
 import React from "react";
 import classes from "./HomeCard.module.css";
 import { FaHome, FaSearch } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
-const HomeCard = () => {
+const HomeCard = ({ setIsSearching }) => {
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const handleHomeClick = () => {
+        if (location.pathname === "/") {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+            navigate("/");
+        }
+    };
+
+    const handleSearchClick = () => {
+        // navigate("/search");
+        console.log("search-click");
+        setIsSearching(true);
+    };
 
     return (
         <motion.nav
@@ -14,12 +29,18 @@ const HomeCard = () => {
         >
             <h1 className={classes["korgi-title"]}>Korgi</h1>
             <div className={classes["icon-container"]}>
-                <div className={classes["home-icon"]}>
-                    <FaHome onClick={() => navigate("/")} />
-                </div>
-                <div className={classes["search-icon"]}>
+                <button
+                    className={classes["home-icon"]}
+                    onClick={handleHomeClick}
+                >
+                    <FaHome />
+                </button>
+                <button
+                    className={classes["search-icon"]}
+                    onClick={handleSearchClick}
+                >
                     <FaSearch />
-                </div>
+                </button>
             </div>
         </motion.nav>
     );

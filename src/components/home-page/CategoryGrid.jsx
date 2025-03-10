@@ -31,8 +31,12 @@ const CategoryGrid = ({
                     whileHover={{ scale: 1.1 }}
                     onClick={() => handleCategoryClick(category.name)}
                 >
-                    <img src={category.image} alt="" />
-                    {category.name}
+                    <img
+                        src={category.image}
+                        className={classes["category-image"]}
+                        alt=""
+                    />
+                    <p className={classes["category-title"]}>{category.name}</p>
                 </motion.li>
             ))}
         </motion.ul>

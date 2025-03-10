@@ -13,24 +13,24 @@ const GameDescription = ({ game }) => {
                 <h2 className={classes["description-title"]}>
                     {game.gameTitle}
                 </h2>
-                <p className={classes["description-text"]}>
+                <div className={classes["description-text"]}>
                     {" "}
                     <RenderHTML htmlString={game.description} />{" "}
-                </p>
+                </div>
                 <p className={classes["howToPlay"]}>
-                    <span className="bold"> How to play: </span>{" "}
+                    <span className={classes.bold}> How to play: </span>{" "}
                     {game.howToPlay}
                 </p>
                 <p className={classes["whoCreated"]}>
-                    <span className="bold"> Who created: </span>{" "}
+                    <span className={classes.bold}> Who created: </span>{" "}
                     {game.whoCreated}
                 </p>
                 <p className={classes["playForFree"]}>
-                    <span className="bold"> Play for Free: </span>{" "}
+                    <span className={classes.bold}> Play for Free: </span>{" "}
                     {game.playForFree}
                 </p>
                 <p className={classes["mobileDesktop"]}>
-                    <span className="bold"> Platform to Play: </span>{" "}
+                    <span className={classes.bold}> Platform to Play: </span>{" "}
                     {game.mobileDesktop}
                 </p>
             </div>

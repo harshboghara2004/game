@@ -9,6 +9,8 @@ import { database } from "../../firebase";
 import { onValue, ref } from "firebase/database";
 import Loader from "../../components/UI/Loader";
 import NotFoundPage from "../Error/NotFoundPage";
+import Modal from "../../components/UI/Modal";
+import SearchPage from "../Search/SearchPage";
 
 const divideGames = (games) => {
     const leftSideGames = games.slice(0, 4);
@@ -17,9 +19,28 @@ const divideGames = (games) => {
     return { leftSideGames, rightSideGames, bottomGames };
 };
 
+const categories = [
+    { id: "action", name: "Action", image: "/images/action.jpg" },
+    {
+        id: "sports_and_Racing",
+        name: "Sports & Racing",
+        image: "/images/sports_and_racing.png",
+    },
+    { id: "adventure", name: "Adventure", image: "/images/adventure.jpg" },
+    { id: "strategy", name: "Strategy", image: "/images/strategy.png" },
+    { id: "merge", name: "Merge", image: "/images/merge.png" },
+    {
+        id: "puzzle_and_Logic",
+        name: "Puzzle & Logic",
+        image: "/images/puzzle_and_logic.jpg",
+    },
+    { id: "arcade", name: "Arcade", image: "/images/arcade.jpg" },
+];
+
 const GamePage = () => {
     const { slug } = useParams();
     const [games, setGames] = useState([]);
+    const [isSearching, setIsSearching] = useState(false);
     let currentGame = null;
 
     // Get all games
@@ -51,7 +72,9 @@ const GamePage = () => {
                     <div className={classes["game-layout"]}>
                         {/* Left Sidebar */}
                         <SideBar
+                            key="left-sidebar"
                             games={leftSideGames}
+                            setIsSearching={setIsSearching}
                             className="left-sidebar"
                             addHome
                         />
@@ -61,6 +84,7 @@ const GamePage = () => {
 
                         {/* Right Sidebar */}
                         <SideBar
+                            key="right-sidebar"
                             games={rightSideGames}
                             className="right-sidebar"
                         />
@@ -76,7 +100,17 @@ const GamePage = () => {
         }
     }
 
-    return <div className={classes["game-page"]}>{content}</div>;
+    return (
+        <div className={classes["game-page"]}>
+            {isSearching && <div className={classes.dimmedContent}></div>}
+            {content}
+            {isSearching && (
+                <Modal onClose={() => setIsSearching(false)}>
+                    <SearchPage games={games} categories={categories} />
+                </Modal>
+            )}
+        </div>
+    );
 };
 
 export default GamePage;
