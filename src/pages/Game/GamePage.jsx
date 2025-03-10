@@ -106,7 +106,11 @@ const GamePage = () => {
             {content}
             {isSearching && (
                 <Modal onClose={() => setIsSearching(false)}>
-                    <SearchPage games={games} categories={categories} />
+                    <SearchPage
+                        key="search-game"
+                        games={games}
+                        categories={categories}
+                    />
                 </Modal>
             )}
         </div>

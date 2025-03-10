@@ -78,7 +78,12 @@ const HomePage = () => {
             <div className={classes["grid-container"]}>{gameContent}</div>
             {isSearching && (
                 <Modal onClose={() => setIsSearching(false)}>
-                    <SearchPage games={games} categories={categories} />
+                    <SearchPage
+                        key="search-home"
+                        games={games}
+                        categories={categories}
+                        setIsSearching={setIsSearching}
+                    />
                 </Modal>
             )}
         </div>

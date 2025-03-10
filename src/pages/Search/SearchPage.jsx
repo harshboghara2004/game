@@ -3,11 +3,12 @@ import { FaHome, FaSearch, FaTimes } from "react-icons/fa";
 import classes from "./SearchPage.module.css";
 import GamesGrid from "../../components/home-page/GamesGrid";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const SearchPage = ({ games, categories }) => {
+const SearchPage = ({ games, categories, setIsSearching = () => {} }) => {
     // console.log(games);
     const navigate = useNavigate();
+    const location = useLocation();
     const [filteredGames, setFilteredGames] = useState(games);
     const [searchText, setSearchText] = useState("");
     const [selectedCategory, setSelectedCategory] = useState(null);
@@ -34,6 +35,14 @@ const SearchPage = ({ games, categories }) => {
         }
     }, [searchText, selectedCategory, games]);
 
+    const handleHomeClick = () => {
+        if (location.pathname === "/") {
+            setIsSearching(false);
+        } else {
+            navigate("/");
+        }
+    };
+
     const handleCategoryClick = (category) => {
         setSelectedCategory((prevState) =>
             prevState === null ? category : null
@@ -51,7 +60,7 @@ const SearchPage = ({ games, categories }) => {
             <div className={classes.searchBar}>
                 <motion.button
                     whileHover={{ scale: 1.1 }}
-                    onClick={() => navigate("/")}
+                    onClick={handleHomeClick}
                 >
                     <FaHome className={classes.logo} />
                 </motion.button>
@@ -77,7 +86,7 @@ const SearchPage = ({ games, categories }) => {
             <div className={classes.categoryList}>
                 {categories.map((category) => (
                     <motion.button
-                        key={category}
+                        key={category.name}
                         onClick={() => handleCategoryClick(category.name)}
                         whileHover={{ scale: 1.1 }}
                         className={`${classes.categoryButton} ${
