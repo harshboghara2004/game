@@ -59,20 +59,23 @@ function GamesPage() {
     // get all games
     useEffect(() => {
         setIsLoading(true);
-        const gamesRef = ref(database, "games");
-        onValue(gamesRef, (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                const gameList = Object.keys(data).map((key) => ({
-                    id: key,
-                    ...data[key],
-                }));
-                setGames(gameList);
-            } else {
-                setGames([]);
-            }
-        });
-        setIsLoading(false);
+        const fetchGames = () => {
+            const gamesRef = ref(database, "games");
+            onValue(gamesRef, (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    const gameList = Object.keys(data).map((key) => ({
+                        id: key,
+                        ...data[key],
+                    }));
+                    setGames(gameList);
+                } else {
+                    setGames([]);
+                }
+            });
+            setIsLoading(false);
+        };
+        fetchGames();
     }, []);
 
     if (isLoading) {

@@ -53,6 +53,9 @@ const HomePage = () => {
     } else {
         gameContent = (
             <>
+                <div className={classes["home-card"]}>
+                    <HomeCard />
+                </div>
                 {/* Game Grid Section */}
                 <GamesGrid games={filteredGames} isHome />
 
@@ -68,8 +71,7 @@ const HomePage = () => {
 
     return (
         <div className={classes["home-page"]}>
-            <HomeCard />
-            {gameContent}
+            <div className={classes["grid-container"]}>{gameContent}</div>
         </div>
     );
 };

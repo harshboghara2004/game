@@ -267,7 +267,7 @@ const LoginPage = () => {
                         <div className="text-sm">
                             <button
                                 type="button"
-                                onClick={() => {}}
+                                onClick={() => navigate("/forget-password")}
                                 className="font-medium text-blue-600 hover:text-blue-500"
                             >
                                 Forgot password?

@@ -3,17 +3,15 @@
     width: 150px;
     height: 150px;
     align-items: center;
-    background: #fff;
+    background: white;
     border-radius: 16px;
     box-shadow: var(--shadow-mid);
     display: flex;
     flex-direction: column;
-    background: white;
     color: #004e98;
-    z-index: 1000;
     position: fixed;
-    top: 1%;
-    left: 9.25%;
+    top: 1rem;
+    z-index: 1000;
 }
 
 /* Title styles */

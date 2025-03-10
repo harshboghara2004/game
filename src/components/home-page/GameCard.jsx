@@ -8,7 +8,6 @@ const GameCard = ({ game, index, isHome }) => {
 
     return (
         <motion.li
-            key={game.id || index}
             className={`${classes["game-card"]} ${
                 isHome && index > 0 && index % 9 === 0 ? classes.large : ""
             }`}

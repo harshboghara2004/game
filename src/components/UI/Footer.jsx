@@ -1,33 +1,73 @@
 import React from "react";
-import classes from "./Footer.module.css";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-
-const footerLinks = [
-    { title: "About Korgi", link: "/about" },
-    { title: "Privacy Statement", link: "/privacy-policy" },
-    { title: "Cookie Statement", link: "/cookie" },
-    { title: "FAQ", link: "/faq" },
-    { title: "Contact", link: "/contact" },
-];
+import classes from "./Footer.module.css";
 
 const Footer = () => {
     return (
         <footer className={classes.footer}>
-            <div className={classes["footer-content"]}>
-                {footerLinks.map((element, index) => (
-                    <motion.li
-                        key={index}
-                        whileHover={{ scale: 1.1 }}
-                        className={classes["footer-item"]}
-                    >
-                        <Link to={element.link} key={index}>
-                            <p className={classes["footer-text"]}>
-                                {element.title}
-                            </p>
+            <div className={classes["footer-top"]}></div>
+            <div className={classes["footer-container"]}>
+                <div className={classes["footer-left"]}>
+                    <img
+                        src="/images/action.jpg"
+                        alt="Korgi Logo"
+                        className={classes["footer-logo"]}
+                    />
+                    <p className={classes["footer-tagline"]}>
+                        Let the world play
+                    </p>
+                </div>
+                <div className={classes["footer-links-container"]}>
+                    <div className={classes["footer-links"]}>
+                        <Link to="/about" className={classes["footer-link"]}>
+                            About
                         </Link>
-                    </motion.li>
-                ))}
+                        <Link to="/jobs" className={classes["footer-link"]}>
+                            Jobs
+                        </Link>
+                        <Link to="/privacy" className={classes["footer-link"]}>
+                            Privacy Statement
+                        </Link>
+                        <Link to="/terms" className={classes["footer-link"]}>
+                            Terms of Use
+                        </Link>
+                        <Link to="/contact" className={classes["footer-link"]}>
+                            Contact
+                        </Link>
+                    </div>
+                    <div className={classes["footer-links"]}>
+                        <Link
+                            to="/developers"
+                            className={classes["footer-link"]}
+                        >
+                            Korgi for Developers
+                        </Link>
+                        <Link to="/kids" className={classes["footer-link"]}>
+                            Korgi Kids
+                        </Link>
+                        <Link
+                            to="/cookie-policy"
+                            className={classes["footer-link"]}
+                        >
+                            Cookie Statement
+                        </Link>
+                        <Link to="/faq" className={classes["footer-link"]}>
+                            FAQ
+                        </Link>
+                    </div>
+                </div>
+                <div className={classes["footer-right"]}>
+                    <img
+                        src="/images/action.jpg"
+                        alt="Language"
+                        className={classes["footer-flag"]}
+                    />
+                </div>
+                <div className={classes["footer-bottom"]}>
+                    <p>
+                        © {new Date().getFullYear()} Korgi. All rights reserved.
+                    </p>
+                </div>
             </div>
         </footer>
     );

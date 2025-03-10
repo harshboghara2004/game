@@ -11,6 +11,6 @@ export const checkIsAdmin = async (emailId) => {
         }
         return { status: 200, isAdmin: false };
     } catch (error) {
-        return { status: 500, message: "Something went wrong." };
+        return { status: 500, message: error.message };
     }
 };

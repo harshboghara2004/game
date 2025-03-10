@@ -8,7 +8,7 @@ const GamesGrid = ({ games, isHome = false }) => {
         <motion.ul animate={{ y: [10, 0] }} className={classes["game-grid"]}>
             {isHome && <div className={classes.dummy}></div>}
             {games.map((game, index) => (
-                <GameCard game={game} index={index} isHome={isHome} />
+                <GameCard key={game.id || index} game={game} index={index} isHome={isHome} />
             ))}
         </motion.ul>
     );

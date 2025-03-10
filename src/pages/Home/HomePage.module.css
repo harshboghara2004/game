@@ -10,3 +10,9 @@
     padding-bottom: 1px; /* Minimal padding at bottom to potentially help with edge cases */
     box-sizing: border-box; /* Include padding in total height */
 }
+
+@media (min-width: 1600px) {
+    .grid-container {
+        padding-left: 10rem;
+    }
+}

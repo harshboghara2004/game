@@ -1,9 +1,9 @@
-
 .game-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(to right, #6ed9ff, #bdf8f2);
+    background-image: url("https://a.poki-cdn.com/images/bg-diamante.svg"),
+        linear-gradient(to bottom, #06d6a0, #00f5d4); /* Replace with your image path */
     min-height: 100vh;
     padding: 20px;
 }
@@ -17,4 +17,3 @@
     margin-bottom: 0px; /* Reduced margin */
     align-items: start; /* Align items at the start of the cell */
 }
-
