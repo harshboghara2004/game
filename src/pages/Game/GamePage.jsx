@@ -14,6 +14,7 @@ import SearchPage from "../Search/SearchPage";
 import { motion } from "framer-motion";
 import { fetchGames } from "../../util/gamesActions";
 import ErrorPage from "../Error/ErrorPage";
+import { fetchCategories } from "../../util/categoryActions";
 
 const divideGames = (games) => {
     const leftSideGames = games.slice(0, 4);
@@ -28,16 +29,26 @@ const GamePage = () => {
 
     let currentGame = null;
     const [games, setGames] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
     const [isSearching, setIsSearching] = useState(false);
 
-    // Get all games
+    // get all games and categories
     useEffect(() => {
         setIsLoading(true);
+
         fetchGames().then((response) => {
             if (response.status === 200) {
                 setGames(response.data);
+            } else {
+                setError(response.error);
+            }
+        });
+
+        fetchCategories().then((response) => {
+            if (response.status === 200) {
+                setCategories(response.data);
             } else {
                 setError(response.error);
             }
