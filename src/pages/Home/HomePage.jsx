@@ -56,14 +56,10 @@ const HomePage = () => {
         gameContent = <Loader message="Loading Games..." />;
     } else {
         gameContent = (
-            <>
-                <HomeCard
-                    setIsSearching={setIsSearching}
-                    widthValue={162}
-                    heightValue={135}
-                />
+            <div className={classes["grid-container"]}>
+                
                 {/* Game Grid Section */}
-                <GamesGrid games={filteredGames} isHome />
+                <GamesGrid games={filteredGames} isHome setIsSearching={setIsSearching}/>
 
                 {/* Category Grid Section */}
                 <CategoryGrid
@@ -71,7 +67,7 @@ const HomePage = () => {
                     selectedCategory={selectedCategory}
                     setSelectedCategory={setSelectedCategory}
                 />
-            </>
+            </div>
         );
     }
 

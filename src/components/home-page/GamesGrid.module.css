@@ -12,3 +12,36 @@
     border-radius: 10px;
     margin-bottom: 0px;
 }
+
+/* No games Block */
+.no-games {
+    grid-column: span 4;
+    width: 100%;
+    max-width: 700px;
+    max-height: 150px;
+    padding: 23px 40px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.no-games h2 {
+    font-size: 35px;
+    margin-bottom: 10px;
+    color: #333;
+    font-family: "Sour Gummy", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+.no-games p {
+    font-size: 15px;
+    color: #777;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-style: normal;
+}
