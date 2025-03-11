@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Plus, Users, GamepadIcon, X } from "lucide-react";
 import CategoryGamesPage from "./CategoryGamesPage";
-import { push, ref, set } from "firebase/database";
-import { database } from "../../firebase";
 import { Game } from "./GamesPage";
 import Loader from "../../components/UI/Loader";
 import { fetchGames } from "../../util/gamesActions";
-import { fetchCategories } from "../../util/categoryActions";
+import {
+    addCategory,
+    deleteCategory,
+    fetchCategories,
+} from "../../util/categoryActions";
 
 export interface Category {
     id: string;
@@ -28,7 +30,7 @@ function CategoryCard({
             className={`bg-white rounded-lg shadow-md p-6 border-l-4 ${category.color} cursor-pointer hover:shadow-lg transition-shadow`}
             onClick={onClick}
         >
-            <div className="mb-4">
+            <div className="mb-4 flex justify-between">
                 <h3 className="font-semibold text-lg">{category.name}</h3>
             </div>
             <div className="flex justify-between text-gray-600">
@@ -54,6 +56,7 @@ function CategoriesPage() {
     );
     const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [updateTrigger, setUpdateTrigger] = useState(false);
     const [newCategory, setNewCategory] = useState({
         name: "",
         image: "",
@@ -71,6 +74,8 @@ function CategoriesPage() {
     ];
 
     const [categories, setCategories] = useState<Category[]>([]);
+    // console.log(categories);
+
     // get all categorioes
     useEffect(() => {
         const fetchData = async () => {
@@ -89,6 +94,8 @@ function CategoriesPage() {
                     throw new Error(categoriesResponse.error);
                 const fetchedCategories: Category[] =
                     categoriesResponse.data || [];
+
+                // console.log(categoriesResponse);
 
                 // Process categories to include games
                 const processedCategories = fetchedCategories.map(
@@ -112,27 +119,30 @@ function CategoriesPage() {
         };
 
         fetchData();
-    }, []);
+    }, [updateTrigger]);
 
     const handleAddCategory = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (newCategory.name.trim()) {
-            try {
-                const newCategoryRef = push(ref(database, "categories"));
-                await set(newCategoryRef, newCategory);
-                alert("Category added successfully!");
-                setNewCategory({ name: "", image: "" });
-            } catch (error) {
-                console.error("Failed to add category:", error);
-                alert("Failed to add category. Please try again.");
-            }
+        console.log("here");
+        const response = await addCategory(newCategory);
+
+        if (response.status === 201) {
+            alert("Category added successfully!");
+            setNewCategory({ name: "", image: "" });
             setIsModalOpen(false);
+            setUpdateTrigger((prev) => !prev);
+        } else {
+            console.error("Failed to add category:", response.error);
+            alert(
+                response.error || "Failed to add category. Please try again."
+            );
         }
     };
 
     if (selectedCategory) {
         return (
             <CategoryGamesPage
+                setUpdateTrigger={setUpdateTrigger}
                 categoryData={selectedCategory}
                 onBack={() => setSelectedCategory(null)}
             />

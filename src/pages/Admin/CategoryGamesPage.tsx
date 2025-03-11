@@ -1,33 +1,68 @@
-import React from "react";
+import React, { SetStateAction } from "react";
 import { ArrowLeft, Star, Users, Clock, Link } from "lucide-react";
 import { Category } from "./CategoriesPage";
+import { deleteCategory } from "../../util/categoryActions";
+import NoResult from "../../components/UI/NoResult";
+import { useNavigate } from "react-router-dom";
 
 function CategoryGamesPage({
     categoryData,
     onBack,
+    setUpdateTrigger,
 }: {
     categoryData: Category;
     onBack: () => void;
+    setUpdateTrigger: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+    const navigate = useNavigate();
     if (!categoryData) {
         return <div>Category not found</div>;
     }
 
+    const handleDeleteCategory = async (categoryId: string) => {
+        const confirmation = window.confirm(
+            "Are you sure you want to delete this category?"
+        );
+        if (!confirmation) return;
+
+        const response = await deleteCategory(categoryId);
+
+        if (response.status === 200) {
+            alert("Category deleted successfully!");
+            setUpdateTrigger((prev) => !prev);
+            onBack();
+        } else {
+            console.error("Failed to delete category:", response.error);
+            alert(
+                response.error || "Failed to delete category. Please try again."
+            );
+        }
+    };
+
     return (
         <>
-            <div className="flex items-center mb-8">
+            <div className="flex items-center mb-8 justify-between">
+                <div className="flex items-center">
+                    <button
+                        onClick={onBack}
+                        className="mr-4 p-2 hover:bg-gray-100 rounded-full transition-colors dark:text-white dark:hover:bg-white dark:hover:text-black "
+                    >
+                        <ArrowLeft size={24} />
+                    </button>
+                    <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
+                        {categoryData.name} Games
+                    </h1>
+                </div>
                 <button
-                    onClick={onBack}
-                    className="mr-4 p-2 hover:bg-gray-100 rounded-full transition-colors dark:text-white dark:hover:bg-white dark:hover:text-black "
+                    className="text-white bg-red-500 p-4 rounded-xl font-bold"
+                    onClick={() => handleDeleteCategory(categoryData.id)}
                 >
-                    <ArrowLeft size={24} />
+                    Delete Category
                 </button>
-                <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
-                    {categoryData.name} Games
-                </h1>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {categoryData.games.length === 0 && <NoResult />}
                 {categoryData.games.map((game) => (
                     <div
                         key={game.id}
