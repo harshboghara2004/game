@@ -1,9 +1,8 @@
-import React, { SetStateAction } from "react";
+import React from "react";
 import { ArrowLeft, Star, Users, Clock, Link } from "lucide-react";
 import { Category } from "./CategoriesPage";
 import { deleteCategory } from "../../util/categoryActions";
 import NoResult from "../../components/UI/NoResult";
-import { useNavigate } from "react-router-dom";
 
 function CategoryGamesPage({
     categoryData,
@@ -14,7 +13,6 @@ function CategoryGamesPage({
     onBack: () => void;
     setUpdateTrigger: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-    const navigate = useNavigate();
     if (!categoryData) {
         return <div>Category not found</div>;
     }
@@ -53,12 +51,14 @@ function CategoryGamesPage({
                         {categoryData.name} Games
                     </h1>
                 </div>
-                <button
-                    className="text-white bg-red-500 p-4 rounded-xl font-bold"
-                    onClick={() => handleDeleteCategory(categoryData.id)}
-                >
-                    Delete Category
-                </button>
+                <div className="flex items-center gap-x-4">
+                    <button
+                        className="text-white bg-red-500 p-4 rounded-xl font-bold"
+                        onClick={() => handleDeleteCategory(categoryData.id)}
+                    >
+                        Delete
+                    </button>
+                </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

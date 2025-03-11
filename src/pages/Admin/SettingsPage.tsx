@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Save, Plus, Pencil, Trash2, X, Link } from "lucide-react";
 import { Game } from "./GamesPage";
-import { database } from "../../firebase";
-import { push, ref, remove, set, update } from "firebase/database";
 import Loader from "../../components/UI/Loader";
-import { fetchGames } from "../../util/gamesActions";
+import {
+    addGame,
+    deleteGame,
+    fetchGames,
+    updateGame,
+} from "../../util/gamesActions";
 import { fetchCategories } from "../../util/categoryActions";
 import ErrorPage from "../Error/ErrorPage";
 
@@ -30,8 +33,10 @@ const SettingsPage = () => {
     });
 
     const [games, setGames] = useState<Game[]>([]);
+    // console.log(games);
     const [categories, setCategories] = useState<Category[]>([]);
     const [error, setError] = useState(null);
+    const [updateTrigger, setUpdateTrigger] = useState(false);
 
     // get all games and categories
     useEffect(() => {
@@ -53,7 +58,7 @@ const SettingsPage = () => {
             }
             setIsLoading(false);
         });
-    }, []);
+    }, [updateTrigger]);
 
     const handleInputChange = (
         e: React.ChangeEvent<
@@ -66,38 +71,35 @@ const SettingsPage = () => {
         });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (editingGame) {
-            // Update existing game
-            const gameRef = ref(database, `games/${editingGame.id}`);
-            // console.log(formData);
-            update(gameRef, { ...formData })
-                .then(() => {
-                    alert("Game updated successfully!");
-                    setEditingGame(null);
-                })
-                .catch((error) => console.error("Update failed: ", error));
+            const response = await updateGame(editingGame.id, formData);
+            if (response.status === 200) {
+                alert("Game updated successfully!");
+            } else {
+                alert("Failed to update game: " + response.error);
+            }
         } else {
             // Add new game
-            const newGameRef = push(ref(database, "games"));
-            // console.log(formData);
-            set(newGameRef, { ...formData, view: Number(formData.view) })
-                .then(() => {
-                    alert("Game added successfully!");
-                    setFormData({
-                        description: "",
-                        gameCategory: "",
-                        gameImage: "",
-                        gameTitle: "",
-                        gameUrl: "",
-                        slug: "",
-                        metaUrl: "",
-                        view: 0,
-                    });
-                })
-                .catch((error) => console.error("Add failed: ", error));
+            const response = await addGame(formData);
+            if (response.status === 200) {
+                alert("Game added successfully!");
+                setFormData({
+                    description: "",
+                    gameCategory: "",
+                    gameImage: "",
+                    gameTitle: "",
+                    gameUrl: "",
+                    slug: "",
+                    metaUrl: "",
+                    view: 0,
+                });
+            } else {
+                alert("Failed to add game: " + response.error);
+            }
         }
+        setUpdateTrigger((prev) => !prev);
         handleCloseModal();
     };
 
@@ -118,14 +120,13 @@ const SettingsPage = () => {
         );
         if (!confirmDelete) return;
 
-        try {
-            const gameRef = ref(database, `games/${gameId}`);
-            await remove(gameRef);
+        const response = await deleteGame(gameId);
+        if (response.status === 200) {
             alert("Game deleted successfully!");
-        } catch (error) {
-            console.error("Delete failed: ", error);
-            alert(`Delete failed: ${(error as Error).message}`);
+        } else {
+            alert(`Delete failed: ${response.error}`);
         }
+        setUpdateTrigger((prev) => !prev);
     };
 
     const handleCloseModal = () => {
