@@ -22,7 +22,6 @@ function ForgotPasswordPage({ onBack }: ForgotPasswordPageProps) {
       setMessage('Please enter a valid email address');
       return;
     }
-    // Simulate password reset email
     setStatus('success');
     setMessage('Password reset instructions have been sent to your email');
   };

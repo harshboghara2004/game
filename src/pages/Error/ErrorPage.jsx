@@ -1,5 +1,3 @@
-// NotFoundPage.jsx
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import classes from "./ErrorPage.module.css";
@@ -10,6 +8,7 @@ const ErrorPage = ({ message = "Please try Again Later." }) => {
     const handleClick = () => {
         navigate("/");
     };
+
     return (
         <div className={classes["error-container"]}>
             <h1 className={classes["error-title"]}>Error Occured!</h1>

@@ -22,9 +22,9 @@ const CategoryGrid = ({
 
     return (
         <motion.ul className={classes["category-grid"]}>
-            {categories.map((category) => (
+            {categories.map((category, index) => (
                 <motion.li
-                    key={category.id}
+                    key={category.id || index}
                     className={`${classes["category-card"]} ${
                         selectedCategory === category.name ? classes.active : ""
                     }`}

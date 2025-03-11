@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Save, Plus, Pencil, Trash2, X, Link } from "lucide-react";
 import { Game } from "./GamesPage";
 import { database } from "../../firebase";
-import { onValue, push, ref, remove, set, update } from "firebase/database";
+import { push, ref, remove, set, update } from "firebase/database";
 import Loader from "../../components/UI/Loader";
+import { fetchGames } from "../../util/gamesActions";
+import { fetchCategories } from "../../util/categoryActions";
+import ErrorPage from "../Error/ErrorPage";
 
 interface Category {
     id: string;
@@ -28,40 +31,28 @@ const SettingsPage = () => {
 
     const [games, setGames] = useState<Game[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
+    const [error, setError] = useState(null);
 
-    // get data
+    // get all games and categories
     useEffect(() => {
         setIsLoading(true);
-        const gamesRef = ref(database, "games");
-        const categoriesRef = ref(database, "categories");
-        // games
-        onValue(gamesRef, (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                const gameList = Object.keys(data).map((key) => ({
-                    id: key,
-                    ...data[key],
-                }));
-                setGames(gameList);
+
+        fetchGames().then((response) => {
+            if (response.status === 200) {
+                setGames(response.data ?? []);
             } else {
-                setGames([]);
+                setError(response.error);
             }
         });
-        // categories
-        onValue(categoriesRef, (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                const categoryList = Object.keys(data).map((key) => ({
-                    id: key,
-                    ...data[key],
-                }));
-                setCategories(categoryList);
+
+        fetchCategories().then((response) => {
+            if (response.status === 200) {
+                setCategories(response.data ?? []);
             } else {
-                setCategories([]);
+                setError(response.error);
             }
             setIsLoading(false);
         });
-        setIsLoading(false);
     }, []);
 
     const handleInputChange = (
@@ -154,7 +145,9 @@ const SettingsPage = () => {
     };
 
     if (isLoading) {
-        return <Loader />;
+        return <Loader message="Loading data..." />;
+    } else if (error) {
+        return <ErrorPage message={error} />;
     }
 
     return (

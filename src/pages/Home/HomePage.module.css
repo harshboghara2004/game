@@ -4,12 +4,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    /* background: linear-gradient(to right, #6ed9ff, #6ed9ff); */
     background-image: url("https://a.poki-cdn.com/images/bg-diamante.svg"),
-        linear-gradient(to bottom, #06d6a0, #00f5d4); /* Replace with your image path */
-    min-height: 100vh; /* Ensure full viewport height */
-    padding-bottom: 1px; /* Minimal padding at bottom to potentially help with edge cases */
-    box-sizing: border-box; /* Include padding in total height */
+        linear-gradient(to bottom, #06d6a0, #00f5d4);
+    min-height: 100vh;
+    padding-bottom: 1px;
+    box-sizing: border-box;
 }
 
 .grid-container {

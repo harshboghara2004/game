@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaHome, FaSearch, FaTimes } from "react-icons/fa";
 import classes from "./SearchPage.module.css";
 import GamesGrid from "../../components/home-page/GamesGrid";
@@ -7,12 +7,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const SearchPage = ({ games, categories, setIsSearching = () => {} }) => {
     // console.log(games);
+    // console.log(categories);
     const navigate = useNavigate();
     const location = useLocation();
+
     const [filteredGames, setFilteredGames] = useState(games);
     const [searchText, setSearchText] = useState("");
     const [selectedCategory, setSelectedCategory] = useState(null);
 
+    // filter the games
     useEffect(() => {
         if (searchText.length >= 3) {
             const updatedFilteredGames = games.filter(

@@ -14,7 +14,7 @@ function CategoryGamesPage({
     }
 
     return (
-        <div>
+        <>
             <div className="flex items-center mb-8">
                 <button
                     onClick={onBack}
@@ -79,7 +79,7 @@ function CategoryGamesPage({
                     </div>
                 ))}
             </div>
-        </div>
+        </>
     );
 }
 

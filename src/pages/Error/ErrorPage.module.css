@@ -8,7 +8,7 @@
     height: 100vh;
     margin: 0;
     background-image: url("https://a.poki-cdn.com/images/bg-diamante.svg");
-    background-color: #caf0f8;
+    background-color: transparent;
 }
 
 .error-title {

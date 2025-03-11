@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "lucide-react";
-import { onValue, ref } from "firebase/database";
-import { database } from "../../firebase";
 import Loader from "../../components/UI/Loader";
+import { fetchGames } from "../../util/gamesActions";
 
 export interface Game {
     id: string;
@@ -59,23 +58,21 @@ function GamesPage() {
     // get all games
     useEffect(() => {
         setIsLoading(true);
-        const fetchGames = () => {
-            const gamesRef = ref(database, "games");
-            onValue(gamesRef, (snapshot) => {
-                const data = snapshot.val();
-                if (data) {
-                    const gameList = Object.keys(data).map((key) => ({
-                        id: key,
-                        ...data[key],
-                    }));
-                    setGames(gameList);
-                } else {
-                    setGames([]);
+
+        const fetchData = async () => {
+            try {
+                const { status, data } = await fetchGames();
+                if (status === 200) {
+                    setGames(data ?? []);
                 }
-            });
-            setIsLoading(false);
+            } catch (error) {
+                console.error("Error fetching games:", error);
+            } finally {
+                setIsLoading(false);
+            }
         };
-        fetchGames();
+
+        fetchData();
     }, []);
 
     if (isLoading) {

@@ -6,7 +6,7 @@ import GamesPage from "./GamesPage";
 import CategoriesPage from "./CategoriesPage";
 import SettingsPage from "./SettingsPage";
 import UsersPage from "./UsersPage";
-import { auth, database } from "../../firebase";
+import { auth } from "../../firebase";
 import NotFoundPage from "../Error/NotFoundPage";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { checkIsAdmin } from "../../util/checkAdmin";
@@ -14,10 +14,7 @@ import Loader from "../../components/UI/Loader";
 import ErrorPage from "../Error/ErrorPage";
 
 function AdminPage() {
-    const [currentPage, setCurrentPage] = useState("home");
-    const [isAdmin, setIsAdmin] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<{ message: string } | null>(null);
+
     const currentUser = auth.currentUser;
     // console.log(currentUser);
 
@@ -29,6 +26,11 @@ function AdminPage() {
             />
         );
     }
+    
+    const [currentPage, setCurrentPage] = useState("home");
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<{ message: string } | null>(null);
 
     // check for admin
     useEffect(() => {

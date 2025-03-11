@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Plus, Users, GamepadIcon, X } from "lucide-react";
 import CategoryGamesPage from "./CategoryGamesPage";
-import { onValue, push, ref, set } from "firebase/database";
+import { push, ref, set } from "firebase/database";
 import { database } from "../../firebase";
 import { Game } from "./GamesPage";
 import Loader from "../../components/UI/Loader";
+import { fetchGames } from "../../util/gamesActions";
+import { fetchCategories } from "../../util/categoryActions";
 
 export interface Category {
     id: string;
@@ -71,68 +73,45 @@ function CategoriesPage() {
     const [categories, setCategories] = useState<Category[]>([]);
     // get all categorioes
     useEffect(() => {
-        setIsLoading(true);
-        const fetchGames = (): Promise<Game[]> => {
-            return new Promise((resolve) => {
-                const gamesRef = ref(database, "games");
-                onValue(gamesRef, (snapshot) => {
-                    const data = snapshot.val();
-                    if (data) {
-                        const gameList: Game[] = Object.keys(data).map(
-                            (key) => ({
-                                id: key,
-                                ...data[key],
-                            })
-                        );
-                        resolve(gameList);
-                    } else {
-                        resolve([]);
-                    }
-                });
-            });
-        };
+        const fetchData = async () => {
+            setIsLoading(true);
 
-        const fetchCategories = async () => {
             try {
-                const games = await fetchGames();
-                const categoriesRef = ref(database, "categories");
+                // Fetch games
+                const gamesResponse = await fetchGames();
+                if (gamesResponse.status !== 200)
+                    throw new Error(gamesResponse.error);
+                const games: Game[] = gamesResponse.data || [];
 
-                onValue(categoriesRef, (snapshot) => {
-                    const data = snapshot.val();
-                    if (data) {
-                        const categoryList: Category[] = Object.keys(data).map(
-                            (key) => {
-                                const categoryGames = games.filter(
-                                    (game) =>
-                                        game.gameCategory === data[key].name
-                                );
+                // Fetch categories
+                const categoriesResponse = await fetchCategories();
+                if (categoriesResponse.status !== 200)
+                    throw new Error(categoriesResponse.error);
+                const fetchedCategories: Category[] =
+                    categoriesResponse.data || [];
 
-                                return {
-                                    id: key,
-                                    name: data[key].name,
-                                    image: data[key].image,
-                                    color: colorOptions[
-                                        Math.floor(
-                                            Math.random() * colorOptions.length
-                                        )
-                                    ].value,
-                                    games: categoryGames,
-                                };
-                            }
-                        );
-                        setCategories(categoryList);
-                    } else {
-                        setCategories([]);
-                    }
-                    setIsLoading(false);
-                });
+                // Process categories to include games
+                const processedCategories = fetchedCategories.map(
+                    (category) => ({
+                        ...category,
+                        color: colorOptions[
+                            Math.floor(Math.random() * colorOptions.length)
+                        ].value,
+                        games: games.filter(
+                            (game: Game) => game.gameCategory === category.name
+                        ),
+                    })
+                );
+
+                setCategories(processedCategories);
             } catch (error) {
                 console.error("Error fetching categories or games:", error);
+            } finally {
                 setIsLoading(false);
             }
         };
 
-        fetchCategories();
+        fetchData();
     }, []);
 
     const handleAddCategory = async (e: React.FormEvent) => {

@@ -21,15 +21,16 @@ interface PasswordRequirement {
 }
 
 const SignUpPage = () => {
+    const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
+
     const [formData, setFormData] = useState({
         name: "",
         email: "",
         password: "",
         confirmPassword: "",
     });
-    const navigate = useNavigate();
     const [error, setError] = useState("");
-    const [searchParams, setSearchParams] = useSearchParams();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [requirements, setRequirements] = useState<PasswordRequirement[]>([

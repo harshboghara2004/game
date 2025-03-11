@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import classes from "./GamePage.module.css";
 import SideBar from "../../components/game-page/SideBar";
@@ -12,6 +12,8 @@ import NotFoundPage from "../Error/NotFoundPage";
 import Modal from "../../components/UI/Modal";
 import SearchPage from "../Search/SearchPage";
 import { motion } from "framer-motion";
+import { fetchGames } from "../../util/gamesActions";
+import ErrorPage from "../Error/ErrorPage";
 
 const divideGames = (games) => {
     const leftSideGames = games.slice(0, 4);
@@ -20,45 +22,34 @@ const divideGames = (games) => {
     return { leftSideGames, rightSideGames, bottomGames };
 };
 
-const categories = [
-    { id: "action", name: "Action", image: "/images/action.jpg" },
-    {
-        id: "sports_and_Racing",
-        name: "Sports & Racing",
-        image: "/images/sports_and_racing.png",
-    },
-    { id: "adventure", name: "Adventure", image: "/images/adventure.jpg" },
-    { id: "strategy", name: "Strategy", image: "/images/strategy.png" },
-    { id: "merge", name: "Merge", image: "/images/merge.png" },
-    {
-        id: "puzzle_and_Logic",
-        name: "Puzzle & Logic",
-        image: "/images/puzzle_and_logic.jpg",
-    },
-    { id: "arcade", name: "Arcade", image: "/images/arcade.jpg" },
-];
-
 const GamePage = () => {
+    // console.log(games);
     const { slug } = useParams();
-    const [games, setGames] = useState([]);
-    const [isSearching, setIsSearching] = useState(false);
+
     let currentGame = null;
+    const [games, setGames] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState();
+    const [isSearching, setIsSearching] = useState(false);
 
     // Get all games
     useEffect(() => {
-        const dataRef = ref(database, "/games");
-
-        const unsubscribe = onValue(dataRef, (snapshot) => {
-            const gamesArray = Object.values(snapshot.val());
-            setGames(gamesArray);
+        setIsLoading(true);
+        fetchGames().then((response) => {
+            if (response.status === 200) {
+                setGames(response.data);
+            } else {
+                setError(response.error);
+            }
+            setIsLoading(false);
         });
-
-        return () => unsubscribe();
     }, []);
 
     let content;
-    if (games.length === 0) {
+    if (games.length === 0 || isLoading) {
         content = <Loader message="Loading Game..." />;
+    } else if (error) {
+        content = <ErrorPage message={error} />;
     } else {
         currentGame = games.find((g) => g.slug === slug);
         if (!currentGame) {
@@ -105,6 +96,7 @@ const GamePage = () => {
         <div className={classes["game-page"]}>
             {isSearching && <div className={classes.dimmedContent}></div>}
             {content}
+            {/* Open Search */}
             {isSearching && (
                 <Modal onClose={() => setIsSearching(false)}>
                     <motion.div
