@@ -56,9 +56,7 @@ const HomePage = () => {
     } else {
         gameContent = (
             <>
-                <div className={classes["home-card"]}>
-                    <HomeCard setIsSearching={setIsSearching} />
-                </div>
+                <HomeCard setIsSearching={setIsSearching} widthValue={162} heightValue={135}/>
                 {/* Game Grid Section */}
                 <GamesGrid games={filteredGames} isHome />
 

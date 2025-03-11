@@ -1,4 +1,6 @@
 .game-card {
+    max-width: 150px;
+    max-height: 150px;
     display: inline-block;
     border-radius: 10px;
     overflow: hidden;
@@ -7,6 +9,8 @@
 }
 
 .game-card.large {
+    max-width: 400px;
+    max-height: 400px;
     grid-column: span 2;
     grid-row: span 2;
 }

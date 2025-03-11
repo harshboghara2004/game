@@ -1,6 +1,4 @@
 .home-card {
-    width: 145px;
-    height: 140px;
     align-items: center;
     background: white;
     border-radius: 16px;
@@ -9,7 +7,7 @@
     flex-direction: column;
     color: #004e98;
     position: fixed;
-    top: 1rem;
+    top: 2rem;
     z-index: 5;
 }
 
@@ -36,6 +34,7 @@
 
 .home-icon,
 .search-icon {
+    width: 100%;
     font-size: 35px;
     padding: 15px 20px;
     color: #004e98;

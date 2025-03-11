@@ -1,8 +1,9 @@
 .home-page {
-    padding-top: 1rem;
+    padding-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     /* background: linear-gradient(to right, #6ed9ff, #6ed9ff); */
     background-image: url("https://a.poki-cdn.com/images/bg-diamante.svg"),
         linear-gradient(to bottom, #06d6a0, #00f5d4); /* Replace with your image path */
@@ -11,10 +12,14 @@
     box-sizing: border-box; /* Include padding in total height */
 }
 
-@media (min-width: 1600px) {
-    .grid-container {
-        padding-left: 10rem;
-    }
+.homeCard {
+    width: 100%;
+    height: 100%;
+    max-width: 350px;
+    max-height: 160px;
+    margin-bottom: 10px;
+    top: 2rem;
+    padding: 0;
 }
 
 .dimmedContent {

@@ -6,16 +6,17 @@
         linear-gradient(to bottom, #06d6a0, #00f5d4); /* Replace with your image path */
     min-height: 100vh;
     padding: 20px;
+    padding-top: 2rem;
 }
 
 .game-layout {
     display: grid;
-    grid-template-columns: 180px 1fr 180px; /* Increased sidebar width */
-    gap: 20px; /* Space between elements */
+    grid-template-columns: 160px 1fr 160px;
+    gap: 20px;
     width: 90%;
     max-width: 1400px;
-    margin-bottom: 20px; /* Reduced margin */
-    align-items: start; /* Align items at the start of the cell */
+    margin-bottom: 20px;
+    align-items: center;
 }
 
 .dimmedContent {
