@@ -55,7 +55,7 @@ const SearchPage = ({ games, categories, setIsSearching = () => {} }) => {
     };
 
     return (
-        <div className={classes.container}>
+        <motion.div className={classes.container}>
             {/* Search Bar */}
             <div className={classes.searchBar}>
                 <motion.button
@@ -114,7 +114,7 @@ const SearchPage = ({ games, categories, setIsSearching = () => {} }) => {
                     </div>
                 )}
             </div>
-        </div>
+        </motion.div>
     );
 };
 

@@ -8,6 +8,7 @@ import Loader from "../../components/UI/Loader";
 import HomeCard from "../../components/UI/HomeCard";
 import SearchPage from "../Search/SearchPage";
 import Modal from "../../components/UI/Modal";
+import { motion } from "framer-motion";
 
 const categories = [
     { id: "action", name: "Action", image: "/images/action.jpg" },
@@ -56,7 +57,11 @@ const HomePage = () => {
     } else {
         gameContent = (
             <>
-                <HomeCard setIsSearching={setIsSearching} widthValue={162} heightValue={135}/>
+                <HomeCard
+                    setIsSearching={setIsSearching}
+                    widthValue={162}
+                    heightValue={135}
+                />
                 {/* Game Grid Section */}
                 <GamesGrid games={filteredGames} isHome />
 
@@ -72,16 +77,35 @@ const HomePage = () => {
 
     return (
         <div className={classes["home-page"]}>
-            {isSearching && <div className={classes.dimmedContent}></div>}
+            {isSearching && (
+                <motion.div
+                    className={classes.dimmedContent}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }} // Matches the SearchPage animation
+                />
+            )}
             <div className={classes["grid-container"]}>{gameContent}</div>
             {isSearching && (
                 <Modal onClose={() => setIsSearching(false)}>
-                    <SearchPage
-                        key="search-home"
-                        games={games}
-                        categories={categories}
-                        setIsSearching={setIsSearching}
-                    />
+                    <motion.div
+                        initial={{ x: "-100%", opacity: 0 }} // Start off-screen (left)
+                        animate={{ x: "0%", opacity: 1 }} // Slide in to view
+                        exit={{ x: "-100%", opacity: 0 }} // Slide out when closing
+                        transition={{
+                            duration: 1,
+                            ease: "easeInOut",
+                            type: "spring",
+                        }} // Smooth transition
+                    >
+                        <SearchPage
+                            key="search-home"
+                            games={games}
+                            categories={categories}
+                            setIsSearching={setIsSearching}
+                        />
+                    </motion.div>
                 </Modal>
             )}
         </div>

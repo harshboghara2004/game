@@ -11,6 +11,7 @@ import Loader from "../../components/UI/Loader";
 import NotFoundPage from "../Error/NotFoundPage";
 import Modal from "../../components/UI/Modal";
 import SearchPage from "../Search/SearchPage";
+import { motion } from "framer-motion";
 
 const divideGames = (games) => {
     const leftSideGames = games.slice(0, 4);
@@ -106,11 +107,22 @@ const GamePage = () => {
             {content}
             {isSearching && (
                 <Modal onClose={() => setIsSearching(false)}>
-                    <SearchPage
-                        key="search-game"
-                        games={games}
-                        categories={categories}
-                    />
+                    <motion.div
+                        initial={{ x: "-100%", opacity: 0 }} // Start off-screen (left)
+                        animate={{ x: "0%", opacity: 1 }} // Slide in to view
+                        exit={{ x: "-100%", opacity: 0 }} // Slide out when closing
+                        transition={{
+                            duration: 1,
+                            ease: "easeInOut",
+                            type: "spring",
+                        }} // Smooth transition
+                    >
+                        <SearchPage
+                            key="search-game"
+                            games={games}
+                            categories={categories}
+                        />
+                    </motion.div>
                 </Modal>
             )}
         </div>

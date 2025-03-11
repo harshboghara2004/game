@@ -17,7 +17,7 @@
     left: 0;
     width: 50%;
     height: 100%;
-    background: black;
+    background: transparent;
     padding: 2px;
     overflow-y: auto;
     z-index: 20;
