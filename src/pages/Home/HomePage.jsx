@@ -11,10 +11,10 @@ import { fetchCategories } from "../../util/categoryActions";
 import ErrorPage from "../Error/ErrorPage";
 
 const HomePage = () => {
-    // console.log(games);
-    // console.log(categories);
     const [games, setGames] = useState([]);
     const [categories, setCategories] = useState([]);
+    // console.log(games);
+    // console.log(categories);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);

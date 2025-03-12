@@ -30,7 +30,13 @@ const HomeCard = ({ setIsSearching, widthValue = 150, heightValue = 150 }) => {
             className={classes["home-card"]}
             style={{ width: `${widthValue}px`, height: `${heightValue}px` }}
         >
-            <h1 className={classes["korgi-title"]}>Korgi</h1>
+            <div className={classes["korgi-title"]}>
+                <motion.img
+                    whileHover={{ scale: 1.05 }}
+                    src="/korgi/Korgi.png"
+                    alt="korgi logo"
+                />
+            </div>
             <div className={classes["icon-container"]}>
                 <button
                     className={classes["home-icon"]}

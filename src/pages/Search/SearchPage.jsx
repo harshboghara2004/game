@@ -65,7 +65,11 @@ const SearchPage = ({ games, categories, setIsSearching = () => {} }) => {
                     whileHover={{ scale: 1.1 }}
                     onClick={handleHomeClick}
                 >
-                    <FaHome className={classes.logo} />
+                    <img
+                        src="/korgi/korgi_favicon.png"
+                        alt="Korgi"
+                        className={classes.logo}
+                    />
                 </motion.button>
                 <div className={classes.searchInputContainer}>
                     <input

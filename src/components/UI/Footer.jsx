@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./Footer.module.css";
+import { motion } from "framer-motion";
 
 const Footer = () => {
     return (
@@ -8,8 +9,9 @@ const Footer = () => {
             <div className={classes["footer-top"]}></div>
             <div className={classes["footer-container"]}>
                 <div className={classes["footer-left"]}>
-                    <img
-                        src="/images/action.jpg"
+                    <motion.img
+                        whileHover={{ scale: 1.1 }}
+                        src="/korgi/Korgi.png"
                         alt="Korgi Logo"
                         className={classes["footer-logo"]}
                     />
