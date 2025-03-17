@@ -9,7 +9,7 @@ import { FaCircleUser } from "react-icons/fa6";
 const RedirectCard = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
-    console.log(user);
+    // console.log(user);
 
     useEffect(() => {
         const auth = getAuth();
@@ -25,7 +25,7 @@ const RedirectCard = () => {
     };
 
     const handleProfileBtnClick = () => {
-        navigate("/profile");
+        navigate(`/profile/${user.uid}`);
     };
 
     return (

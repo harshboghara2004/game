@@ -9,12 +9,12 @@ import UsersPage from "./UsersPage";
 import { auth } from "../../firebase";
 import NotFoundPage from "../Error/NotFoundPage";
 import { onAuthStateChanged, User } from "firebase/auth";
-import { checkIsAdmin } from "../../util/checkAdmin";
+import { checkIsAdmin } from "../../util/userActions";
 import Loader from "../../components/UI/Loader";
 import ErrorPage from "../Error/ErrorPage";
+import { useNavigate } from "react-router-dom";
 
 function AdminPage() {
-
     const currentUser = auth.currentUser;
     // console.log(currentUser);
 
@@ -26,7 +26,7 @@ function AdminPage() {
             />
         );
     }
-    
+
     const [currentPage, setCurrentPage] = useState("home");
     const [isAdmin, setIsAdmin] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +39,7 @@ function AdminPage() {
             auth,
             async (user: User | null) => {
                 if (user) {
-                    const currentUserEmail: string | null = user.email;
+                    const currentUserUid: string | null = user.uid;
                     // console.log("Current User Email:", currentUserEmail);
 
                     try {
@@ -47,7 +47,7 @@ function AdminPage() {
                             status: number;
                             isAdmin?: boolean;
                             message?: string;
-                        } = await checkIsAdmin(currentUserEmail);
+                        } = await checkIsAdmin(currentUserUid);
                         if (response.status === 200) {
                             setIsAdmin(response.isAdmin ?? false);
                         } else {
@@ -81,10 +81,6 @@ function AdminPage() {
         { id: "settings", label: "Settings", icon: <Settings size={20} /> },
     ];
 
-    const handleLogout = () => {
-        auth.signOut();
-    };
-
     let content;
     if (isLoading) {
         content = <Loader message="Loading Admin..." />;
@@ -104,7 +100,6 @@ function AdminPage() {
                     menuItems={menuItems}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
-                    onLogout={handleLogout}
                 />
                 <main className="flex-1 overflow-y-auto p-8">
                     {currentPage === "home" && (

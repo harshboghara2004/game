@@ -12,7 +12,7 @@ import {
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 
 interface PasswordRequirement {
     label: string;
@@ -141,10 +141,12 @@ const SignUpPage = () => {
             const user = userCredential.user;
             console.log("User sign-up success", user);
 
-            await addDoc(collection(db, role), {
+            await setDoc(doc(db, "users", user.uid), {
                 uid: user.uid,
                 name: formData.name,
                 email: user.email,
+                isAdmin: role === "admin",
+                rewards: [],
                 createdAt: new Date(),
             });
             console.log("User data added to Firestore as", role);

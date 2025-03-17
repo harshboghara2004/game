@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Mail, Lock, ArrowRight, Eye, EyeOff, Check, X } from "lucide-react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { checkIsAdmin } from "../../util/checkAdmin";
+import { useNavigate } from "react-router-dom";
+import { checkIsAdmin } from "../../util/userActions";
 import { signInWithEmailAndPassword, User } from "firebase/auth";
 import { auth } from "../../firebase";
 
@@ -13,7 +13,6 @@ interface PasswordRequirement {
 
 const LoginPage = () => {
     const navigate = useNavigate();
-    const [searchParams, setSearchParams] = useSearchParams();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -46,8 +45,6 @@ const LoginPage = () => {
         },
     ]);
 
-    const role = searchParams.get("role") || "user";
-
     useEffect(() => {
         setRequirements((prev) =>
             prev.map((req) => ({
@@ -68,7 +65,7 @@ const LoginPage = () => {
     };
 
     const handleToSignUp = () => {
-        navigate(`/signup?role=${role}`);
+        navigate(`/signup`);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -91,20 +88,6 @@ const LoginPage = () => {
             return;
         }
 
-        const response = await checkIsAdmin(email);
-        if (response.status === 200) {
-            if (role === "user" && response.isAdmin) {
-                setError("You are admin. Login as admin");
-                return;
-            } else if (role === "admin" && !response.isAdmin) {
-                setError("You are not admin. Login as user");
-                return;
-            }
-        } else {
-            setError(response.message ?? "Unknown error occurred");
-            return;
-        }
-
         try {
             const userCredential = await signInWithEmailAndPassword(
                 auth,
@@ -113,7 +96,7 @@ const LoginPage = () => {
             );
             const user: User = userCredential.user;
             console.log("User login success", user);
-            navigate("/");
+            navigate(`/profile/${user.uid}`);
         } catch (error: unknown) {
             if (error instanceof Error) {
                 setError(error.message);
@@ -125,14 +108,6 @@ const LoginPage = () => {
         }
     };
 
-    const handleRoleChange = () => {
-        if (role === "user") {
-            setSearchParams({ role: "admin" });
-        } else {
-            setSearchParams({ role: "user" });
-        }
-    };
-
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 px-4">
             <div className="max-w-md w-full space-y-8 bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
@@ -141,7 +116,7 @@ const LoginPage = () => {
                         Welcome back
                     </h2>
                     <p className="mt-2 text-center text-gray-600 dark:text-gray-400">
-                        Login to access your account as {role}
+                        Login to access your account
                     </p>
                 </div>
 
@@ -296,15 +271,6 @@ const LoginPage = () => {
                             Sign up now
                         </button>
                     </p>
-                </div>
-
-                <div className="mt-4 text-center">
-                    <button
-                        onClick={handleRoleChange}
-                        className="font-medium text-blue-600 hover:text-blue-500"
-                    >
-                        Login as {role === "user" ? "Admin" : "User"}
-                    </button>
                 </div>
             </div>
         </div>

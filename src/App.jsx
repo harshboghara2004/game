@@ -21,6 +21,7 @@ import TermsOfUsePage from "./pages/Footer/TermsofUsePage";
 import Header from "./components/UI/Header";
 import DeveloperPage from "./pages/Footer/DeveloperPage";
 import CookiesPage from "./pages/Footer/CookiesPage";
+import ProfilePage from "./pages/Profile/ProfilePage";
 
 const App = () => {
     return (
@@ -28,6 +29,7 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/game/:slug" element={<GamePage />} />
+                <Route path="/profile/:uid" element={<ProfilePage />} />
 
                 {/* Authentication Pages Start */}
                 <Route path="/login" element={<LoginPage />} />

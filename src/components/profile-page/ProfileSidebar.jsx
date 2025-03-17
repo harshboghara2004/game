@@ -1,22 +1,15 @@
 import React from "react";
 import { Sun, Moon, LogOut } from "lucide-react";
-import { auth } from "../../firebase";
-import { useNavigate } from "react-router-dom";
 import { PiUserSwitchDuotone } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebase";
 
-interface MenuItem {
-    id: string;
-    label: string;
-    icon: React.ReactNode;
-}
-
-interface SidebarProps {
-    menuItems: MenuItem[];
-    currentPage: string;
-    setCurrentPage: (page: string) => void;
-}
-
-function Sidebar({ menuItems, currentPage, setCurrentPage }: SidebarProps) {
+function ProfileSidebar({
+    menuItems,
+    currentPage,
+    setCurrentPage,
+    isAdmin = false,
+}) {
     const navigate = useNavigate();
     const [isDark, setIsDark] = React.useState(false);
     // console.log(isDark);
@@ -32,15 +25,14 @@ function Sidebar({ menuItems, currentPage, setCurrentPage }: SidebarProps) {
     };
 
     const handleSwithToAdmin = () => {
-        const uid = auth.currentUser?.uid;
-        navigate(`/profile/${uid}`);
+        navigate("/admin-panel");
     };
 
     return (
         <aside className="w-64 bg-white dark:bg-gray-800 shadow-md flex flex-col">
             <div className="p-6 flex justify-between items-center">
                 <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
-                    Korgi Admin
+                    Korgi Profile
                 </h1>
                 <button
                     onClick={toggleDarkMode}
@@ -67,17 +59,17 @@ function Sidebar({ menuItems, currentPage, setCurrentPage }: SidebarProps) {
                     </button>
                 ))}
             </nav>
-
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-                <button
-                    onClick={handleSwithToAdmin}
-                    className="w-full flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
-                >
-                    <PiUserSwitchDuotone size={20} className="mr-3" />
-                    Switch to Profile page
-                </button>
-            </div>
-
+            {isAdmin && (
+                <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+                    <button
+                        onClick={handleSwithToAdmin}
+                        className="w-full flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                    >
+                        <PiUserSwitchDuotone size={20} className="mr-3" />
+                        Switch to Admin Panel
+                    </button>
+                </div>
+            )}
             <div className="p-4 border-t border-gray-200 dark:border-gray-700">
                 <button
                     onClick={handleLogout}
@@ -91,4 +83,4 @@ function Sidebar({ menuItems, currentPage, setCurrentPage }: SidebarProps) {
     );
 }
 
-export default Sidebar;
+export default ProfileSidebar;
