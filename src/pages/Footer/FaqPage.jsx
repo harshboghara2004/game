@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./FAQPage.module.css"; // Import CSS module
+import classes from "./FaqPage.module.css"; // Import CSS module
 
 const questionsList = [
     {
