@@ -67,6 +67,7 @@ const HomePage = () => {
                 <RedirectCard />
                 {/* Game Grid Section */}
                 <GamesGrid
+                    selectedCategory={selectedCategory}
                     games={filteredGames}
                     isHome
                     setIsSearching={setIsSearching}

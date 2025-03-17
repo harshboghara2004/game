@@ -4,7 +4,12 @@ import { motion } from "framer-motion";
 import GameCard from "./GameCard";
 import HomeCard from "../UI/HomeCard";
 
-const GamesGrid = ({ games, isHome = false, setIsSearching = () => {} }) => {
+const GamesGrid = ({
+    games,
+    selectedCategory = null,
+    isHome = false,
+    setIsSearching = () => {},
+}) => {
     return (
         <motion.ul animate={{ y: [10, 0] }} className={classes["game-grid"]}>
             {isHome && <div className={classes.dummy}></div>}
@@ -15,6 +20,11 @@ const GamesGrid = ({ games, isHome = false, setIsSearching = () => {} }) => {
                     heightValue={135}
                 />
             )}
+            {selectedCategory && (
+                <div className={classes.categorySelected}>
+                    <p>{selectedCategory} Games</p>
+                </div>
+            )}
             {games && games.length === 0 && (
                 <div className={classes["no-games"]}>
                     <h2>Hmm, nothing’s coming up for that.</h2>
@@ -24,6 +34,7 @@ const GamesGrid = ({ games, isHome = false, setIsSearching = () => {} }) => {
                     </p>
                 </div>
             )}
+
             {games.map((game, index) => (
                 <GameCard
                     key={game.id || index}

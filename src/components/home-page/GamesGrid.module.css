@@ -45,3 +45,22 @@
     font-weight: 600;
     font-style: normal;
 }
+
+.categorySelected {
+    grid-column: span 3;
+    width: 100%;
+    background-color: white;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.categorySelected p {
+    margin: auto;
+    font-size: 2rem;
+    font-family: "Sour Gummy", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
