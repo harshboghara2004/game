@@ -1,0 +1,39 @@
+.terms-page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.terms-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+.terms-title {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.terms-text {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.terms-soon {
+    font-size: 20px;
+    color: #999;
+}

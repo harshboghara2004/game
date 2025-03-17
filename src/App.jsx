@@ -8,6 +8,11 @@ import LoginPage from "./pages/Auth/LoginPage";
 import SignUpPage from "./pages/Auth/SignUpPage";
 import ForgotPasswordPage from "./pages/Admin/ForgetPasswordPage";
 import Footer from "./components/UI/Footer";
+import AboutPage from "./pages/Footer/AboutPage";
+import ContactPage from "./pages/Footer/ContactPage";
+import FAQPage from "./pages/Footer/FaqPage";
+import PrivacyStatementPage from "./pages/Footer/PrivacyStatementPage";
+import TermsOfUsePage from "./pages/Footer/TermsofUsePage";
 
 const App = () => {
     return (
@@ -22,6 +27,12 @@ const App = () => {
                     path="/forget-password"
                     element={<ForgotPasswordPage />}
                 />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/faq" element={<FAQPage />} />
+                <Route path="/privacy" element={<PrivacyStatementPage />} />
+                <Route path="/terms" element={<TermsOfUsePage />} />
+
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
             <Footer />

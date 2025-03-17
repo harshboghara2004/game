@@ -9,8 +9,10 @@ import { motion } from "framer-motion";
 import { fetchGames } from "../../util/gamesActions";
 import { fetchCategories } from "../../util/categoryActions";
 import ErrorPage from "../Error/ErrorPage";
+import { useLocation } from "react-router-dom";
 
 const HomePage = () => {
+    const location = useLocation();
     const [games, setGames] = useState([]);
     const [categories, setCategories] = useState([]);
     // console.log(games);
@@ -19,6 +21,13 @@ const HomePage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [isSearching, setIsSearching] = useState(false);
+
+    // handle category select from about page
+    useEffect(() => {
+        if (location.state?.selectedCategory) {
+            setSelectedCategory(location.state.selectedCategory);
+        }
+    }, [location.state]);
 
     // get all games and categories
     useEffect(() => {
