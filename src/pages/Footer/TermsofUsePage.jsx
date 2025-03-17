@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./TermsOfUsePage.module.css";
+import classes from "./TermsofUsePage.module.css";
 
 function TermsOfUsePage() {
     return (
