@@ -1,39 +1,55 @@
-.privacy-page {
+.privacy-statement-wrapper {
     width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: flex-start;
-}
-
-.privacy-container {
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 20px auto;
+    min-height: 100vh;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: "IBM Plex Sans", sans-serif;
 }
 
-.privacy-title {
-    font-size: 32px;
+.privacy-statement-page {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: ghostwhite;
     color: #333;
-    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.privacy-statement-page h1 {
+    font-size: 32px;
+    color: #0073e6;
     text-align: center;
+    margin-bottom: 20px;
 }
 
-.privacy-text {
+.privacy-statement-page h2 {
+    font-size: 24px;
+    color: #005bb5;
+    margin-top: 20px;
+}
+
+.privacy-statement-page p {
     font-size: 16px;
-    color: #555;
     line-height: 1.6;
-    text-align: justify;
+    margin: 10px 0;
 }
 
-.privacy-soon {
-    font-size: 20px;
-    color: #999;
+.privacy-statement-page ul {
+    padding-left: 20px;
+}
+
+.privacy-statement-page ul li {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.privacy-statement-page a {
+    color: #0073e6;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.privacy-statement-page a:hover {
+    text-decoration: underline;
 }

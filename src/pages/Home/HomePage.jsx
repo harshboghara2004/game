@@ -10,6 +10,7 @@ import { fetchGames } from "../../util/gamesActions";
 import { fetchCategories } from "../../util/categoryActions";
 import ErrorPage from "../Error/ErrorPage";
 import { useLocation } from "react-router-dom";
+import RedirectCard from "../../components/UI/RedirectCard";
 
 const HomePage = () => {
     const location = useLocation();
@@ -63,6 +64,7 @@ const HomePage = () => {
     } else {
         gameContent = (
             <div className={classes["grid-container"]}>
+                <RedirectCard />
                 {/* Game Grid Section */}
                 <GamesGrid
                     games={filteredGames}

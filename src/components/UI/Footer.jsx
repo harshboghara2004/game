@@ -1,9 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import classes from "./Footer.module.css";
 import { motion } from "framer-motion";
 
 const Footer = () => {
+    const navigate = useNavigate();
+
+    const handleLogoClick = (event) => {
+        event.stopPropagation();
+        console.log("here");
+        navigate("/");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
@@ -17,6 +26,7 @@ const Footer = () => {
                         whileHover={{ scale: 1.1 }}
                         src="/korgi/Korgi.png"
                         alt="Korgi Logo"
+                        onClick={handleLogoClick}
                         className={classes["footer-logo"]}
                     />
                     <p className={classes["footer-tagline"]}>
@@ -32,13 +42,7 @@ const Footer = () => {
                         >
                             About
                         </Link>
-                        <Link
-                            to="/jobs"
-                            className={classes["footer-link"]}
-                            onClick={scrollToTop}
-                        >
-                            Jobs
-                        </Link>
+
                         <Link
                             to="/privacy"
                             className={classes["footer-link"]}
@@ -70,14 +74,7 @@ const Footer = () => {
                             Korgi for Developers
                         </Link>
                         <Link
-                            to="/kids"
-                            className={classes["footer-link"]}
-                            onClick={scrollToTop}
-                        >
-                            Korgi Kids
-                        </Link>
-                        <Link
-                            to="/cookie-policy"
+                            to="/cookies"
                             className={classes["footer-link"]}
                             onClick={scrollToTop}
                         >

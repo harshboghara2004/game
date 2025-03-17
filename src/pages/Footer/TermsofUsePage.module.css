@@ -1,39 +1,55 @@
-.terms-page {
+.terms-of-use-wrapper {
     width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.terms-container {
-    max-width: 800px;
-    margin: 20px auto;
+    min-height: 100vh;
     padding: 20px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: "IBM Plex Sans", sans-serif;
 }
 
-.terms-title {
-    font-size: 32px;
+.terms-of-use-page {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
     color: #333;
-    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.terms-of-use-page h1 {
+    font-size: 32px;
+    color: #0073e6;
     text-align: center;
+    margin-bottom: 20px;
 }
 
-.terms-text {
+.terms-of-use-page h2 {
+    font-size: 24px;
+    color: #005bb5;
+    margin-top: 20px;
+}
+
+.terms-of-use-page p {
     font-size: 16px;
-    color: #555;
     line-height: 1.6;
-    text-align: justify;
+    margin: 10px 0;
 }
 
-.terms-soon {
-    font-size: 20px;
-    color: #999;
+.terms-of-use-page ul {
+    padding-left: 20px;
+}
+
+.terms-of-use-page ul li {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.terms-of-use-page a {
+    color: #0073e6;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.terms-of-use-page a:hover {
+    text-decoration: underline;
 }

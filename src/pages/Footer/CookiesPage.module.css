@@ -1,0 +1,82 @@
+.cookie-statement-wrapper {
+    width: 100vw;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.cookie-statement-page {
+    max-width: 800px;
+    margin: auto;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    color: #005bb5;
+    background: ghostwhite;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.cookie-statement-page h1 {
+    color: #005bb5;
+    text-align: center;
+    font-size: 28px;
+}
+
+.cookie-statement-page p,
+.cookie-statement-page ul {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.cookie-statement-page ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.cookie-statement-page li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.cookie-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.accept-button,
+.manage-button {
+    background: #005bb5;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.accept-button:hover {
+    background: #005bb5;
+}
+
+.manage-button {
+    background: #005bb5;
+    color: #fff;
+}
+
+.manage-button:hover {
+    background: #005bb5;
+}
+
+a {
+    color: blue;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

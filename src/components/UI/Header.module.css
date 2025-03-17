@@ -1,11 +1,13 @@
 .header {
+    width: 100%;
+    max-width: 400px;
     display: flex;
+    align-self: center;
     align-items: center;
-    justify-content: space-between; /* Ensures proper spacing */
     padding: 10px 20px;
     background-color: #333;
     color: #72a0c1;
-    position: relative;
+    border-radius: 30px;    
 }
 
 .sour-gummy-text {

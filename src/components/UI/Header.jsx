@@ -6,9 +6,6 @@ import classes from "./Header.module.css";
 const Header = () => {
     return (
         <header className={classes.header}>
-            <Link to="/" className={classes["header-home-icon"]}>
-                <FaHome size={18} />
-            </Link>
             <h1
                 className={`${classes["header-title"]} ${classes["sour-gummy-text"]}`}
             >
