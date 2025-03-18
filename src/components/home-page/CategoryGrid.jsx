@@ -17,6 +17,7 @@ const CategoryGrid = ({
         } else {
             setSelectedCategory(category);
         }
+        window.scrollTo({ top: 0, behavior: "smooth" });
         navigate("/");
     };
 

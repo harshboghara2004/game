@@ -89,13 +89,13 @@ const Footer = () => {
                         </Link>
                     </div>
                 </div>
-                <div className={classes["footer-right"]}>
+                {/* <div className={classes["footer-right"]}>
                     <img
                         src="/images/usa-eng-logo.webp"
                         alt="Language"
                         className={classes["footer-flag"]}
                     />
-                </div>
+                </div> */}
                 <div className={classes["footer-bottom"]}>
                     <p>
                         © {new Date().getFullYear()} Korgi. All rights reserved.
