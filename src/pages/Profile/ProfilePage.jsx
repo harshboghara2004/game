@@ -13,8 +13,6 @@ import HomePage from "./HomePage";
 import FavoriteGamesPage from "./FavoriteGamesPage";
 import AchivementsPage from "./AchivementsPage";
 import RecentActiviyPage from "./RecentActiviyPage";
-import { FaCoins } from "react-icons/fa";
-import RewardsPage from "./RewardsPage";
 
 const menuItems = [
     { id: "home", label: "Home", icon: <Home size={20} /> },
@@ -23,7 +21,6 @@ const menuItems = [
         label: "Favorite Games",
         icon: <MdFavoriteBorder size={20} />,
     },
-    { id: "rewards", label: "Rewards", icon: <FaCoins size={20} /> },
     {
         id: "achievements",
         label: "Achievements",
@@ -42,6 +39,8 @@ const ProfilePage = () => {
 
     const { user, loading, error } = useUser(params.uid);
     const [currentPage, setCurrentPage] = useState("home");
+
+    // console.log(user);
 
     let content;
     if (loading) {
@@ -63,6 +62,7 @@ const ProfilePage = () => {
                     {currentPage === "home" && (
                         <HomePage
                             setCurrentPage={setCurrentPage}
+                            totalCoins={user.currentCoins}
                             name={user.name}
                             noOfFavoriteGames={user.favoriteGames.length}
                         />

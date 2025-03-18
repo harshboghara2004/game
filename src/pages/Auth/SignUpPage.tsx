@@ -149,6 +149,7 @@ const SignUpPage = () => {
                 isAdmin: role === "admin",
                 rewards: [],
                 favoriteGames: [],
+                currentCoins: 0,
                 createdAt: new Date(),
             });
             console.log("User data added to Firestore as", role);
