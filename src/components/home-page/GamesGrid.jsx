@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./GamesGrid.module.css";
 import { motion } from "framer-motion";
 import GameCard from "./GameCard";
-import HomeCard from "../UI/HomeCard";
+import HomeCard from "../Cards/HomeCard";
 
 const GamesGrid = ({
     games,

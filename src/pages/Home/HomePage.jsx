@@ -10,7 +10,7 @@ import { fetchGames } from "../../util/gamesActions";
 import { fetchCategories } from "../../util/categoryActions";
 import ErrorPage from "../Error/ErrorPage";
 import { useLocation } from "react-router-dom";
-import RedirectCard from "../../components/UI/RedirectCard";
+import RedirectCard from "../../components/Cards/RedirectCard";
 
 const HomePage = () => {
     const location = useLocation();

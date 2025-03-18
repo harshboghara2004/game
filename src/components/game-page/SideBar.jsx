@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./SideBar.module.css";
 import { motion } from "framer-motion";
-import HomeCard from "../UI/HomeCard";
+import HomeCard from "../Cards/HomeCard";
 import GameCard from "../home-page/GameCard";
 
 const SideBar = ({

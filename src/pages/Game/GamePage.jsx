@@ -15,7 +15,7 @@ import { motion } from "framer-motion";
 import { fetchGames } from "../../util/gamesActions";
 import ErrorPage from "../Error/ErrorPage";
 import { fetchCategories } from "../../util/categoryActions";
-import RedirectCard from "../../components/UI/RedirectCard";
+import RedirectCard from "../../components/Cards/RedirectCard";
 
 const divideGames = (games) => {
     const leftSideGames = games.slice(0, 4);
