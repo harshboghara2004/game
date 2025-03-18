@@ -3,7 +3,7 @@ import classes from "./GameWindow.module.css";
 import GameWindowBottomBar from "./GameWindowBottomBar";
 
 const GameWindow = ({ game }) => {
-    const { gameUrl, gameTitle, whoCreated, gameImage, view } = game;
+    const { id, gameUrl, gameTitle, whoCreated, gameImage, view } = game;
     return (
         <div className={classes["game-container"]}>
             <iframe
@@ -14,6 +14,7 @@ const GameWindow = ({ game }) => {
             />
             {/* Game Title */}
             <GameWindowBottomBar
+                gameId={id}
                 title={gameTitle}
                 whoCreated={whoCreated}
                 image={gameImage}
