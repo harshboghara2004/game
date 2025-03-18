@@ -14,6 +14,10 @@ export interface Game {
     slug: string;
     metaUrl: string;
     view: number;
+    howToPlay: string;
+    whoCreated: string;
+    playForFree: string;
+    platformToPlay: string;
 }
 
 function GamesPage() {

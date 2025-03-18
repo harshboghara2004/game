@@ -41,8 +41,16 @@ export const getGameById = async (gameId) => {
 
 export const addGame = async (gameData) => {
     try {
+        const slug = gameData.gameTitle
+            .toLowerCase()
+            .replace(/\s+/g, "-")
+            .replace(/[^a-z0-9-]/g, "");
         const newGameRef = push(ref(database, "/games"));
-        await set(newGameRef, { ...gameData, view: Number(gameData.view) });
+        await set(newGameRef, {
+            ...gameData,
+            slug,
+            view: Number(gameData.view),
+        });
 
         return { status: 200, error: null };
     } catch (error) {
