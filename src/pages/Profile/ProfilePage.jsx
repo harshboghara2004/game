@@ -13,6 +13,7 @@ import HomePage from "./HomePage";
 import FavoriteGamesPage from "./FavoriteGamesPage";
 import AchivementsPage from "./AchivementsPage";
 import RecentActiviyPage from "./RecentActiviyPage";
+import { RewardsProvider } from "../../context/RewardsContext";
 
 const menuItems = [
     { id: "home", label: "Home", icon: <Home size={20} /> },
@@ -58,22 +59,23 @@ const ProfilePage = () => {
                     setCurrentPage={setCurrentPage}
                     isAdmin={user.isAdmin}
                 />
-                <main className="flex-1 overflow-y-auto p-8">
-                    {currentPage === "home" && (
-                        <HomePage
-                            setCurrentPage={setCurrentPage}
-                            totalCoins={user.currentCoins}
-                            name={user.name}
-                            noOfFavoriteGames={user.favoriteGames.length}
-                        />
-                    )}
-                    {currentPage === "favorite" && (
-                        <FavoriteGamesPage gameIds={user.favoriteGames} />
-                    )}
-                    {currentPage === "rewards" && <RewardsPage />}
-                    {currentPage === "achievements" && <AchivementsPage />}
-                    {currentPage === "activity" && <RecentActiviyPage />}
-                </main>
+                <RewardsProvider>
+                    <main className="flex-1 overflow-y-auto p-8">
+                        {currentPage === "home" && (
+                            <HomePage
+                                setCurrentPage={setCurrentPage}
+                                totalCoins={user.currentCoins}
+                                name={user.name}
+                                noOfFavoriteGames={user.favoriteGames.length}
+                            />
+                        )}
+                        {currentPage === "favorite" && (
+                            <FavoriteGamesPage gameIds={user.favoriteGames} />
+                        )}
+                        {currentPage === "achievements" && <AchivementsPage />}
+                        {currentPage === "activity" && <RecentActiviyPage />}
+                    </main>
+                </RewardsProvider>
             </>
         );
     }

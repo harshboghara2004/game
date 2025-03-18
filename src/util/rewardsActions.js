@@ -73,7 +73,11 @@ export const fetchUserRewards = async (uid) => {
                 .sort((a, b) => new Date(a.date) - new Date(b.date))
                 .slice(0, 7); // Get first 7 entries
 
-            return { status: 200, rewards: sortedRewards };
+            return {
+                status: 200,
+                rewards: sortedRewards,
+                currentCoins: userData.currentCoins,
+            };
         } else {
             return { status: 404, message: "User data not found!" };
         }

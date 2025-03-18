@@ -1,9 +1,11 @@
 import { GamepadIcon } from "lucide-react";
-import React, { useState } from "react";
 import { GoTrophy } from "react-icons/go";
 import { MdOutlineFavorite } from "react-icons/md";
 import DailyRewards from "../../components/profile-page/DailyRewards";
 import { FaCoins } from "react-icons/fa";
+import { RewardsContext } from "../../context/RewardsContext";
+import { useContext } from "react";
+
 function StatCard({ icon, title, value, change, onClick }) {
     return (
         <div
@@ -26,20 +28,20 @@ function StatCard({ icon, title, value, change, onClick }) {
     );
 }
 
-const HomePage = ({ name, totalCoins, noOfFavoriteGames, setCurrentPage }) => {
+const HomePage = ({ name, noOfFavoriteGames, setCurrentPage }) => {
+    const { currentCoins } = useContext(RewardsContext);
     // console.log(totalCoins);
     return (
         <div>
             <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
                 Welcome {name},
             </h1>
-
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <StatCard
                     icon={<FaCoins size={24} />}
                     title="Total Coins"
-                    value={totalCoins}
-                    change={`+${totalCoins} added this week`}
+                    value={currentCoins}
+                    change={`+${currentCoins} added this week`}
                     onClick={() => setCurrentPage("home")}
                 />
                 <StatCard
@@ -64,7 +66,6 @@ const HomePage = ({ name, totalCoins, noOfFavoriteGames, setCurrentPage }) => {
                     onClick={() => setCurrentPage("achievements")}
                 />
             </div>
-
             <DailyRewards />
         </div>
     );

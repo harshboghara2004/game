@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { claimDailyReward, fetchUserRewards } from "../../util/rewardsActions";
-import { auth } from "../../firebase";
+import React, { useContext } from "react";
+import { RewardsContext } from "../../context/RewardsContext";
 import { toast } from "react-toastify";
 import moment from "moment";
 
@@ -15,48 +14,18 @@ const DAILY_REWARDS = [
 ];
 
 const DailyRewards = () => {
-    const [claimedRewards, setClaimedRewards] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const { claimedRewards, currentCoins, loading, claimReward } =
+        useContext(RewardsContext);
 
-    // fetch current Rewards
-    useEffect(() => {
-        const fetchRewards = async () => {
-            const uid = auth.currentUser?.uid;
-            if (!uid) return;
-
-            setLoading(true);
-            const response = await fetchUserRewards(uid);
-
-            if (response.status === 200) {
-                setClaimedRewards(response.rewards);
-            } else {
-                toast.error(response.message);
-            }
-
-            setLoading(false);
-        };
-
-        fetchRewards();
-    }, []);
+    // console.log("RewardsContext State:", {
+    //     claimedRewards,
+    //     currentCoins,
+    //     loading,
+    // });
 
     const handleClaimReward = async (rewardAmount) => {
-        const uid = auth.currentUser?.uid;
-        if (!uid) {
-            toast.error("User not logged in!");
-            return;
-        }
-
-        const response = await claimDailyReward(uid, rewardAmount);
+        const response = await claimReward(rewardAmount);
         if (response.status === 200) {
-            const todayDate = moment().format("DD-MM-YYYY");
-            setClaimedRewards((prev) => [
-                ...prev,
-                {
-                    date: todayDate,
-                    coins: rewardAmount,
-                    timeStamp: moment().format("HH:mm"),
-                },
-            ]);
             toast.success(response.message);
         } else {
             toast.error(response.message);
@@ -74,7 +43,7 @@ const DailyRewards = () => {
     return (
         <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
             <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
-                Daily Rewards
+                Daily Rewards (Coins: {currentCoins})
             </h2>
 
             {loading ? (
@@ -88,6 +57,10 @@ const DailyRewards = () => {
                             .startOf("week")
                             .add(index, "days")
                             .format("DD-MM-YYYY");
+                        const formattedDate = moment(
+                            rewardDate,
+                            "DD-MM-YYYY"
+                        ).format("D MMM");
                         const statusText = getRewardStatus(rewardDate);
                         const isToday =
                             moment().format("DD-MM-YYYY") === rewardDate;
@@ -112,7 +85,7 @@ const DailyRewards = () => {
                                 }`}
                             >
                                 <p className="text-sm font-medium">
-                                    {reward.day}
+                                    {reward.day} ({formattedDate})
                                 </p>
                                 <p className="text-lg font-semibold">
                                     {reward.coins} Coins
