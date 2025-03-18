@@ -13,6 +13,13 @@ const DAILY_REWARDS = [
     { day: "Day 7", coins: 500 },
 ];
 
+const convertTo12HourFormat = (time) => {
+    const [hour, minute] = time.split(":").map(Number);
+    const ampm = hour >= 12 ? "PM" : "AM";
+    const formattedHour = hour % 12 || 12; // Convert 0 to 12 for 12 AM
+    return `${formattedHour}:${minute.toString().padStart(2, "0")} ${ampm}`;
+};
+
 const DailyRewards = () => {
     const { claimedRewards, currentCoins, loading, claimReward } =
         useContext(RewardsContext);
@@ -34,7 +41,8 @@ const DailyRewards = () => {
 
     const getRewardStatus = (date) => {
         const reward = claimedRewards.find((r) => r.date === date);
-        if (reward) return `Claimed at ${reward.timeStamp}`;
+        if (reward)
+            return `Claimed at ${convertTo12HourFormat(reward.timeStamp)}`;
         return moment(date, "DD-MM-YYYY").isBefore(moment())
             ? "Not Claimed"
             : "Upcoming";
