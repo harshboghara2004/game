@@ -3,6 +3,7 @@ import { Sun, Moon, LogOut } from "lucide-react";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { PiUserSwitchDuotone } from "react-icons/pi";
+import { toast } from "react-toastify";
 
 interface MenuItem {
     id: string;
@@ -28,6 +29,7 @@ function Sidebar({ menuItems, currentPage, setCurrentPage }: SidebarProps) {
 
     const handleLogout = () => {
         auth.signOut();
+        toast.success("Log out successfully.");
         navigate("/");
     };
 

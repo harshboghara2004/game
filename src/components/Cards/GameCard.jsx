@@ -22,7 +22,7 @@ export const GameCard = ({
                 </p>
                 {gameUrl && (
                     <a
-                        to={`/game/${slug}`}
+                        href={`/game/${slug}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center text-blue-500 hover:text-blue-700"

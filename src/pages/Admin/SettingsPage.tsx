@@ -10,6 +10,7 @@ import {
 } from "../../util/gamesActions";
 import { fetchCategories } from "../../util/categoryActions";
 import ErrorPage from "../Error/ErrorPage";
+import { toast } from "react-toastify";
 
 interface Category {
     id: string;
@@ -76,15 +77,15 @@ const SettingsPage = () => {
         if (editingGame) {
             const response = await updateGame(editingGame.id, formData);
             if (response.status === 200) {
-                alert("Game updated successfully!");
+                toast.success("Game updated successfully!");
             } else {
-                alert("Failed to update game: " + response.error);
+                toast.error("Failed to update game: " + response.error);
             }
         } else {
             // Add new game
             const response = await addGame(formData);
             if (response.status === 200) {
-                alert("Game added successfully!");
+                toast.success("Game added successfully!");
                 setFormData({
                     description: "",
                     gameCategory: "",
@@ -96,7 +97,7 @@ const SettingsPage = () => {
                     view: 0,
                 });
             } else {
-                alert("Failed to add game: " + response.error);
+                toast.error("Failed to add game: " + response.error);
             }
         }
         setUpdateTrigger((prev) => !prev);
@@ -111,7 +112,7 @@ const SettingsPage = () => {
 
     const handleDelete = async (gameId: string) => {
         if (!gameId) {
-            alert("Invalid game ID");
+            toast.error("Invalid game ID");
             return;
         }
 
@@ -122,9 +123,9 @@ const SettingsPage = () => {
 
         const response = await deleteGame(gameId);
         if (response.status === 200) {
-            alert("Game deleted successfully!");
+            toast.success("Game deleted successfully!");
         } else {
-            alert(`Delete failed: ${response.error}`);
+            toast.error(`Delete failed: ${response.error}`);
         }
         setUpdateTrigger((prev) => !prev);
     };

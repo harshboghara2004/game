@@ -3,6 +3,7 @@ import React from "react";
 import { GoTrophy } from "react-icons/go";
 
 import { MdOutlineFavorite } from "react-icons/md";
+import DailyRewards from "../../components/profile-page/DailyRewards";
 function StatCard({ icon, title, value, change, onClick }) {
     return (
         <div
@@ -25,7 +26,17 @@ function StatCard({ icon, title, value, change, onClick }) {
     );
 }
 
-const HomePage = ({ name, setCurrentPage }) => {
+const rewards = [
+    { day: 1, coins: 100 },
+    { day: 2, coins: 150 },
+    { day: 3, coins: 200 },
+    { day: 4, coins: 250 },
+    { day: 5, coins: 300 },
+    { day: 6, coins: 400 },
+    { day: 7, coins: 500 },
+];
+
+const HomePage = ({ name, noOfFavoriteGames, setCurrentPage }) => {
     return (
         <div>
             <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
@@ -43,8 +54,8 @@ const HomePage = ({ name, setCurrentPage }) => {
                 <StatCard
                     icon={<MdOutlineFavorite size={24} />}
                     title="Favorite Games"
-                    value="20"
-                    change="+10 new games added"
+                    value={noOfFavoriteGames}
+                    change={`+${noOfFavoriteGames} new games added`}
                     onClick={() => setCurrentPage("favorite")}
                 />
                 <StatCard
@@ -56,42 +67,7 @@ const HomePage = ({ name, setCurrentPage }) => {
                 />
             </div>
 
-            {/* <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                <h2 className="text-xl font-semibold mb-4 dark:text-white">
-                    Gaming Portal Overview
-                </h2>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    Welcome to your Korgi gaming portal administration
-                    dashboard. Here you can manage all aspects of your gaming
-                    platform, including game listings, categories, and user
-                    settings. The dashboard provides real-time statistics and
-                    insights about your platform's performance.
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                    <div className="border dark:border-gray-700 rounded-lg p-4">
-                        <h3 className="font-semibold mb-2 dark:text-white">
-                            Quick Actions
-                        </h3>
-                        <ul className="space-y-2 text-gray-600 dark:text-gray-300">
-                            <li>• Add new games to the platform</li>
-                            <li>• Manage game categories</li>
-                            <li>• Review user feedback</li>
-                            <li>• Update platform settings</li>
-                        </ul>
-                    </div>
-                    <div className="border dark:border-gray-700 rounded-lg p-4">
-                        <h3 className="font-semibold mb-2 dark:text-white">
-                            Recent Updates
-                        </h3>
-                        <ul className="space-y-2 text-gray-600 dark:text-gray-300">
-                            <li>• New game category added</li>
-                            <li>• Platform performance improved</li>
-                            <li>• User interface updated</li>
-                            <li>• Security features enhanced</li>
-                        </ul>
-                    </div>
-                </div>
-            </div> */}
+            <DailyRewards />
         </div>
     );
 };

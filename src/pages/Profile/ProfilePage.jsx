@@ -64,6 +64,7 @@ const ProfilePage = () => {
                         <HomePage
                             setCurrentPage={setCurrentPage}
                             name={user.name}
+                            noOfFavoriteGames={user.favoriteGames.length}
                         />
                     )}
                     {currentPage === "favorite" && (

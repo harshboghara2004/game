@@ -11,12 +11,11 @@ const FavoriteGamesPage = ({ gameIds = [] }) => {
     useEffect(() => {
         const fetchFavoriteGames = async () => {
             setIsLoading(true);
-            if (gameIds.length === 0) {
-                setGames([]);
-                return;
-            }
-
             try {
+                if (gameIds.length === 0) {
+                    setGames([]);
+                    return;
+                }
                 const gamePromises = gameIds.map((gameId) =>
                     getGameById(gameId)
                 );
@@ -45,7 +44,7 @@ const FavoriteGamesPage = ({ gameIds = [] }) => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {isLoading && <Loader message="Loading games..." />}
-                {!isLoading && gameIds.length === 0 && (
+                {!isLoading && games.length === 0 && (
                     <NoResult title="There is No Favorite games till now." />
                 )}
                 {!isLoading &&

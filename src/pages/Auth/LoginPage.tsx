@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { checkIsAdmin } from "../../util/userActions";
 import { signInWithEmailAndPassword, User } from "firebase/auth";
 import { auth } from "../../firebase";
+import { toast } from "react-toastify";
 
 interface PasswordRequirement {
     label: string;
@@ -95,7 +96,7 @@ const LoginPage = () => {
                 password
             );
             const user: User = userCredential.user;
-            console.log("User login success", user);
+            toast.success("Login successful!");
             navigate(`/profile/${user.uid}`);
         } catch (error: unknown) {
             if (error instanceof Error) {
@@ -105,6 +106,7 @@ const LoginPage = () => {
                 setError("An unknown error occurred.");
                 console.error("Unknown error logging in:", error);
             }
+            toast.error("Invalid credentials");
         }
     };
 

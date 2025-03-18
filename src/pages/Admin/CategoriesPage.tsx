@@ -9,6 +9,7 @@ import {
     deleteCategory,
     fetchCategories,
 } from "../../util/categoryActions";
+import { toast } from "react-toastify";
 
 export interface Category {
     id: string;
@@ -127,13 +128,13 @@ function CategoriesPage() {
         const response = await addCategory(newCategory);
 
         if (response.status === 201) {
-            alert("Category added successfully!");
+            toast.success("Category added successfully!");
             setNewCategory({ name: "", image: "" });
             setIsModalOpen(false);
             setUpdateTrigger((prev) => !prev);
         } else {
             console.error("Failed to add category:", response.error);
-            alert(
+            toast.error(
                 response.error || "Failed to add category. Please try again."
             );
         }

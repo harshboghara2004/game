@@ -1,9 +1,4 @@
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Outlet,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import classes from "./App.module.css";
 import HomePage from "./pages/Home/HomePage";
 import GamePage from "./pages/Game/GamePage";
@@ -18,10 +13,10 @@ import ContactPage from "./pages/Footer/ContactPage";
 import FAQPage from "./pages/Footer/FaqPage";
 import PrivacyStatementPage from "./pages/Footer/PrivacyStatementPage";
 import TermsOfUsePage from "./pages/Footer/TermsofUsePage";
-import Header from "./components/UI/Header";
 import DeveloperPage from "./pages/Footer/DeveloperPage";
 import CookiesPage from "./pages/Footer/CookiesPage";
 import ProfilePage from "./pages/Profile/ProfilePage";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
     return (
@@ -59,9 +54,12 @@ const App = () => {
 };
 
 const AppWrapper = () => (
-    <Router>
-        <App />
-    </Router>
+    <>
+        <ToastContainer position="top-center" autoClose={3000} />
+        <Router>
+            <App />
+        </Router>
+    </>
 );
 
 export default AppWrapper;

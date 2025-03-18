@@ -3,6 +3,7 @@ import { ArrowLeft, Star, Users, Clock, Link } from "lucide-react";
 import { Category } from "./CategoriesPage";
 import { deleteCategory } from "../../util/categoryActions";
 import NoResult from "../../components/UI/NoResult";
+import { toast } from "react-toastify";
 
 function CategoryGamesPage({
     categoryData,
@@ -26,12 +27,12 @@ function CategoryGamesPage({
         const response = await deleteCategory(categoryId);
 
         if (response.status === 200) {
-            alert("Category deleted successfully!");
+            toast.success("Category deleted successfully!");
             setUpdateTrigger((prev) => !prev);
             onBack();
         } else {
             console.error("Failed to delete category:", response.error);
-            alert(
+            toast.error(
                 response.error || "Failed to delete category. Please try again."
             );
         }

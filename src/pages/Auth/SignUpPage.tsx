@@ -13,6 +13,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 interface PasswordRequirement {
     label: string;
@@ -147,9 +148,11 @@ const SignUpPage = () => {
                 email: user.email,
                 isAdmin: role === "admin",
                 rewards: [],
+                favoriteGames: [],
                 createdAt: new Date(),
             });
             console.log("User data added to Firestore as", role);
+            toast.success(`Signup successful as ${role}!`);
             navigate("/");
         } catch (error: unknown) {
             if (error instanceof Error) {
@@ -159,6 +162,7 @@ const SignUpPage = () => {
                 setError("An unknown error occurred.");
                 console.error("Unknown error signing up:", error);
             }
+            toast.error("Invalid credentials");
         }
     };
 
