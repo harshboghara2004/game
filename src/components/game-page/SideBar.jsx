@@ -11,18 +11,22 @@ const SideBar = ({
     setIsSearching = () => {},
 }) => {
     return (
-        <motion.ul
-            className={`${classes["game-sidebar"]} ${className}`}
-            animate={{ y: [15, 0] }}
-        >
-            {addHome && (
-                <HomeCard setIsSearching={setIsSearching} widthValue={162} />
-            )}
-            {addHome && <div className={classes["dummy"]}></div>}
-            {games.map((game, index) => (
-                <GameCard key={game.id || index} index={index} game={game} />
-            ))}
-        </motion.ul>
+        <>
+            {addHome && <HomeCard setIsSearching={setIsSearching} />}
+            <motion.ul
+                className={`${classes["game-sidebar"]} ${className}`}
+                animate={{ y: [15, 0] }}
+            >
+                {addHome && <div className={classes["dummy"]}></div>}
+                {games.map((game, index) => (
+                    <GameCard
+                        key={game.id || index}
+                        index={index}
+                        game={game}
+                    />
+                ))}
+            </motion.ul>
+        </>
     );
 };
 

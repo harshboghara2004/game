@@ -12,7 +12,7 @@
     display: grid;
     grid-template-columns: 160px 1fr 160px;
     gap: 20px;
-    width: 90%;
+    width: 100%;
     max-width: 1400px;
     margin-bottom: 20px;
     align-items: center;

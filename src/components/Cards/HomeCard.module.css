@@ -193,7 +193,7 @@
     .home-card {
         width: 100%;
         height: 100%;
-        top: 1.2rem;
+        top: 2.5rem;
         box-shadow: var(--shadow-light);
         justify-content: space-between; /* Push items to each end */
         align-items: center; /* Center vertically */
