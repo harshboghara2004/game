@@ -63,8 +63,7 @@ const HomePage = () => {
         gameContent = <ErrorPage message={error} />;
     } else {
         gameContent = (
-            <div className={classes["grid-container"]}>
-                <RedirectCard />
+            <>
                 {/* Game Grid Section */}
                 <GamesGrid
                     selectedCategory={selectedCategory}
@@ -79,7 +78,7 @@ const HomePage = () => {
                     selectedCategory={selectedCategory}
                     setSelectedCategory={setSelectedCategory}
                 />
-            </div>
+            </>
         );
     }
 

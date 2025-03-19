@@ -95,13 +95,16 @@ function AdminPage() {
         );
     } else {
         content = (
-            <>
+            <div className="flex h-screen">
+                {/* Sidebar */}
                 <Sidebar
                     menuItems={menuItems}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
                 />
-                <main className="flex-1 overflow-y-auto p-8">
+
+                {/* Main Content */}
+                <main className="flex-1 overflow-y-auto p-6 lg:p-8 transition-all duration-300">
                     {currentPage === "home" && (
                         <HomePage setCurrentPage={setCurrentPage} />
                     )}
@@ -110,12 +113,12 @@ function AdminPage() {
                     {currentPage === "categories" && <CategoriesPage />}
                     {currentPage === "settings" && <SettingsPage />}
                 </main>
-            </>
+            </div>
         );
     }
 
     return (
-        <div className="flex h-screen bg-gray-100 dark:bg-gray-900">
+        <div className="min-h-screen pb-20 bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
             {content}
         </div>
     );

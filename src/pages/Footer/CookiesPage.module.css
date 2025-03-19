@@ -2,11 +2,14 @@
     width: 100vw;
     min-height: 100vh;
     padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cookie-statement-page {
     max-width: 800px;
-    margin: auto;
+    width: 90%;
     padding: 40px 20px;
     font-family: Arial, sans-serif;
     color: #005bb5;
@@ -44,6 +47,7 @@
     justify-content: center;
     gap: 15px;
     margin-top: 20px;
+    flex-wrap: wrap;
 }
 
 .accept-button,
@@ -59,17 +63,9 @@
     transition: 0.3s ease-in-out;
 }
 
-.accept-button:hover {
-    background: #005bb5;
-}
-
-.manage-button {
-    background: #005bb5;
-    color: #fff;
-}
-
+.accept-button:hover,
 .manage-button:hover {
-    background: #005bb5;
+    background: #004494;
 }
 
 a {
@@ -79,4 +75,50 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+/* 🔹 Responsive Styles */
+@media (max-width: 768px) {
+    .cookie-statement-page {
+        padding: 30px;
+    }
+
+    .cookie-statement-page h1 {
+        font-size: 24px;
+    }
+
+    .cookie-statement-page p {
+        font-size: 15px;
+    }
+
+    .accept-button,
+    .manage-button {
+        font-size: 14px;
+        padding: 10px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cookie-statement-page {
+        padding: 25px;
+        width: 95%;
+    }
+
+    .cookie-statement-page h1 {
+        font-size: 22px;
+    }
+
+    .cookie-statement-page p {
+        font-size: 14px;
+    }
+
+    .cookie-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .accept-button,
+    .manage-button {
+        width: 100%;
+    }
 }

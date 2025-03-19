@@ -1,4 +1,3 @@
-
 .error-container {
     width: 100%;
     display: flex;
@@ -8,30 +7,77 @@
     height: 100vh;
     margin: 0;
     background-image: url("https://a.poki-cdn.com/images/bg-diamante.svg");
-    background-color: transparent;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    padding: 20px;
 }
 
 .error-title {
-    font-size: 6rem;
+    font-size: 5rem;
     font-weight: bold;
     color: #1f2937;
     margin: 0;
+}
+
+/* Adjust font size for smaller screens */
+@media (max-width: 768px) {
+    .error-title {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .error-title {
+        font-size: 2.5rem;
+    }
 }
 
 .error-message {
     font-size: 1.5rem;
     color: #4b5563;
     margin: 16px 0;
+    max-width: 80%;
+}
+
+/* Adjust font size for smaller screens */
+@media (max-width: 768px) {
+    .error-message {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .error-message {
+        font-size: 1rem;
+    }
 }
 
 .home-link {
-    padding: 10px 20px;
-    font-size: 1rem;
+    padding: 12px 24px;
+    font-size: 1.2rem;
     color: white;
     background-color: #3b82f6;
     border-radius: 5px;
     text-decoration: none;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease-in-out;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+/* Make the button responsive */
+@media (max-width: 768px) {
+    .home-link {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-link {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
 }
 
 .home-link:hover {

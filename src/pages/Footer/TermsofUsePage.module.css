@@ -2,6 +2,7 @@
     width: 100vw;
     min-height: 100vh;
     padding: 20px;
+    box-sizing: border-box; /* Ensures padding is included in the width */
 }
 
 .terms-of-use-page {
@@ -13,6 +14,7 @@
     font-family: Arial, sans-serif;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    box-sizing: border-box; /* Ensures padding is included in the width */
 }
 
 .terms-of-use-page h1 {
@@ -52,4 +54,59 @@
 
 .terms-of-use-page a:hover {
     text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .terms-of-use-wrapper {
+        padding: 15px; /* Reduce padding for smaller screens */
+    }
+
+    .terms-of-use-page {
+        padding: 15px;
+    }
+
+    .terms-of-use-page h1 {
+        font-size: 28px; /* Smaller font size for headings */
+    }
+
+    .terms-of-use-page h2 {
+        font-size: 22px;
+    }
+
+    .terms-of-use-page p,
+    .terms-of-use-page ul li {
+        font-size: 14px; /* Smaller font size for text */
+    }
+
+    .terms-of-use-page ul {
+        padding-left: 15px; /* Adjust list padding */
+    }
+}
+
+@media (max-width: 480px) {
+    .terms-of-use-wrapper {
+        padding: 10px; /* Further reduce padding for mobile devices */
+    }
+
+    .terms-of-use-page {
+        padding: 10px;
+    }
+
+    .terms-of-use-page h1 {
+        font-size: 24px; /* Even smaller font size for headings */
+    }
+
+    .terms-of-use-page h2 {
+        font-size: 20px;
+    }
+
+    .terms-of-use-page p,
+    .terms-of-use-page ul li {
+        font-size: 12px; /* Smaller font size for text */
+    }
+
+    .terms-of-use-page ul {
+        padding-left: 10px; /* Further adjust list padding */
+    }
 }

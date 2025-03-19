@@ -3,7 +3,9 @@
     min-height: 100vh;
     height: fit-content;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     color: #005bb5;
     text-align: center;
     padding: 40px 20px;
@@ -12,8 +14,9 @@
 
 .footer-content {
     max-width: 800px;
+    width: 90%;
     margin: auto;
-    padding: 10px 20px;
+    padding: 20px;
     border-radius: 12px;
     background-color: ghostwhite;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -48,7 +51,7 @@
 .join-button {
     display: inline-block;
     background: #005bb5;
-    color: #1c1c1e;
+    color: white;
     padding: 12px 20px;
     border-radius: 6px;
     font-weight: bold;
@@ -58,7 +61,7 @@
 }
 
 .join-button:hover {
-    background: #005bb5;
+    background: #004494;
 }
 
 .contact-info {
@@ -74,4 +77,54 @@
 
 .contact-info a:hover {
     text-decoration: underline;
+}
+
+/* 🔹 Responsive Styles */
+@media (max-width: 768px) {
+    .footer-content {
+        padding: 30px;
+    }
+
+    .footer-content h2 {
+        font-size: 24px;
+    }
+
+    .footer-content p {
+        font-size: 15px;
+    }
+
+    .join-button {
+        font-size: 16px;
+        padding: 10px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .developer-page {
+        padding: 30px 15px;
+    }
+
+    .footer-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .footer-content h2 {
+        font-size: 22px;
+    }
+
+    .footer-content p {
+        font-size: 14px;
+    }
+
+    .developer-benefits li {
+        font-size: 14px;
+    }
+
+    .join-button {
+        width: 100%;
+        text-align: center;
+        font-size: 14px;
+        padding: 10px;
+    }
 }

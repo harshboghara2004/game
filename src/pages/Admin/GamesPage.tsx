@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "lucide-react";
 import Loader from "../../components/UI/Loader";
 import { fetchGames } from "../../util/gamesActions";
 import { GameCard } from "../../components/Cards/GameCard";
@@ -49,14 +48,16 @@ function GamesPage() {
     }
 
     return (
-        <div>
-            <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
+        <div className="">
+            {/* Heading */}
+            <div className="ml-10 lg:ml-0 flex flex-col md:flex-row justify-between mb-6">
+                <h1 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">
                     Games
                 </h1>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Games Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {games.map((game) => (
                     <GameCard key={game.id} {...game} />
                 ))}

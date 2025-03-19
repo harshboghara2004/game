@@ -5,6 +5,7 @@
     background-image: url("https://a.poki-cdn.com/images/bg-diamante.svg"),
         linear-gradient(to bottom, #06d6a0, #00f5d4); /* Replace with your image path */
     min-height: 100vh;
+    padding-top: 1rem;
 }
 
 .game-layout {
@@ -15,6 +16,7 @@
     max-width: 1400px;
     margin-bottom: 20px;
     align-items: center;
+    justify-content: space-between;
 }
 
 .dimmedContent {
@@ -27,4 +29,46 @@
     right: 0;
     top: 0;
     z-index: 5;
+}
+
+@media (max-width: 1024px) {
+    .game-page {
+        padding: 10px;
+        align-items: flex-start;
+    }
+    .game-layout {
+        margin-top: 20px;
+        grid-template-columns: 120px 1fr 120px; /* Reduce sidebar width */
+        gap: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-page {
+        padding: 10px;
+        align-items: flex-start;
+    }
+    .game-layout {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        width: 95%;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-page {
+        padding: 10px;
+        align-items: flex-start;
+    }
+
+    .game-layout {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 5px;
+    }
+
+    .dimmedContent {
+        opacity: 0.8;
+    }
 }

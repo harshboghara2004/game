@@ -35,17 +35,17 @@ const FavoriteGamesPage = ({ gameIds = [] }) => {
     }, [gameIds]);
 
     return (
-        <>
-            <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
+        <div className="min-h-screen">
+            <div className="ml-8 lg:ml-0 flex justify-between items-center mb-8">
+                <h1 className="text-3xl font-bold text-gray-800 dark:text-white text-center sm:text-left">
                     Favorite Games
                 </h1>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {isLoading && <Loader message="Loading games..." />}
                 {!isLoading && games.length === 0 && (
-                    <NoResult title="There is No Favorite games till now." />
+                    <NoResult title="There are no favorite games yet." />
                 )}
                 {!isLoading &&
                     games.length > 0 &&
@@ -53,7 +53,7 @@ const FavoriteGamesPage = ({ gameIds = [] }) => {
                         <GameCard key={game.id || index} {...game} />
                     ))}
             </div>
-        </>
+        </div>
     );
 };
 

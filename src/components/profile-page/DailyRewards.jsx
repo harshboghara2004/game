@@ -16,7 +16,7 @@ const DAILY_REWARDS = [
 const convertTo12HourFormat = (time) => {
     const [hour, minute] = time.split(":").map(Number);
     const ampm = hour >= 12 ? "PM" : "AM";
-    const formattedHour = hour % 12 || 12; // Convert 0 to 12 for 12 AM
+    const formattedHour = hour % 12 || 12;
     return `${formattedHour}:${minute.toString().padStart(2, "0")} ${ampm}`;
 };
 
@@ -24,19 +24,11 @@ const DailyRewards = () => {
     const { claimedRewards, currentCoins, loading, claimReward } =
         useContext(RewardsContext);
 
-    // console.log("RewardsContext State:", {
-    //     claimedRewards,
-    //     currentCoins,
-    //     loading,
-    // });
-
     const handleClaimReward = async (rewardAmount) => {
         const response = await claimReward(rewardAmount);
-        if (response.status === 200) {
-            toast.success(response.message);
-        } else {
-            toast.error(response.message);
-        }
+        response.status === 200
+            ? toast.success(response.message)
+            : toast.error(response.message);
     };
 
     const getRewardStatus = (date) => {
@@ -49,8 +41,8 @@ const DailyRewards = () => {
     };
 
     return (
-        <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-            <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
+        <div className="p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-4">
                 Daily Rewards (Coins: {currentCoins})
             </h2>
 
@@ -59,7 +51,7 @@ const DailyRewards = () => {
                     Loading rewards...
                 </p>
             ) : (
-                <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 sm:gap-4">
                     {DAILY_REWARDS.map((reward, index) => {
                         const rewardDate = moment()
                             .startOf("week")
@@ -81,7 +73,7 @@ const DailyRewards = () => {
                         return (
                             <div
                                 key={rewardDate}
-                                className={`p-4 rounded-lg text-center border shadow-md
+                                className={`p-3 sm:p-4 rounded-lg text-center border shadow-md text-sm
                                 ${
                                     isToday
                                         ? "bg-blue-500 text-white border-blue-600"
@@ -92,20 +84,18 @@ const DailyRewards = () => {
                                         : "bg-gray-100 dark:bg-gray-700 border-gray-300"
                                 }`}
                             >
-                                <p className="text-sm font-medium">
-                                    {reward.day} ({formattedDate})
-                                </p>
-                                <p className="text-lg font-semibold">
+                                <p className="font-medium">{reward.day}</p>
+                                <p className="text-base font-semibold">
                                     {reward.coins} Coins
                                 </p>
 
                                 {isClaimed ? (
-                                    <p className="text-sm mt-2 font-semibold">
+                                    <p className="text-xs sm:text-sm mt-1 font-semibold">
                                         {statusText}
                                     </p>
                                 ) : isToday ? (
                                     <button
-                                        className="mt-2 px-3 py-1 text-sm rounded bg-green-500 text-white shadow-md hover:bg-green-600 transition"
+                                        className="mt-2 w-full px-3 py-1 text-xs sm:text-sm rounded bg-green-500 text-white shadow-md hover:bg-green-600 transition"
                                         onClick={() =>
                                             handleClaimReward(reward.coins)
                                         }
@@ -113,7 +103,7 @@ const DailyRewards = () => {
                                         Claim Now
                                     </button>
                                 ) : (
-                                    <p className="text-sm mt-2 italic opacity-70">
+                                    <p className="text-xs sm:text-sm mt-1 italic opacity-70">
                                         {statusText}
                                     </p>
                                 )}

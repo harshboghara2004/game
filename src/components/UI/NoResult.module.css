@@ -26,3 +26,34 @@
     font-weight: 600;
     font-style: "normal";
 }
+
+/* Adjust layout for smaller screens */
+@media (max-width: 768px) {
+    .noResultPage {
+        padding: 30px;
+        grid-column: span 2;
+    }
+
+    .noResultHeader {
+        font-size: 28px; /* Reduce header size */
+    }
+
+    .noResultText {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .noResultPage {
+        padding: 20px;
+        grid-column: span 1;
+    }
+
+    .noResultHeader {
+        font-size: 24px;
+    }
+
+    .noResultText {
+        font-size: 13px;
+    }
+}

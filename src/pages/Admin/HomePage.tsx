@@ -55,31 +55,44 @@ function StatCard({
 
 function RevenueChart() {
     return (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mt-8">
-            <h2 className="text-xl font-semibold mb-6 dark:text-white">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mt-8 w-full max-w-4xl mx-auto">
+            {/* Title */}
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
                 Revenue Overview
             </h2>
+
+            {/* Chart Container */}
             <div className="h-80">
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={revenueData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
+                        <CartesianGrid
+                            strokeDasharray="3 3"
+                            strokeOpacity={0.2}
+                        />
+                        <XAxis dataKey="month" stroke="#9CA3AF" />
+                        <YAxis stroke="#9CA3AF" />
                         <Tooltip
                             formatter={(value) => [`$${value}`, "Revenue"]}
                             contentStyle={{
                                 backgroundColor: "white",
                                 border: "1px solid #ccc",
-                                borderRadius: "4px",
+                                borderRadius: "6px",
+                                padding: "8px",
+                                fontSize: "14px",
+                                color: "#374151",
+                            }}
+                            wrapperStyle={{
+                                outline: "none",
+                                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
                             }}
                         />
                         <Line
                             type="monotone"
                             dataKey="revenue"
                             stroke="#3B82F6"
-                            strokeWidth={2}
-                            dot={{ fill: "#3B82F6", r: 4 }}
-                            activeDot={{ r: 6 }}
+                            strokeWidth={3}
+                            dot={{ fill: "#3B82F6", r: 5 }}
+                            activeDot={{ r: 7 }}
                         />
                     </LineChart>
                 </ResponsiveContainer>
@@ -100,12 +113,14 @@ function HomePage({
     };
 
     return (
-        <div>
-            <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
+        <div className="">
+            {/* Heading */}
+            <h1 className="ml-10 lg:ml-0 text-3xl font-bold text-gray-800 dark:text-white mb-6 lg:mb-8">
                 Welcome to Dashboard
             </h1>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {/* Statistics Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <StatCard
                     icon={<Users size={24} />}
                     title="Total Users"
@@ -136,40 +151,65 @@ function HomePage({
                 />
             </div>
 
-            {showRevenueChart && <RevenueChart />}
+            {/* Revenue Chart */}
+            <div className="flex flex-col items-center justify-center">
+                {showRevenueChart && <RevenueChart />}
+            </div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                <h2 className="text-xl font-semibold mb-4 dark:text-white">
+            {/* Overview Section */}
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 transition-all duration-300">
+                <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
                     Gaming Portal Overview
                 </h2>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
+                <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
                     Welcome to your Korgi gaming portal administration
                     dashboard. Here you can manage all aspects of your gaming
                     platform, including game listings, categories, and user
                     settings. The dashboard provides real-time statistics and
                     insights about your platform's performance.
                 </p>
+
+                {/* Quick Actions & Recent Updates */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                    <div className="border dark:border-gray-700 rounded-lg p-4">
-                        <h3 className="font-semibold mb-2 dark:text-white">
+                    {/* Quick Actions */}
+                    <div className="border dark:border-gray-700 rounded-lg p-5 hover:shadow-lg transition-shadow duration-300">
+                        <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">
                             Quick Actions
                         </h3>
                         <ul className="space-y-2 text-gray-600 dark:text-gray-300">
-                            <li>• Add new games to the platform</li>
-                            <li>• Manage game categories</li>
-                            <li>• Review user feedback</li>
-                            <li>• Update platform settings</li>
+                            <li className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+                                • Add new games to the platform
+                            </li>
+                            <li className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+                                • Manage game categories
+                            </li>
+                            <li className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+                                • Review user feedback
+                            </li>
+                            <li className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+                                • Update platform settings
+                            </li>
                         </ul>
                     </div>
-                    <div className="border dark:border-gray-700 rounded-lg p-4">
-                        <h3 className="font-semibold mb-2 dark:text-white">
+
+                    {/* Recent Updates */}
+                    <div className="border dark:border-gray-700 rounded-lg p-5 hover:shadow-lg transition-shadow duration-300">
+                        <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">
                             Recent Updates
                         </h3>
                         <ul className="space-y-2 text-gray-600 dark:text-gray-300">
-                            <li>• New game category added</li>
-                            <li>• Platform performance improved</li>
-                            <li>• User interface updated</li>
-                            <li>• Security features enhanced</li>
+                            <li className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+                                • New game category added
+                            </li>
+                            <li className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+                                • Platform performance improved
+                            </li>
+                            <li className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+                                • User interface updated
+                            </li>
+                            <li className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+                                • Security features enhanced
+                            </li>
                         </ul>
                     </div>
                 </div>

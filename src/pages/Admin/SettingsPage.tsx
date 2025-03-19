@@ -172,14 +172,14 @@ const SettingsPage = () => {
 
     return (
         <div className="relative">
-            <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
+            <h1 className="ml-10 lg:ml-0 text-3xl font-bold text-gray-800 dark:text-white mb-8">
                 Settings
             </h1>
 
             <div className="space-y-8">
                 {/* General Settings Section */}
                 <div className="bg-white rounded-lg shadow-md p-6">
-                    <h2 className="text-xl font-semibold mb-4">
+                    <h2 className="text-lg sm:text-xl font-semibold mb-4">
                         General Settings
                     </h2>
                     <form>
@@ -210,36 +210,37 @@ const SettingsPage = () => {
 
                 {/* Game Management Section */}
                 <div className="bg-white rounded-lg shadow-md p-6">
-                    <div className="flex justify-between items-center mb-4">
-                        <h2 className="text-xl font-semibold">
+                    <div className="flex flex-col sm:flex-row gap-y-2 sm:gap-0 justify-between items-center mb-4">
+                        <h2 className="text-lg sm:text-xl font-semibold">
                             Game Management
                         </h2>
                         <button
                             onClick={() => setIsModalOpen(true)}
-                            className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center hover:bg-blue-600"
+                            className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center hover:bg-blue-600 transition-all"
                         >
                             <Plus size={20} className="mr-2" />
                             Add Game
                         </button>
                     </div>
 
+                    {/* Table */}
                     <div className="overflow-x-auto">
-                        <table className="w-full">
+                        <table className="w-full min-w-max">
                             <thead className="bg-gray-50">
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                                         Title
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                                         Category
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                                         Description
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                                         Game URL
                                     </th>
-                                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">
+                                    <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">
                                         Actions
                                     </th>
                                 </tr>
@@ -250,35 +251,31 @@ const SettingsPage = () => {
                                         key={game.id}
                                         className="hover:bg-gray-50"
                                     >
-                                        <td className="px-6 py-4 whitespace-nowrap">
+                                        <td className="px-4 py-3 whitespace-nowrap">
                                             <div className="flex items-center">
                                                 <img
-                                                    src={game.gameImage} // Fixed: Use gameImage instead of image
-                                                    alt={game.gameTitle} // Fixed: Use gameTitle instead of title
+                                                    src={game.gameImage}
+                                                    alt={game.gameTitle}
                                                     className="h-10 w-10 rounded-lg object-cover mr-3"
                                                 />
                                                 <span className="font-medium">
                                                     {game.gameTitle}
                                                 </span>
-                                                {/* Fixed */}
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4">
+                                        <td className="px-4 py-3">
                                             {game.gameCategory}
                                         </td>
-                                        {/* Fixed */}
-                                        <td className="px-6 py-4">
-                                            <p className="truncate max-w-md">
-                                                {game.description}
-                                            </p>
+                                        <td className="px-4 py-3 max-w-xs truncate">
+                                            {game.description}
                                         </td>
-                                        <td className="px-6 py-4">
+                                        <td className="px-4 py-3">
                                             {game.gameUrl && (
                                                 <a
                                                     href={`/game/${game.slug}`}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="text-blue-500 hover:text-blue-700 flex items-center"
+                                                    className="text-blue-500 hover:text-blue-700 flex items-center transition-all"
                                                 >
                                                     <Link
                                                         size={16}
@@ -288,10 +285,10 @@ const SettingsPage = () => {
                                                 </a>
                                             )}
                                         </td>
-                                        <td className="px-6 py-4 text-right space-x-2">
+                                        <td className="px-4 py-3 text-right space-x-2">
                                             <button
                                                 onClick={() => handleEdit(game)}
-                                                className="text-blue-600 hover:text-blue-800"
+                                                className="text-blue-600 hover:text-blue-800 transition-all"
                                             >
                                                 <Pencil size={16} />
                                             </button>
@@ -299,7 +296,7 @@ const SettingsPage = () => {
                                                 onClick={() =>
                                                     handleDelete(game.id)
                                                 }
-                                                className="text-red-600 hover:text-red-800"
+                                                className="text-red-600 hover:text-red-800 transition-all"
                                             >
                                                 <Trash2 size={16} />
                                             </button>
@@ -311,9 +308,11 @@ const SettingsPage = () => {
                     </div>
                 </div>
 
-                {/* Other Settings Sections */}
+                {/* Security Section */}
                 <div className="bg-white rounded-lg shadow-md p-6">
-                    <h2 className="text-xl font-semibold mb-4">Security</h2>
+                    <h2 className="text-lg sm:text-xl font-semibold mb-4">
+                        Security
+                    </h2>
                     <div className="grid grid-cols-1 gap-6">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -341,7 +340,7 @@ const SettingsPage = () => {
             <div className="mt-8">
                 <button
                     type="submit"
-                    className="bg-blue-500 text-white px-6 py-2 rounded-lg flex items-center hover:bg-blue-600"
+                    className="bg-blue-500 text-white px-6 py-2 rounded-lg flex items-center hover:bg-blue-600 transition-all"
                 >
                     <Save size={20} className="mr-2" />
                     Save Changes
@@ -350,17 +349,17 @@ const SettingsPage = () => {
 
             {/* Add/Edit Game Modal */}
             {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-white rounded-lg p-6 w-full max-w-3xl">
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4 sm:px-6">
+                    <div className="bg-white rounded-lg p-6 w-full max-w-3xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl">
                         <div className="flex justify-between items-center mb-4">
-                            <h3 className="text-xl font-semibold">
+                            <h3 className="text-lg sm:text-xl font-semibold">
                                 {editingGame ? "Edit Game" : "Add New Game"}
                             </h3>
                             <button
                                 onClick={handleCloseModal}
                                 className="text-gray-500 hover:text-gray-700"
                             >
-                                <X size={24} />
+                                <X size={20} />
                             </button>
                         </div>
 
@@ -368,48 +367,85 @@ const SettingsPage = () => {
                             onSubmit={handleSubmit}
                             className="flex flex-col gap-y-4 overflow-y-auto max-h-[75vh] p-2"
                         >
-                            {/* Game Title */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Game Title
-                                </label>
-                                <input
-                                    type="text"
-                                    name="gameTitle"
-                                    value={formData.gameTitle || ""} // Fixed
-                                    onChange={handleInputChange}
-                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required
-                                />
-                            </div>
+                            {/* Grid Layout for Responsive Fields */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {/* Game Title */}
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                        Game Title
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="gameTitle"
+                                        value={formData.gameTitle || ""}
+                                        onChange={handleInputChange}
+                                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        required
+                                    />
+                                </div>
 
-                            {/* Game Category */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Game Category
-                                </label>
-                                <select
-                                    name="gameCategory"
-                                    value={formData.gameCategory || ""} // Fixed
-                                    onChange={handleInputChange}
-                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required
-                                >
-                                    <option value="">Select a category</option>
-                                    {categories.map((category) => (
-                                        <option
-                                            key={category.id}
-                                            value={category.name}
-                                        >
-                                            {category.name}
+                                {/* Game Category */}
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                        Game Category
+                                    </label>
+                                    <select
+                                        name="gameCategory"
+                                        value={formData.gameCategory || ""}
+                                        onChange={handleInputChange}
+                                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        required
+                                    >
+                                        <option value="">
+                                            Select a category
                                         </option>
-                                    ))}
-                                </select>
+                                        {categories.map((category) => (
+                                            <option
+                                                key={category.id}
+                                                value={category.name}
+                                            >
+                                                {category.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                                {/* Game Image URL */}
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                        Game Image URL
+                                    </label>
+                                    <input
+                                        type="url"
+                                        name="gameImage"
+                                        value={formData.gameImage || ""}
+                                        onChange={handleInputChange}
+                                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        required
+                                    />
+                                </div>
+
+                                {/* Game URL */}
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                        Game URL
+                                    </label>
+                                    <input
+                                        type="url"
+                                        name="gameUrl"
+                                        value={formData.gameUrl || ""}
+                                        onChange={handleInputChange}
+                                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        required
+                                    />
+                                </div>
                             </div>
 
-                            {/* Description */}
+                            {/* Full-width Fields */}
                             <div>
-                                Game Description
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Game Description
+                                </label>
                                 <CKEditor
                                     editor={ClassicEditor}
                                     data={formData.description}
@@ -436,114 +472,86 @@ const SettingsPage = () => {
                                 />
                             </div>
 
-                            {/* Game Image */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Game Image URL
-                                </label>
-                                <input
-                                    type="url"
-                                    name="gameImage"
-                                    value={formData.gameImage || ""} // Fixed
-                                    onChange={handleInputChange}
-                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required
-                                />
-                            </div>
+                            {/* More Inputs with Grid */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {/* How to Play */}
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                        How to Play
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="howToPlay"
+                                        value={formData.howToPlay || ""}
+                                        onChange={handleInputChange}
+                                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        required
+                                    />
+                                </div>
 
-                            {/* Game URL */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Game URL
-                                </label>
-                                <input
-                                    type="url"
-                                    name="gameUrl"
-                                    value={formData.gameUrl || ""}
-                                    onChange={handleInputChange}
-                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="https://example.com/play-game"
-                                    required
-                                />
-                            </div>
+                                {/* Who Created */}
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                        Who Created
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="whoCreated"
+                                        value={formData.whoCreated || ""}
+                                        onChange={handleInputChange}
+                                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        required
+                                    />
+                                </div>
 
-                            {/* How to play */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    How to Play
-                                </label>
-                                <input
-                                    type="text"
-                                    name="howToPlay"
-                                    value={formData.howToPlay || ""} // Fixed
-                                    onChange={handleInputChange}
-                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required
-                                />
-                            </div>
+                                {/* Play for Free */}
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                        Play for Free
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="playForFree"
+                                        value={formData.playForFree || ""}
+                                        onChange={handleInputChange}
+                                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        required
+                                    />
+                                </div>
 
-                            {/* Who created */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Who Created
-                                </label>
-                                <input
-                                    type="text"
-                                    name="whoCreated"
-                                    value={formData.whoCreated || ""} // Fixed
-                                    onChange={handleInputChange}
-                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required
-                                />
-                            </div>
+                                {/* Platform to Play */}
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                        Platform To Play
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="platformToPlay"
+                                        value={formData.platformToPlay || ""}
+                                        onChange={handleInputChange}
+                                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        required
+                                    />
+                                </div>
 
-                            {/* Play for free */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Play for free
-                                </label>
-                                <input
-                                    type="text"
-                                    name="playForFree"
-                                    value={formData.playForFree || ""} // Fixed
-                                    onChange={handleInputChange}
-                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required
-                                />
-                            </div>
-
-                            {/* Platform to play */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Platform To Play
-                                </label>
-                                <input
-                                    type="text"
-                                    name="platformToPlay"
-                                    value={formData.platformToPlay || ""} // Fixed
-                                    onChange={handleInputChange}
-                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required
-                                />
-                            </div>
-
-                            {/* views */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Views
-                                </label>
-                                <input
-                                    type="number"
-                                    name="view"
-                                    value={formData.view || ""} // Fixed
-                                    onChange={handleInputChange}
-                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required
-                                />
+                                {/* Views */}
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                        Views
+                                    </label>
+                                    <input
+                                        type="number"
+                                        name="view"
+                                        value={formData.view || ""}
+                                        onChange={handleInputChange}
+                                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        required
+                                    />
+                                </div>
                             </div>
 
                             {/* Buttons */}
-                            <div className="flex justify-end space-x-4 mt-6">
+                            <div className="flex justify-end space-x-4 mt-4">
                                 <button
                                     type="button"
                                     onClick={handleCloseModal}

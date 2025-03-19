@@ -3,8 +3,8 @@
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-self: center;
     align-items: center;
+    padding: 20px;
 }
 
 .contactContainer {
@@ -15,6 +15,8 @@
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 90%;
 }
 
 .contactTitle {
@@ -28,6 +30,7 @@
     font-size: 16px;
     color: #555;
     margin-bottom: 10px;
+    line-height: 1.5;
 }
 
 .contactEmail {
@@ -38,8 +41,47 @@
     text-decoration: none;
     margin-top: 10px;
     transition: color 0.3s ease-in-out;
+    word-wrap: break-word;
 }
 
 .contactEmail:hover {
     color: #0056b3;
+}
+
+/* 🔹 Responsive Styles */
+@media (max-width: 768px) {
+    .contactContainer {
+        padding: 30px;
+        width: 95%;
+    }
+
+    .contactTitle {
+        font-size: 24px;
+    }
+
+    .contactText {
+        font-size: 15px;
+    }
+
+    .contactEmail {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contactContainer {
+        padding: 25px;
+    }
+
+    .contactTitle {
+        font-size: 22px;
+    }
+
+    .contactText {
+        font-size: 14px;
+    }
+
+    .contactEmail {
+        font-size: 14px;
+    }
 }

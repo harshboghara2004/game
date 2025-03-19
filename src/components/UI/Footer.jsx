@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import classes from "./Footer.module.css";
 import { motion } from "framer-motion";
+import { getCurrentUserUID } from "../../util/userActions";
+import { auth } from "../../firebase";
 
 const Footer = () => {
     const navigate = useNavigate();
+
+    const [uid, setUid] = useState(null);
+
+    useEffect(() => {
+        const fetchUID = async () => {
+            const userUID = await getCurrentUserUID();
+            setUid(userUID);
+        };
+        fetchUID();
+    }, [auth.currentUser]);
 
     const handleLogoClick = (event) => {
         event.stopPropagation();
@@ -35,6 +47,24 @@ const Footer = () => {
                 </div>
                 <div className={classes["footer-links-container"]}>
                     <div className={classes["footer-links"]}>
+                        {uid ? (
+                            <Link
+                                to={`/profile/${uid}`}
+                                className={classes["footer-link"]}
+                                onClick={scrollToTop}
+                            >
+                                Go to Profile
+                            </Link>
+                        ) : (
+                            <Link
+                                to="/login"
+                                className={classes["footer-link"]}
+                                onClick={scrollToTop}
+                            >
+                                Login
+                            </Link>
+                        )}
+
                         <Link
                             to="/about"
                             className={classes["footer-link"]}
@@ -89,13 +119,6 @@ const Footer = () => {
                         </Link>
                     </div>
                 </div>
-                {/* <div className={classes["footer-right"]}>
-                    <img
-                        src="/images/usa-eng-logo.webp"
-                        alt="Language"
-                        className={classes["footer-flag"]}
-                    />
-                </div> */}
                 <div className={classes["footer-bottom"]}>
                     <p>
                         © {new Date().getFullYear()} Korgi. All rights reserved.

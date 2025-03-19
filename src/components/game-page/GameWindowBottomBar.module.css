@@ -58,6 +58,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: "Sour Gummy", sans-serif;
 }
 
 .icon {
@@ -72,4 +73,47 @@
     font-family: "Comic Neue", cursive;
     font-weight: 400;
     font-style: normal;
+}
+
+/* 🔹 Responsive Design 🔹 */
+@media (max-width: 768px) {
+    .bottom-bar {
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .left-section {
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+
+    .thumbnail {
+        width: 40px;
+        height: 40px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+    }
+
+    .name {
+        font-size: 16px;
+    }
+
+    .creator {
+        font-size: 12px;
+    }
+
+    .right-section {
+        gap: 10px;
+    }
+
+    .icon {
+        width: 22px;
+        height: 20px;
+    }
+
+    .views {
+        font-size: 12px;
+    }
 }

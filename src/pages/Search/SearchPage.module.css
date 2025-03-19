@@ -2,7 +2,6 @@
 .container {
     display: flex;
     flex-direction: column;
-
     min-height: 100vh;
     width: 100%;
     padding: 20px;
@@ -176,4 +175,61 @@
     font-family: "IBM Plex Mono", monospace;
     font-weight: 600;
     font-style: normal;
+}
+
+@media (max-width: 480px) {
+    /* Full page container - Mobile */
+    .container {
+        padding: 10px; /* Reduced padding for small screens */
+        align-items: stretch; /* Ensure elements take full width */
+    }
+
+    /* Search Bar */
+    .searchBar {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 5px;
+    }
+
+    .searchInputContainer {
+        max-width: 100%; /* Full width input */
+    }
+
+    .searchInput {
+        padding: 10px 35px 10px 10px; /* Adjusted padding */
+        font-size: 14px; /* Smaller font for mobile */
+    }
+
+    /* Category List */
+    .categoryList {
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .categoryButton {
+        padding: 8px 16px;
+        font-size: 14px;
+        width: auto; /* Prevents taking full width */
+        white-space: nowrap;
+    }
+
+    /* Game Grid */
+    .filteredGamesGrid {
+        flex-direction: column; /* Stack items in a single column */
+        gap: 10px;
+    }
+
+    /* No Results Block */
+    .noResults {
+        padding: 20px;
+    }
+
+    .noResults h2 {
+        font-size: 28px;
+    }
+
+    .noResults p {
+        font-size: 14px;
+    }
 }

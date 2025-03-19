@@ -28,23 +28,26 @@ function CategoryCard({
 }) {
     return (
         <div
-            className={`bg-white rounded-lg shadow-md p-6 border-l-4 ${category.color} cursor-pointer hover:shadow-lg transition-shadow`}
+            className={`bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg shadow-md p-4 sm:p-6 border-l-4 ${category.color} cursor-pointer hover:shadow-lg transition-all duration-300`}
             onClick={onClick}
         >
-            <div className="mb-4 flex justify-between">
+            {/* Title */}
+            <div className="mb-4 flex justify-between items-center">
                 <h3 className="font-semibold text-lg">{category.name}</h3>
             </div>
-            <div className="flex justify-between text-gray-600">
+
+            {/* Details Section */}
+            <div className="flex justify-between items-center text-gray-600 dark:text-gray-400 flex-wrap gap-2">
+                {/* Games Count */}
                 <div className="flex items-center">
                     <GamepadIcon size={16} className="mr-2" />
                     <span>{category.games.length} Games</span>
                 </div>
+
+                {/* Users Count */}
                 <div className="flex items-center">
                     <Users size={16} className="mr-2" />
-                    <span>
-                        {/* {category.users} */}
-                        Users
-                    </span>
+                    <span>Users</span>
                 </div>
             </div>
         </div>
@@ -157,20 +160,22 @@ function CategoriesPage() {
 
     return (
         <div>
-            <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-8">
+            {/* Header Section */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8">
+                <h1 className="ml-10 lg:ml-0 text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white">
                     Categories
                 </h1>
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center hover:bg-blue-600"
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center hover:bg-blue-600 transition-all duration-300 mt-4 sm:mt-0"
                 >
                     <Plus size={20} className="mr-2" />
                     Add Category
                 </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Categories Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
                 {categories.map((category, index) => (
                     <CategoryCard
                         key={index}
@@ -182,26 +187,28 @@ function CategoriesPage() {
 
             {/* Add Category Modal */}
             {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-white rounded-lg p-6 w-full max-w-md">
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 sm:p-6">
+                    <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md sm:max-w-lg">
+                        {/* Modal Header */}
                         <div className="flex justify-between items-center mb-4">
-                            <h3 className="text-xl font-semibold">
+                            <h3 className="text-lg sm:text-xl font-semibold">
                                 Add New Category
                             </h3>
                             <button
                                 onClick={() => setIsModalOpen(false)}
-                                className="text-gray-500 hover:text-gray-700"
+                                className="text-gray-500 hover:text-gray-700 transition-all duration-300"
                             >
                                 <X size={24} />
                             </button>
                         </div>
 
+                        {/* Form */}
                         <form
                             onSubmit={handleAddCategory}
                             className="space-y-4"
                         >
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
                                     Category Name
                                 </label>
                                 <input
@@ -220,8 +227,8 @@ function CategoriesPage() {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Category image
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Category Image
                                 </label>
                                 <input
                                     type="text"
@@ -233,47 +240,23 @@ function CategoriesPage() {
                                         })
                                     }
                                     className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    placeholder="Enter category image url"
+                                    placeholder="Enter category image URL"
                                     required
                                 />
                             </div>
 
-                            {/* <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Category Color
-                                </label>
-                                <select
-                                    value={newCategory.color}
-                                    onChange={(e) =>
-                                        setNewCategory({
-                                            ...newCategory,
-                                            color: e.target.value,
-                                        })
-                                    }
-                                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                >
-                                    {colorOptions.map((color) => (
-                                        <option
-                                            key={color.value}
-                                            value={color.value}
-                                        >
-                                            {color.label}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div> */}
-
-                            <div className="flex justify-end space-x-4 mt-6">
+                            {/* Buttons */}
+                            <div className="flex justify-end space-x-3 mt-4">
                                 <button
                                     type="button"
                                     onClick={() => setIsModalOpen(false)}
-                                    className="px-4 py-2 border rounded-lg hover:bg-gray-50"
+                                    className="px-4 py-2 border rounded-lg hover:bg-gray-100 transition-all duration-300"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
-                                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+                                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all duration-300"
                                 >
                                     Add Category
                                 </button>

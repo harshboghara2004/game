@@ -32,7 +32,7 @@ const menuItems = [
         label: "Recent  Activity",
         icon: <FiActivity size={20} />,
     },
-    { id: "settings", label: "Settings", icon: <Settings size={20} /> },
+    // { id: "settings", label: "Settings", icon: <Settings size={20} /> },
 ];
 
 const ProfilePage = () => {
@@ -52,15 +52,14 @@ const ProfilePage = () => {
         content = <NotFoundPage message="Can not find an User" />;
     } else {
         content = (
-            <>
+            <div className="flex flex-col lg:flex-row h-auto lg:h-screen bg-gray-100 dark:bg-gray-900">
                 <ProfileSidebar
                     menuItems={menuItems}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
-                    isAdmin={user.isAdmin}
                 />
                 <RewardsProvider>
-                    <main className="flex-1 overflow-y-auto p-8">
+                    <main className="flex-1 overflow-y-auto p-8 py-6">
                         {currentPage === "home" && (
                             <HomePage
                                 setCurrentPage={setCurrentPage}
@@ -76,12 +75,12 @@ const ProfilePage = () => {
                         {currentPage === "activity" && <RecentActiviyPage />}
                     </main>
                 </RewardsProvider>
-            </>
+            </div>
         );
     }
 
     return (
-        <div className="flex h-screen bg-gray-100 dark:bg-gray-900">
+        <div className="min-h-screen pb-20 bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
             {content}
         </div>
     );

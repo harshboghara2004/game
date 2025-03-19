@@ -4,7 +4,7 @@ import { FaHome, FaSearch } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
-const HomeCard = ({ setIsSearching, widthValue = 150, heightValue = 150 }) => {
+const HomeCard = ({ setIsSearching }) => {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -22,13 +22,10 @@ const HomeCard = ({ setIsSearching, widthValue = 150, heightValue = 150 }) => {
         setIsSearching(true);
     };
 
-    const dimension = `w-[${widthValue}px] h-[${heightValue}px]`;
-
     return (
         <motion.div
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.01 }}
             className={classes["home-card"]}
-            style={{ width: `${widthValue}px`, height: `${heightValue}px` }}
         >
             <div className={classes["korgi-title"]}>
                 <motion.img

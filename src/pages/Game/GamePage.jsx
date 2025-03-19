@@ -5,8 +5,6 @@ import SideBar from "../../components/game-page/SideBar";
 import GamesGrid from "../../components/home-page/GamesGrid";
 import GameWindow from "../../components/game-page/GameWindow";
 import GameDescription from "../../components/game-page/GameDescription";
-import { database } from "../../firebase";
-import { onValue, ref } from "firebase/database";
 import Loader from "../../components/UI/Loader";
 import NotFoundPage from "../Error/NotFoundPage";
 import Modal from "../../components/UI/Modal";
@@ -15,7 +13,8 @@ import { motion } from "framer-motion";
 import { fetchGames } from "../../util/gamesActions";
 import ErrorPage from "../Error/ErrorPage";
 import { fetchCategories } from "../../util/categoryActions";
-import RedirectCard from "../../components/Cards/RedirectCard";
+import useIsMobile from "../../hooks/useIsMobile";
+import HomeCard from "../../components/Cards/HomeCard";
 
 const divideGames = (games) => {
     const leftSideGames = games.slice(0, 4);
@@ -27,6 +26,7 @@ const divideGames = (games) => {
 const GamePage = () => {
     // console.log(games);
     const { slug } = useParams();
+    const isMobile = useIsMobile();
 
     let currentGame = null;
     const [games, setGames] = useState([]);
@@ -70,33 +70,43 @@ const GamePage = () => {
             const otherGames = games.filter((g) => g.slug !== currentGame.slug);
             const { leftSideGames, rightSideGames, bottomGames } =
                 divideGames(otherGames);
+
             content = (
                 <>
-                    <RedirectCard />
+                    {isMobile && (
+                        <HomeCard
+                            setIsSearching={setIsSearching}
+                            widthValue={162}
+                        />
+                    )}
                     {/* Game Layout */}
                     <div className={classes["game-layout"]}>
                         {/* Left Sidebar */}
-                        <SideBar
-                            key="left-sidebar"
-                            games={leftSideGames}
-                            setIsSearching={setIsSearching}
-                            className="left-sidebar"
-                            addHome
-                        />
+                        {!isMobile && (
+                            <SideBar
+                                key="left-sidebar"
+                                games={leftSideGames}
+                                setIsSearching={setIsSearching}
+                                className="left-sidebar"
+                                addHome
+                            />
+                        )}
 
                         {/* Game Window */}
                         <GameWindow game={currentGame} />
 
                         {/* Right Sidebar */}
-                        <SideBar
-                            key="right-sidebar"
-                            games={rightSideGames}
-                            className="right-sidebar"
-                        />
+                        {!isMobile && (
+                            <SideBar
+                                key="right-sidebar"
+                                games={rightSideGames}
+                                className="right-sidebar"
+                            />
+                        )}
                     </div>
 
                     {/* Games Below */}
-                    <GamesGrid games={bottomGames} />
+                    <GamesGrid games={isMobile ? otherGames : bottomGames} />
 
                     {/*Description Section: MOVED TO THE END*/}
                     <GameDescription game={currentGame} />

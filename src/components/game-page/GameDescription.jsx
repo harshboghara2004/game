@@ -6,6 +6,11 @@ const GameDescription = ({ game }) => {
     // console.log(game);
     return (
         <div className={classes["game-description-section"]}>
+            <img
+                src={game.gameImage}
+                alt={game.gameTitle}
+                className={classes["description-image"]}
+            />
             <div className={classes["description-text-area"]}>
                 <span className={classes["description-category"]}>
                     {game.gameCategory}
@@ -17,28 +22,28 @@ const GameDescription = ({ game }) => {
                     {" "}
                     <RenderHTML htmlString={game.description} />{" "}
                 </div>
-                <p className={classes["howToPlay"]}>
-                    <span className={classes.bold}> How to play: </span>{" "}
-                    {game.howToPlay}
-                </p>
-                <p className={classes["whoCreated"]}>
-                    <span className={classes.bold}> Who created: </span>{" "}
-                    {game.whoCreated}
-                </p>
-                <p className={classes["playForFree"]}>
-                    <span className={classes.bold}> Play for Free: </span>{" "}
-                    {game.playForFree}
-                </p>
-                <p className={classes["mobileDesktop"]}>
-                    <span className={classes.bold}> Platform to Play: </span>{" "}
-                    {game.mobileDesktop}
-                </p>
+                <div className={classes["help-section"]}>
+                    <p className={classes["howToPlay"]}>
+                        <span className={classes.bold}> How to play: </span>{" "}
+                        {game.howToPlay}
+                    </p>
+                    <p className={classes["whoCreated"]}>
+                        <span className={classes.bold}> Who created: </span>{" "}
+                        {game.whoCreated}
+                    </p>
+                    <p className={classes["playForFree"]}>
+                        <span className={classes.bold}> Play for Free: </span>{" "}
+                        {game.playForFree}
+                    </p>
+                    <p className={classes["mobileDesktop"]}>
+                        <span className={classes.bold}>
+                            {" "}
+                            Platform to Play:{" "}
+                        </span>{" "}
+                        {game.mobileDesktop}
+                    </p>
+                </div>
             </div>
-            <img
-                src={game.gameImage}
-                alt={game.gameTitle}
-                className={classes["description-image"]}
-            />
         </div>
     );
 };

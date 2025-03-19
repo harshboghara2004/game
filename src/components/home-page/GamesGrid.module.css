@@ -2,10 +2,12 @@
 .game-grid {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
+    align-items: center;
     gap: 15px;
     width: 100%;
     max-width: 1400px;
 }
+
 .dummy {
     width: 100px;
     height: 100px;
@@ -13,7 +15,7 @@
     margin-bottom: 0px;
 }
 
-/* No games Block */
+/* No Games Block */
 .no-games {
     grid-column: span 4;
     width: 100%;
@@ -32,10 +34,7 @@
     margin-bottom: 10px;
     color: #333;
     font-family: "Sour Gummy", sans-serif;
-    font-optical-sizing: auto;
     font-weight: 500;
-    font-style: normal;
-    font-variation-settings: "wdth" 100;
 }
 
 .no-games p {
@@ -43,7 +42,6 @@
     color: #777;
     font-family: "IBM Plex Mono", monospace;
     font-weight: 600;
-    font-style: normal;
 }
 
 .categorySelected {
@@ -59,8 +57,111 @@
     margin: auto;
     font-size: 2rem;
     font-family: "Sour Gummy", sans-serif;
-    font-optical-sizing: auto;
     font-weight: 500;
-    font-style: normal;
-    font-variation-settings: "wdth" 100;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .game-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
+
+    .dummy {
+        width: 90px;
+        height: 90px;
+    }
+
+    .no-games {
+        grid-column: span 4;
+        max-width: 600px;
+        padding: 20px 35px;
+    }
+
+    .no-games h2 {
+        font-size: 30px;
+    }
+
+    .no-games p {
+        font-size: 14px;
+    }
+
+    .categorySelected {
+        grid-column: span 4;
+    }
+
+    .categorySelected p {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .dummy {
+        display: none;
+        /* width: 80px;
+        height: 80px; */
+    }
+
+    .no-games {
+        grid-column: span 3;
+        max-width: 500px;
+        padding: 18px 30px;
+    }
+
+    .no-games h2 {
+        font-size: 28px;
+    }
+
+    .no-games p {
+        font-size: 13px;
+    }
+
+    .categorySelected {
+        grid-column: span 3;
+    }
+
+    .categorySelected p {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile */
+        gap: 10px;
+    }
+
+    .dummy {
+        grid-column: span 2;
+        width: 70px;
+        height: 70px;
+    }
+
+    .no-games {
+        grid-column: span 2;
+        max-width: 100%;
+        padding: 15px 20px;
+    }
+
+    .no-games h2 {
+        font-size: 24px;
+    }
+
+    .no-games p {
+        font-size: 12px;
+    }
+
+    .categorySelected {
+        grid-column: span 2;
+        padding: 10px;
+    }
+
+    .categorySelected p {
+        font-size: 1.4rem;
+    }
 }

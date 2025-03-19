@@ -5,7 +5,11 @@ import {
     getDoc,
     updateDoc,
 } from "firebase/firestore";
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
+
+export const getCurrentUserUID = () => {
+    return auth.currentUser ? auth.currentUser.uid : null;
+};
 
 export const getUserByUid = async (uid) => {
     try {
