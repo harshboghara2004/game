@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import classes from "./GameWindow.module.css";
 import GameWindowBottomBar from "./GameWindowBottomBar";
 import useIsMobile from "../../hooks/useIsMobile";
@@ -6,7 +6,9 @@ import useIsMobile from "../../hooks/useIsMobile";
 const GameWindow = ({ game }) => {
     const { id, gameUrl, gameTitle, whoCreated, gameImage, view } = game;
     const [isPlaying, setIsPlaying] = useState(false);
+    const [isFullscreen, setIsFullscreen] = useState(false);
     const isMobile = useIsMobile();
+    const gameRef = useRef(null);
 
     useEffect(() => {
         if (isMobile && isPlaying) {
@@ -20,8 +22,23 @@ const GameWindow = ({ game }) => {
         };
     }, [isMobile, isPlaying]);
 
+    // Function to toggle fullscreen mode
+    const toggleFullscreen = () => {
+        if (!gameRef.current) return;
+
+        if (!document.fullscreenElement) {
+            gameRef.current.requestFullscreen().catch((err) => {
+                console.error("Error entering fullscreen:", err);
+            });
+            setIsFullscreen(true);
+        } else {
+            document.exitFullscreen();
+            setIsFullscreen(false);
+        }
+    };
+
     return (
-        <div className={classes["game-container"]}>
+        <div className={classes["game-container"]} ref={gameRef}>
             {isMobile ? (
                 !isPlaying ? (
                     <div className={classes["game-card"]}>
@@ -52,6 +69,7 @@ const GameWindow = ({ game }) => {
                             whoCreated={whoCreated}
                             image={gameImage}
                             views={view}
+                            onFullscreen={toggleFullscreen} // Pass fullscreen function
                         />
                         <button
                             className={classes["close-button"]}
@@ -63,7 +81,11 @@ const GameWindow = ({ game }) => {
                 )
             ) : (
                 // Desktop View - Loads iframe normally
-                <div className={classes["desktop-game-wrapper"]}>
+                <div
+                    className={`${classes["desktop-game-wrapper"]} ${
+                        isFullscreen ? classes["fullscreen-active"] : ""
+                    }`}
+                >
                     <iframe
                         src={gameUrl}
                         title={gameTitle}
@@ -77,6 +99,7 @@ const GameWindow = ({ game }) => {
                         whoCreated={whoCreated}
                         image={gameImage}
                         views={view}
+                        onFullscreen={toggleFullscreen} // Pass fullscreen function
                     />
                 </div>
             )}

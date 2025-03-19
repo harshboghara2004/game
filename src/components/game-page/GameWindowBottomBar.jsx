@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import classes from "./GameWindowBottomBar.module.css";
-import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
+import {
+    MdFavorite,
+    MdFavoriteBorder,
+    MdFullscreen,
+    MdFullscreenExit,
+} from "react-icons/md";
 import { motion } from "framer-motion";
 import {
     addGameToFavorites,
@@ -8,6 +13,7 @@ import {
     removeGameFromFavorites,
 } from "../../util/userActions";
 import { auth } from "../../firebase";
+import useIsMobile from "../../hooks/useIsMobile";
 
 const GameWindowBottomBar = ({
     gameId,
@@ -15,11 +21,14 @@ const GameWindowBottomBar = ({
     whoCreated,
     image,
     views = 0,
+    onFullscreen, // Fullscreen function from GameWindow
 }) => {
     const [isFavorite, setIsFavorite] = useState(false);
     const uid = auth.currentUser?.uid;
+    const isMobile = useIsMobile(); // Check if mobile
+    const [isFullscreen, setIsFullscreen] = useState(false);
 
-    // fetch game favorite status
+    // Fetch game favorite status
     useEffect(() => {
         const fetchFavoriteStatus = async () => {
             if (uid) {
@@ -45,6 +54,20 @@ const GameWindowBottomBar = ({
         }
     };
 
+    useEffect(() => {
+        const fullscreenChangeHandler = () => {
+            setIsFullscreen(!!document.fullscreenElement);
+        };
+
+        document.addEventListener("fullscreenchange", fullscreenChangeHandler);
+        return () => {
+            document.removeEventListener(
+                "fullscreenchange",
+                fullscreenChangeHandler
+            );
+        };
+    }, []);
+
     return (
         <div className={classes["bottom-bar"]}>
             {/* Left Side: Image, Name, Who Created */}
@@ -60,24 +83,47 @@ const GameWindowBottomBar = ({
                 </div>
             </div>
 
-            {/* Right Side: Icon and Views Text */}
+            {/* Right Side: Buttons */}
             <div className={classes["right-section"]}>
-                <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    className={classes["favorite-icon"]}
-                    onClick={handleToggleFavorite}
-                >
-                    {isFavorite ? (
-                        <MdFavorite className={classes["icon"]} color="red" />
-                    ) : (
-                        <MdFavoriteBorder className={classes["icon"]} />
-                    )}
-                    <span>{isFavorite ? "Unfavorite" : "Favorite"}</span>
-                </motion.div>
-                {/* <div className={classes["views-icon"]}>
-                    <Eye className={classes["icon"]} />
-                    <span>{views}</span>
-                </div> */}
+                {/* Favorite button (only if user is logged in) */}
+                {uid && (
+                    <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        className={classes["favorite-icon"]}
+                        onClick={handleToggleFavorite}
+                    >
+                        {isFavorite ? (
+                            <MdFavorite
+                                className={classes["icon"]}
+                                color="red"
+                            />
+                        ) : (
+                            <MdFavoriteBorder className={classes["icon"]} />
+                        )}
+                        <span>{isFavorite ? "Unfavorite" : "Favorite"}</span>
+                    </motion.div>
+                )}
+
+                {/* Fullscreen button (only on desktop) */}
+                {!isMobile && (
+                    <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        className={classes["fullscreen-icon"]}
+                        onClick={onFullscreen}
+                    >
+                        {isFullscreen ? (
+                            <>
+                                <MdFullscreenExit className={classes["icon"]} />
+                                <span>Exit Fullscreen</span>
+                            </>
+                        ) : (
+                            <>
+                                <MdFullscreen className={classes["icon"]} />
+                                <span>Fullscreen</span>
+                            </>
+                        )}
+                    </motion.div>
+                )}
             </div>
         </div>
     );
