@@ -3,8 +3,8 @@ import NoResult from "../../components/UI/NoResult";
 
 const RecentActivityPage = ({ activities = [] }) => {
     return (
-        <div className="min-h-screen p-4 sm:p-6 lg:p-8">
-            <div className="flex justify-between items-center mb-6 sm:mb-8">
+        <div className="min-h-screen">
+            <div className="ml-8 lg:ml-0 flex justify-between items-center mb-6 sm:mb-8">
                 <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white">
                     Recent Activities
                 </h1>
