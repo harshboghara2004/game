@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import classes from "./Footer.module.css";
 import { motion } from "framer-motion";
-import { getCurrentUserUID } from "../../util/userActions";
 import { auth } from "../../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Footer = () => {
     const navigate = useNavigate();
@@ -11,12 +11,16 @@ const Footer = () => {
     const [uid, setUid] = useState(null);
 
     useEffect(() => {
-        const fetchUID = async () => {
-            const userUID = await getCurrentUserUID();
-            setUid(userUID);
-        };
-        fetchUID();
-    }, [auth.currentUser]);
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUid(user.uid);
+            } else {
+                setUid(null);
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
 
     const handleLogoClick = (event) => {
         event.stopPropagation();

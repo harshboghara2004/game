@@ -1,17 +1,7 @@
 import React, { useContext } from "react";
 import { RewardsContext } from "../../context/RewardsContext";
 import { toast } from "react-toastify";
-import moment from "moment";
-
-const DAILY_REWARDS = [
-    { day: "Day 1", coins: 100 },
-    { day: "Day 2", coins: 150 },
-    { day: "Day 3", coins: 200 },
-    { day: "Day 4", coins: 250 },
-    { day: "Day 5", coins: 300 },
-    { day: "Day 6", coins: 400 },
-    { day: "Day 7", coins: 500 },
-];
+import useRewards from "../../hooks/useRewards";
 
 const convertTo12HourFormat = (time) => {
     const [hour, minute] = time.split(":").map(Number);
@@ -21,8 +11,9 @@ const convertTo12HourFormat = (time) => {
 };
 
 const DailyRewards = () => {
-    const { claimedRewards, currentCoins, loading, claimReward } =
-        useContext(RewardsContext);
+    const { claimedRewards, loading, claimReward } = useContext(RewardsContext);
+
+    const { dailyRewards, streak, today } = useRewards(claimedRewards);
 
     const handleClaimReward = async (rewardAmount) => {
         const response = await claimReward(rewardAmount);
@@ -31,19 +22,10 @@ const DailyRewards = () => {
             : toast.error(response.message);
     };
 
-    const getRewardStatus = (date) => {
-        const reward = claimedRewards.find((r) => r.date === date);
-        if (reward)
-            return `Claimed at ${convertTo12HourFormat(reward.timeStamp)}`;
-        return moment(date, "DD-MM-YYYY").isBefore(moment())
-            ? "Not Claimed"
-            : "Upcoming";
-    };
-
     return (
         <div className="p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
             <h2 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-4">
-                Daily Rewards (Coins: {currentCoins})
+                Daily Rewards (Current Streak: 🔥{streak} Days)
             </h2>
 
             {loading ? (
@@ -52,35 +34,19 @@ const DailyRewards = () => {
                 </p>
             ) : (
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 sm:gap-4">
-                    {DAILY_REWARDS.map((reward, index) => {
-                        const rewardDate = moment()
-                            .startOf("week")
-                            .add(index, "days")
-                            .format("DD-MM-YYYY");
-                        const formattedDate = moment(
-                            rewardDate,
-                            "DD-MM-YYYY"
-                        ).format("D MMM");
-                        const statusText = getRewardStatus(rewardDate);
-                        const isToday =
-                            moment().format("DD-MM-YYYY") === rewardDate;
-                        const isClaimed = statusText.includes("Claimed at");
-                        const isPast = moment(
-                            rewardDate,
-                            "DD-MM-YYYY"
-                        ).isBefore(moment(), "day");
+                    {dailyRewards.map((reward, index) => {
+                        const isClaimed = reward.status === "Claimed";
+                        const isToday = today === `Day ${index + 1}`;
 
                         return (
                             <div
-                                key={rewardDate}
+                                key={index}
                                 className={`p-3 sm:p-4 rounded-lg text-center border shadow-md text-sm
                                 ${
                                     isToday
                                         ? "bg-blue-500 text-white border-blue-600"
                                         : isClaimed
                                         ? "bg-green-100 text-green-800 border-green-300"
-                                        : isPast
-                                        ? "bg-red-100 text-red-600 border-red-300"
                                         : "bg-gray-100 dark:bg-gray-700 border-gray-300"
                                 }`}
                             >
@@ -91,7 +57,10 @@ const DailyRewards = () => {
 
                                 {isClaimed ? (
                                     <p className="text-xs sm:text-sm mt-1 font-semibold">
-                                        {statusText}
+                                        Claimed at{" "}
+                                        {convertTo12HourFormat(
+                                            reward.timeStamp
+                                        )}
                                     </p>
                                 ) : isToday ? (
                                     <button
@@ -100,11 +69,11 @@ const DailyRewards = () => {
                                             handleClaimReward(reward.coins)
                                         }
                                     >
-                                        Claim Now
+                                        Claim
                                     </button>
                                 ) : (
                                     <p className="text-xs sm:text-sm mt-1 italic opacity-70">
-                                        {statusText}
+                                        Upcoming
                                     </p>
                                 )}
                             </div>

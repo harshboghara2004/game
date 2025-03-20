@@ -6,7 +6,7 @@ import Loader from "../../components/UI/Loader";
 import SearchPage from "../Search/SearchPage";
 import Modal from "../../components/UI/Modal";
 import { motion } from "framer-motion";
-import { fetchGames } from "../../util/gamesActions";
+import { fetchGames, shuffleArray } from "../../util/gamesActions";
 import { fetchCategories } from "../../util/categoryActions";
 import ErrorPage from "../Error/ErrorPage";
 import { useLocation } from "react-router-dom";
@@ -56,6 +56,8 @@ const HomePage = () => {
         ? games.filter((game) => game.gameCategory === selectedCategory)
         : games;
 
+    const shuffledGames = shuffleArray(filteredGames);
+
     let gameContent;
     if (isLoading) {
         gameContent = <Loader message="Loading Games..." />;
@@ -67,7 +69,7 @@ const HomePage = () => {
                 {/* Game Grid Section */}
                 <GamesGrid
                     selectedCategory={selectedCategory}
-                    games={filteredGames}
+                    games={shuffledGames}
                     isHome
                     setIsSearching={setIsSearching}
                 />

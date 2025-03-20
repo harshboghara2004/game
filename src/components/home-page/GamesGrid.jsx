@@ -3,7 +3,6 @@ import classes from "./GamesGrid.module.css";
 import { motion } from "framer-motion";
 import GameCard from "./GameCard";
 import HomeCard from "../Cards/HomeCard";
-import { shuffleArray } from "../../util/gamesActions";
 
 const GamesGrid = ({
     games,
@@ -11,8 +10,6 @@ const GamesGrid = ({
     isHome = false,
     setIsSearching = () => {},
 }) => {
-    const shuffledGames = shuffleArray(games);
-    
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }, [games]);
@@ -30,7 +27,7 @@ const GamesGrid = ({
                         <p>{selectedCategory} Games</p>
                     </div>
                 )}
-                {shuffledGames && shuffledGames.length === 0 && (
+                {games && games.length === 0 && (
                     <div className={classes["no-games"]}>
                         <h2>Hmm, nothing’s coming up for that.</h2>
                         <p>
@@ -40,7 +37,7 @@ const GamesGrid = ({
                     </div>
                 )}
 
-                {shuffledGames.map((game, index) => (
+                {games.map((game, index) => (
                     <GameCard
                         key={game.id || index}
                         game={game}

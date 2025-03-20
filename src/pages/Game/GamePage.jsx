@@ -10,7 +10,7 @@ import NotFoundPage from "../Error/NotFoundPage";
 import Modal from "../../components/UI/Modal";
 import SearchPage from "../Search/SearchPage";
 import { motion } from "framer-motion";
-import { fetchGames } from "../../util/gamesActions";
+import { fetchGames, shuffleArray } from "../../util/gamesActions";
 import ErrorPage from "../Error/ErrorPage";
 import { fetchCategories } from "../../util/categoryActions";
 import useIsMobile from "../../hooks/useIsMobile";
@@ -68,8 +68,9 @@ const GamePage = () => {
             return <NotFoundPage message="Game Not Found" />;
         } else {
             const otherGames = games.filter((g) => g.slug !== currentGame.slug);
+            const shuffledGames = shuffleArray(otherGames);
             const { leftSideGames, rightSideGames, bottomGames } =
-                divideGames(otherGames);
+                divideGames(shuffledGames);
 
             content = (
                 <>
