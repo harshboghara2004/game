@@ -17,7 +17,7 @@ const GameCard = ({ game, index, isHome }) => {
                 window.innerWidth >= 768 &&
                 isHome &&
                 index > 0 &&
-                index % 9 === 0
+                index % 11 === 0
                     ? classes.large
                     : ""
             }`}
