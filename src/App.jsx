@@ -19,7 +19,7 @@ import ProfilePage from "./pages/Profile/ProfilePage";
 import { ToastContainer } from "react-toastify";
 
 const App = () => {
-    // update in gamehost
+    // update in gamehost another branch
     return (
         <div className={classes.app}>
             <Routes>
