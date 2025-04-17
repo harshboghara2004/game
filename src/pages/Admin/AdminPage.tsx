@@ -50,6 +50,7 @@ function AdminPage() {
                         } = await checkIsAdmin(currentUserUid);
                         if (response.status === 200) {
                             setIsAdmin(response.isAdmin ?? false);
+                            
                         } else {
                             setError({
                                 message:
